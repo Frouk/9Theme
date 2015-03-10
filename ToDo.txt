@@ -1,0 +1,4 @@
+-Slowly remake 9nsfw theme to 9theme
+-allow full customization from wordpress interface
+-allow user accounts upload/upvote/downvote
+-make a better todo file

@@ -1,0 +1,228 @@
+/*
+Theme Name: Nein
+Theme URI: Nein
+Author: Nein
+Author URI: Nein
+Description: Nein
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: Nein
+Text Domain: Nein
+
+Nein
+*/
+
+
+
+body{
+	background-color: #0000;
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
+	font-size: 13px;
+	font-weight: normal;
+	height:100%;
+}
+
+h1,li, ol, p, pre, td, th, ul{
+	margin: 0;
+	padding: 0;
+	outline: 0;
+}
+
+/*
+	HEADER START
+*/
+header#top-nav {
+	background-color: #f4f4f4;
+	width: 100%;
+	height: 46px;
+	border-bottom: 1px solid #ddd;
+}
+
+header#top-nav li{
+	list-style: none;
+}
+
+header#top-nav a{				
+	text-decoration:none;
+	float:left;
+	display: block;
+	padding-top: 15px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	padding-left: 20pt;
+	height: 20px;
+	line-height: 20px;                       
+	font-family:arial;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background-color: transparent;
+	// border-right: 1px solid #000;
+	-moz-box-shadow: #000000;
+	text-align: center;
+	font-weight: bold;
+}
+
+
+
+
+header#top-nav .nav-wrap {
+	width: 1068px;
+	height: 46px;
+	margin: 0 auto;
+	position: relative;
+}
+
+
+
+
+#logo{
+}
+#logo a{				
+	color: #111!important;
+	font-size: 33px;
+}
+
+
+#menuz{
+}
+#menuz a{				
+	color: #999999 !important;
+	font-size: 16px;
+}
+
+#usercrap {
+	float: right;
+}
+#usercrap a{
+	color: #f811fc!important;
+	font-size: 16px;
+}
+
+/*
+HEADER END
+*/
+
+/*
+MainPage Start
+*/
+
+#container{
+	position: relative;
+	overflow: hidden;
+	margin: 0 auto;
+	clear: both;
+}
+
+#main{
+	width: 940px;
+	margin: 20px auto;
+}
+
+#posts{
+	width: 600px;
+}
+
+#singlepost{
+	border-bottom:30px;
+	border-bottom: 1px solid #eee;
+	margin-bottom:30px;
+}
+#posttitle{
+	width: 600px;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+#posttitle a{
+	font-size: 22px;
+	color: #000;
+	text-decoration: none;
+}
+#posttitle a:hover {
+  color: blue;
+}
+
+#postcontent{
+	width: 600px;
+	margin-top: 10px;
+}
+
+#postcontent img{
+	width: 500px;	
+	height: auto;
+}
+#postdata{
+	width: 500px;
+	height: 54px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+#postdata li{
+margin: 0 10px 0 0;
+float: left;
+list-style: none;
+}
+
+.vote a{
+position: relative;
+box-sizing: border-box;
+border: 1px solid #ddd;
+border-radius: 3px;
+width: 44px;
+height: 34px;
+display: block;
+text-indent: -999px;
+}
+.voteup{
+background: url(http://i.imgur.com/7FGuyWG.png) no-repeat;
+}
+.votedown{
+background: url(http://i.imgur.com/7FGuyWG.png) no-repeat 0 -32px;
+}
+
+#stats {
+
+}
+
+/*
+MainPage END
+*/
+
+/*
+Single Start
+*/
+#postpage{
+	width: 1068px;
+	margin: 20px auto;
+}
+#pp_post{
+	width: 800px;
+}
+#pp_title{
+	width: 800px;
+	font-size: 26px;
+	margin-bottom: 7px;
+	font-weight: bold;
+}
+#pp_content{
+	width: 728px;
+}
+#pp_content img{
+	width: 728px;	
+	height: auto;
+}
+#pp_data{
+	
+}
+#pp_comments{
+	position relative;
+}
+
+/*
+Single End
+*/

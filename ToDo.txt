@@ -3,4 +3,7 @@
 -allow user accounts upload/upvote/downvote
 -make a better todo file
 
--fuk yu world not
+Usefull Links:
+http://wordpress.stackexchange.com/questions/76034/theme-activation-create-database-tables
+http://codex.wordpress.org/Creating_Tables_with_Plugins
+https://wordpress.org/support/topic/foreign-keys-referencing-wp_usersid

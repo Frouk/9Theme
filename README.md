@@ -1,4 +1,6 @@
 # 9Theme
 Wordpress Theme
 
-Fuk yu world
+Remaking 9nsfw.com theme to a more customizable one with more features.
+
+Live Preview @ 9webm.com

@@ -3,4 +3,4 @@
 -allow user accounts upload/upvote/downvote
 -make a better todo file
 
--fuk yu world
+-fuk yu world not

@@ -25,7 +25,19 @@
 	function peos(){
 		?><p>yolo</p> <?php      	
 	}
+	function addtest($user,$id){
+		global $wpdb;
+		$charset_collate = $wpdb->get_charset_collate();
+		
+		$table_name = $wpdb->prefix . "updownvotes"; 
+		
+		$sql = "INSERT INTO wp_updownvotes ()
+				VALUES ($user,$id,1);";
 
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		dbDelta( $sql );
+		
+	}
 
 	// custom menu support
 

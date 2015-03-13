@@ -7,3 +7,4 @@ Usefull Links:
 http://wordpress.stackexchange.com/questions/76034/theme-activation-create-database-tables
 http://codex.wordpress.org/Creating_Tables_with_Plugins
 https://wordpress.org/support/topic/foreign-keys-referencing-wp_usersid
+http://premium.wpmudev.org/blog/how-to-use-ajax-with-php-on-your-wp-site-without-a-plugin/

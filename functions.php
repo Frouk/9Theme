@@ -1,5 +1,24 @@
 <?php
 	
+	
+	function load_shit(){
+		wp_enqueue_script( 'function', get_template_directory_uri().'/majavascript.js', 'jquery', true);
+		wp_localize_script( 'function', 'my_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+	}
+	add_action('template_redirect', 'load_shit');
+
+	add_action("wp_ajax_nopriv_domyshit", "domyshit");
+	add_action("wp_ajax_domyshit", "domyshit");
+	
+	
+	function domyshit(){
+		
+		$var = get_current_user_id();
+		addtest($var,666);
+		
+		die();
+	}
+	
 	add_action("after_switch_theme", "createtablez");
 	
 	function createtablez(){

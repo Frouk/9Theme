@@ -10,7 +10,10 @@
 			<div id="pp_content"><?php the_content(); ?></div>
 			<div id="pp_data"></div>
 			<div id="pp_comments"></div>
-			
+			<div class="vote">
+				<li><a class="voteup"  href="javascript:void(0);" onclick="myFunction();"></a></li>		
+				<li><a class="votedown" href="javascript:void(0);" onclick="myFunction();"></a></li>
+			</div>
 		</div>
 		<?php endwhile; /* end loop */ ?>
 	</div>

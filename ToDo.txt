@@ -16,5 +16,25 @@ http://natko.com/wordpress-ajax-login-without-a-plugin-the-right-way/
 http://codex.wordpress.org/Hardening_WordPress
 
 Now:
--make a "Like" wp/ajax/functions.php security test with fiddler to make sure wordpress can be used easily for a site like this
+-DONE:(All shit seem to work.)make a "Like" wp/ajax/functions.php security test with fiddler to make sure wordpress can be used easily for a site like this
 -Leave functions for later,focus on theme design,templates.
+
+Soon:
+-create all functions for upvote downvote.
+-make a better updownvotes table
+-find a way to query user liked posts,the wordpress style.
+-user register/login page
+
+Templates todo:
+-main
+-category
+-tag (multiple tags)
+-author
+-liked
+
+-single
+-comments
+-sidebar
+-footer
+-404
+-myprofile page

@@ -82,7 +82,7 @@
 
 	}
 
-
+	
 	// removes detailed login error information for security
 	add_filter('login_errors',create_function('$a', "return null;"));
 	// removes the WordPress version from your header for security
@@ -91,5 +91,6 @@
 	}
 	add_filter('the_generator', 'wb_remove_version');
 
-
+	add_filter('show_admin_bar', '__return_false');
+	
 ?>

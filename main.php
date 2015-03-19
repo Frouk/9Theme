@@ -27,7 +27,4 @@
 			<?php endif; ?>
 		</div>
 	</div>
-</div>
-
-</body>
-</html>
+<?php get_footer(); ?>

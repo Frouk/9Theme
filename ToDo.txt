@@ -1,8 +1,6 @@
--Slowly remake 9nsfw theme to 9theme
--allow full customization from wordpress interface
+-Slowly remake 9nsfw theme to 9theme,but more generic
 -allow user accounts upload/upvote/downvote
--make a better todo file
-
+-possible make a few theme styles (examples:9gag/old 9nsfw)
 
 
 Usefull Links:
@@ -10,31 +8,57 @@ http://wordpress.stackexchange.com/questions/76034/theme-activation-create-datab
 http://codex.wordpress.org/Creating_Tables_with_Plugins
 https://wordpress.org/support/topic/foreign-keys-referencing-wp_usersid
 http://premium.wpmudev.org/blog/how-to-use-ajax-with-php-on-your-wp-site-without-a-plugin/
-
-
 http://natko.com/wordpress-ajax-login-without-a-plugin-the-right-way/
 http://codex.wordpress.org/Hardening_WordPress
 
-Now:
--DONE:(All shit seem to work.)make a "Like" wp/ajax/functions.php security test with fiddler to make sure wordpress can be used easily for a site like this
--Leave functions for later,focus on theme design,templates.
+Steps:
+1)create allmost all templates to be used,with crappy style
+2)create login/register/settings tab
+3)create all php functions needed
+4)create custom my likes template
+5)create better comments.php
+6)create upload system
+7)add wordpress crap like wp_footer();
+8)design style,possible make multiple different styles(some close to other site like 9gag or the old 9nsfw)
+9)allow full customization from wordpress interface?
+10)edit everything to follow "Theme Development Standards"
 
-Soon:
--create all functions for upvote downvote.
--make a better updownvotes table
--find a way to query user liked posts,the wordpress style.
--user register/login page
 
-Templates todo:
+1)Templates todo:
 -main
 -category
 -tag (multiple tags)
 -author
--liked
-
 -single
 -comments
+-header
 -sidebar
 -footer
 -404
+
+later:
+-liked
 -myprofile page
+-comments improved
+
+2)
+-popup style
+-register/login/settings
+-settings:basic user info,logout
+
+3)
+-better database structure,use foreign key?
+-like/dislike/removelike post
+-create a custom post field,likes counter for post,have a chance to refresh it on every like?
+-create a custom user field,likes on all my posts,refresh now and then
+-get posts liked by user,somehow
+
+4)
+-will need to work with functions.php and find a way to query user liked posts,the wordpress style.
+
+5)
+-allow anonymous posts
+-users avatar,will also edit settings to allow custom avatar then
+-each account should show rating-upvotes earned-reputation.
+
+

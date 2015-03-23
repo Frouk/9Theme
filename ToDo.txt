@@ -10,6 +10,8 @@ https://wordpress.org/support/topic/foreign-keys-referencing-wp_usersid
 http://premium.wpmudev.org/blog/how-to-use-ajax-with-php-on-your-wp-site-without-a-plugin/
 http://natko.com/wordpress-ajax-login-without-a-plugin-the-right-way/
 http://codex.wordpress.org/Hardening_WordPress
+https://wpcodereminder.wordpress.com/2013/04/03/ultimate-wordpress-comments-guide/
+https://wordpress.org/support/topic/customizing-the-author-permalink-structure
 
 Steps:
 1)create allmost all templates to be used,with crappy style
@@ -24,7 +26,7 @@ Steps:
 10)edit everything to follow "Theme Development Standards"
 
 
-1)Templates todo:
+1)Templates todo://sidebar and tags left
 -main
 -category
 -tag (multiple tags)

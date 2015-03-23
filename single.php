@@ -2,22 +2,24 @@
 
 <div id="container">
 	<div id="postpage">
-			<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
-		<div id="pp_post">
-			<?php addtest(get_current_user_id(),get_the_id());?>
-		
-			<div id="pp_title"><?php the_title(); ?></div>
-			<div id="pp_content"><?php the_content(); ?></div>
-			<div id="pp_data"></div>
-			<div id="pp_comments"></div>
-			<div class="vote">
-				<li><a class="voteup"  href="javascript:void(0);" onclick="myFunction();"></a></li>		
-				<li><a class="votedown" href="javascript:void(0);" onclick="myFunction();"></a></li>
+		<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
+			<div id="pp_post">
+				<div id="pp_title"><?php the_title(); ?></div>
+				<div id="pp_content"><?php the_content(); ?></div>
+				<div id="pp_data"></div>
+				<div id="pp_comments"></div>
+				<div id="postdata">
+					<div id="stats">900 points - <?php comments_number( 'No comments', 'One comment', '% comments' ); ?> By: <?php echo the_author_posts_link(); ?></div>
+				
+					<div class="vote">
+						<li><a class="voteup" href="javascript:void(0);" onclick="UpVote();"></a></li>
+						<li><a class="votedown" href="javascript:void(0);" onclick="DownVote();"></a></li>
+					</div>
+				</div>
 			</div>
-		</div>
 		<?php endwhile; /* end loop */ ?>
+		<?php comments_template( '', true ); ?>
 	</div>
+	
 </div>
-
-</body>
-</html>
+<?php get_footer(); ?>

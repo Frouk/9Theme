@@ -187,12 +187,18 @@ MainPage Start
 #main{
 	width: 940px;
 	margin: 20px auto;
+	position: relative;
+  	overflow: hidden;
+  	margin: 0 auto;
+	clear: both;
 }
 
 #posts{
 	width: 600px;
 	overflow: hidden;
 	float: left;
+	min-height: 100%;
+ 	height: auto !important;
 }
 
 #singlepost{

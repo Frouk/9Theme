@@ -26,7 +26,7 @@
 				<?php _e('It seems there are no posts here.'); ?></p>
 			<?php endif; ?>
 		</div>
+		<?php get_sidebar(); ?>
 	</div>
-	
-<?php get_sidebar(); ?>
+
 <?php get_footer(); ?>

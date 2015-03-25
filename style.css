@@ -115,6 +115,19 @@ HEADER END
 
 
 /*
+SIDEBAR START
+*/
+#sidebar{
+	width:150px;
+	overflow: hidden;
+	float: right;
+}
+/*
+SIDEBAR END
+*/
+
+
+/*
 FOOTER Start
 */
 footer#bot-nav{
@@ -178,6 +191,8 @@ MainPage Start
 
 #posts{
 	width: 600px;
+	overflow: hidden;
+	float: left;
 }
 
 #singlepost{

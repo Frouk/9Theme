@@ -19,8 +19,9 @@
 
 			if(isset($_GET['login']) && $_GET['login'] == 'failed')
 			{
-				?>
-					<div class="aa_error">
+				?>	
+					<script type="text/javascript">jQuery(document).ready(function($) {jQuery("#show_login").click();});</script>
+					<div class="login_error">
 						<p>FAILED: Try again!</p>
 					</div>
 				<?php

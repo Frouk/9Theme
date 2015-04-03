@@ -29,9 +29,10 @@
             if (is_user_logged_in()) {
                 echo 'Hello, ', $user_login, '. You are already logged in.<a id="wp-submit" href="', wp_logout_url(), '" title="Logout">Logout</a>';
             } else {
+					$referrer = $_SERVER['HTTP_REFERER'];
                     $args = array(
                                 'echo'           => true,
-                                'redirect'       => home_url('/wp-admin/'), 
+                                'redirect'       => $referrer, 
                                 'form_id'        => 'loginform',
                                 'label_username' => __( 'Username' ),
                                 'label_password' => __( 'Password' ),

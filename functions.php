@@ -92,4 +92,10 @@
 		}
 	}
 	add_action( 'admin_init', 'restrict_admin', 1 );
+	
+	function mh_load_my_script() {
+		wp_enqueue_script( 'jquery' );
+	}
+
+	add_action( 'wp_enqueue_scripts', 'mh_load_my_script' );
 ?>

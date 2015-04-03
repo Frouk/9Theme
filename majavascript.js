@@ -12,12 +12,12 @@
 jQuery(document).ready(function($) {
 
     // Show the login dialog box on click
-    $('a#show_login').on('click', function(e){
-        $('body').prepend('<div class="login_overlay"></div>');
-        $('#popup').fadeIn(500);
-        $('div.login_overlay, form#login a.close').on('click', function(){
-            $('div.login_overlay').remove();
-            $('form#login').hide();
+    jQuery('a#show_login').on('click', function(e){
+        jQuery('body').prepend('<div class="login_overlay"></div>');
+        jQuery('#popup').fadeIn(500);
+        jQuery('div.login_overlay, form#login a.close').on('click', function(){
+           jQuery('div.login_overlay').remove();
+            jQuery('form#login').hide();
         });
         e.preventDefault();
     });

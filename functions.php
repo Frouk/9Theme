@@ -59,25 +59,15 @@
 	}
 
 	// custom menu support
-
 	add_theme_support( 'menus' );
-
 	if ( function_exists( 'register_nav_menus' ) ) {
-
 	  	register_nav_menus(
-
 	  		array(
-
 	  		  'header-menu' => 'Header Menu',
-
 	  		  'sidebar-menu' => 'Sidebar Menu',
-
 	  		  'footer-menu' => 'Footer Menu',
-
 	  		  'logged-in-menu' => 'Logged In Menu'
-
 	  		)
-
 	  	);
 
 	}
@@ -94,5 +84,12 @@
 	add_filter('show_admin_bar', '__return_false');
 	
 
-	
+	//restricts access to admin area
+	function restrict_admin()
+	{
+		if ( ! current_user_can( 'manage_options' ) && '/wp-admin/admin-ajax.php' != $_SERVER['PHP_SELF'] ) {
+			wp_redirect( site_url() );
+		}
+	}
+	add_action( 'admin_init', 'restrict_admin', 1 );
 ?>

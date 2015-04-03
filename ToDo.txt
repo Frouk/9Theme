@@ -13,6 +13,8 @@ http://codex.wordpress.org/Hardening_WordPress
 https://wpcodereminder.wordpress.com/2013/04/03/ultimate-wordpress-comments-guide/
 https://wordpress.org/support/topic/customizing-the-author-permalink-structure
 http://natko.com/changing-default-wordpress-theme-customization-api-sections/
+http://www.paulund.co.uk/create-your-own-wordpress-login-page
+https://ahmadawais.com/create-front-end-login-page-wordpress/
 
 Steps:
 1)create allmost all templates to be used,with crappy style

@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
         jQuery('#popup').fadeIn(500);
         jQuery('div.login_overlay, form#login a.close').on('click', function(){
            jQuery('div.login_overlay').remove();
-            jQuery('form#login').hide();
+            jQuery('#popup').hide();
         });
         e.preventDefault();
     });

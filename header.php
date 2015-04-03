@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
     <head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
         <meta charset="<?php bloginfo( 'charset' ); ?>" />
         <title><?php wp_title(); ?></title>
         <link rel="profile" href="http://gmpg.org/xfn/11" />
@@ -53,7 +54,7 @@
 			<div class="nav-wrap"><nav>
 				<div id="logo"><li><a href=<?php echo get_bloginfo(wpurl) . ">" .get_bloginfo(); ?></a></li></div>
 				<div id="menuz"><?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?></div>
-				<div id="usercrap"><li><a href=<?php echo get_bloginfo(wpurl) . ">" .get_bloginfo(); ?></a></li></div>
+				<div id="usercrap"><li><a id="show_login" href="javascript:void(0);"><?php echo get_bloginfo(); ?></a></li></div>
 			</nav></div>
 		</header>
 		

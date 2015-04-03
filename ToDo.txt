@@ -66,4 +66,8 @@ later:
 -users avatar,will also edit settings to allow custom avatar then
 -each account should show rating-upvotes earned-reputation.
 
+Issues:
+1)Something is wrong with wordpress and jquery.
+Getting uncaught-referenceerror-jquery-is-not-defined whilst using wp_enqueue_script( 'jquery' );,have to import jquery on head.
+Also need to replace # with jQuery 
 

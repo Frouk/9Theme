@@ -46,7 +46,7 @@ later:
 -myprofile page
 -comments improved
 
-2)
+2)//register,make sure nobody goes to /wp-admin/,replace register/login with settings/logout when logged in left
 -popup style
 -register/login/settings
 -settings:basic user info,logout

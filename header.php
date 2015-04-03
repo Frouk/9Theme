@@ -12,19 +12,20 @@
     </head>
 
 <body <?php body_class(); ?>>
-<body>
+
+		<div id="popup">
 		 <?php global $user_login;
 
-        if(isset($_GET['login']) && $_GET['login'] == 'failed')
-        {
-            ?>
-	            <div class="aa_error">
-		            <p>FAILED: Try again!</p>
-	            </div>
-            <?php
-        }
+			if(isset($_GET['login']) && $_GET['login'] == 'failed')
+			{
+				?>
+					<div class="aa_error">
+						<p>FAILED: Try again!</p>
+					</div>
+				<?php
+			}
             if (is_user_logged_in()) {
-                echo '<div class="login_overlay"> Hello, <div class="aa_logout_user">', $user_login, '. You are already logged in.</div><a id="wp-submit" href="', wp_logout_url(), '" title="Logout">Logout</a></div>';
+                echo 'Hello, ', $user_login, '. You are already logged in.<a id="wp-submit" href="', wp_logout_url(), '" title="Logout">Logout</a>';
             } else {
                     $args = array(
                                 'echo'           => true,
@@ -46,6 +47,8 @@
             }
 
         ?> 
+		</div>
+		
 		<header id="top-nav">
 			<div class="nav-wrap"><nav>
 				<div id="logo"><li><a href=<?php echo get_bloginfo(wpurl) . ">" .get_bloginfo(); ?></a></li></div>

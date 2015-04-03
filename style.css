@@ -309,7 +309,7 @@ Single End
 /*
 Register/login and shit Start
 */
-form#login{
+#popup{
     display: none;
     background-color: #FFFFFF;
     position: fixed;
@@ -319,10 +319,6 @@ form#login{
     z-index: 999;
     left: 50%;
     margin-left: -200px;
-}
-
-form#login p.status{
-    display: none;
 }
 
 .login_overlay{

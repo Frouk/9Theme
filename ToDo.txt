@@ -15,6 +15,10 @@ https://wordpress.org/support/topic/customizing-the-author-permalink-structure
 http://natko.com/changing-default-wordpress-theme-customization-api-sections/
 http://www.paulund.co.uk/create-your-own-wordpress-login-page
 https://ahmadawais.com/create-front-end-login-page-wordpress/
+https://pippinsplugins.com/creating-custom-front-end-registration-and-login-forms/
+http://code.tutsplus.com/tutorials/creating-a-custom-wordpress-registration-form-plugin--cms-20968
+http://designmodo.com/wordpress-custom-registration/
+http://cubiq.org/front-end-user-registration-and-login-in-wordpress
 
 Steps:
 1)create allmost all templates to be used,with crappy style

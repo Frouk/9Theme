@@ -250,7 +250,7 @@
 		}
 	}
 	function complete_registration() {
-		global $reg_errors, $username, $password, $email, $website, $first_name, $last_name, $nickname, $bio;
+		global $reg_errors, $username, $password, $email;
 		if ( 1 > count( $reg_errors->get_error_messages() ) ) {
 			$userdata = array(
 			'user_login'    =>   $username,

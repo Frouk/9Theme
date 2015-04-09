@@ -13,20 +13,25 @@
     </head>
 
 <body <?php body_class(); ?>>
-
-		<div id="popuplogin">
-			<?php custom_login();?>
-		</div>
-		<div id="popupregister">
-			<?php custom_registration_function(); ?>
-		</div>
+		<?php if (!is_user_logged_in()) {echo '
+		<div id="popuplogin">';
+			custom_login();
+		echo '</div>
+		<div id="popupregister">';
+			custom_registration_function();
+		echo '</div>';}?>
 		<header id="top-nav">
 			<div class="nav-wrap"><nav>
 				<div id="logo"><li><a href=<?php echo get_bloginfo(wpurl) . ">" .get_bloginfo(); ?></a></li></div>
 				<div id="menuz"><?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?></div>
 				<div id="usercrap"><li>
-					<a id="show_login" href="javascript:void(0);">Login</a>
-					<a id="show_register" href="javascript:void(0);">Register</a>
+					<?php if (!is_user_logged_in()) {echo '
+						<a id="show_login" href="javascript:void(0);">Login</a>
+						<a id="show_register" href="javascript:void(0);">Register</a>';
+					}else{echo '
+						<a id="show_settings" href="javascript:void(0);">My Profile</a>
+						<a id="Logout" href="javascript:void(0);">Logout</a>';
+					} ?>
 				</li></div>
 			</nav></div>
 		</header>

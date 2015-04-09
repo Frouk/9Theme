@@ -15,42 +15,7 @@
 <body <?php body_class(); ?>>
 
 		<div id="popuplogin">
-		 <?php global $user_login;
-			
-			if(isset($_GET['login']) && $_GET['login'] == 'failed')
-			{
-				?>	
-					<script type="text/javascript">jQuery(document).ready(function($) {jQuery("#show_login").click();});</script>
-					<div class="login_error">
-						<p>FAILED: Try again!</p>
-					</div>
-				<?php
-			}
-            if (is_user_logged_in()) {
-                echo 'Hello, ', $user_login, '. You are already logged in.<a id="wp-submit" href="', wp_logout_url(), '" title="Logout">Logout</a>';
-            } else {
-					$referrer = $_SERVER['HTTP_REFERER'];
-                    $args = array(
-                                'echo'           => true,
-                                'redirect'       => $referrer, 
-                                'form_id'        => 'loginform',
-                                'label_username' => __( 'Username' ),
-                                'label_password' => __( 'Password' ),
-                                'label_remember' => __( 'Remember Me' ),
-                                'label_log_in'   => __( 'Log In' ),
-                                'id_username'    => 'user_login',
-                                'id_password'    => 'user_pass',
-                                'id_remember'    => 'rememberme',
-                                'id_submit'      => 'wp-submit',
-                                'remember'       => true,
-                                'value_username' => NULL,
-                                'value_remember' => true
-                                ); 
-					wp_login_form($args);			
-            }
-			
-			//custom_registration_function();
-        ?> 
+			<?php custom_login();?>
 		</div>
 		<div id="popupregister">
 			<?php custom_registration_function(); ?>

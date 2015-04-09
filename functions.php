@@ -99,6 +99,9 @@
 	add_action( 'wp_enqueue_scripts', 'mh_load_my_script' );
 	
 	
+	
+	//Login shit
+	
 	add_action( 'wp_login_failed', 'pu_login_failed' ); // hook failed login
 
 	function pu_login_failed( $user ) {
@@ -147,22 +150,46 @@
 		}
 	}
 	
+	function custom_login() {
+		global $user_login;
+		if(isset($_GET['login']) && $_GET['login'] == 'failed')
+			{
+				echo'	
+					<script type="text/javascript">jQuery(document).ready(function($) {jQuery("#show_login").click();});</script>
+					<div class="login_error">
+						<p>FAILED: Try again!</p>
+					</div>
+				';
+			}
+            if (is_user_logged_in()) {
+                echo 'Hello, ', $user_login, '. You are already logged in.<a id="wp-submit" href="', wp_logout_url(), '" title="Logout">Logout</a>';
+            } else {
+					$referrer = $_SERVER['HTTP_REFERER'];
+                    $args = array(
+                                'echo'           => true,
+                                'redirect'       => $referrer, 
+                                'form_id'        => 'loginform',
+                                'label_username' => __( 'Username' ),
+                                'label_password' => __( 'Password' ),
+                                'label_remember' => __( 'Remember Me' ),
+                                'label_log_in'   => __( 'Log In' ),
+                                'id_username'    => 'user_login',
+                                'id_password'    => 'user_pass',
+                                'id_remember'    => 'rememberme',
+                                'id_submit'      => 'wp-submit',
+                                'remember'       => true,
+                                'value_username' => NULL,
+                                'value_remember' => true
+                                ); 
+					wp_login_form($args);			
+            }
+	
+	}
 	//Register user shit
 	
 	
-	function registration_form( $username, $password, $email, $website, $first_name, $last_name, $nickname, $bio ) {
-		echo '
-		<style>
-		div {
-			margin-bottom:2px;
-		}
-		 
-		input{
-			margin-bottom:4px;
-		}
-		</style>
-		';
-	 
+	function registration_form( $username, $password, $email ) {
+		
 		echo '
 		<form action="' . $_SERVER['REQUEST_URI'] . '" method="post">
 		<div>
@@ -179,36 +206,13 @@
 		<label for="email">Email <strong>*</strong></label>
 		<input type="text" name="email" value="' . ( isset( $_POST['email']) ? $email : null ) . '">
 		</div>
-		 
-		<div>
-		<label for="website">Website</label>
-		<input type="text" name="website" value="' . ( isset( $_POST['website']) ? $website : null ) . '">
-		</div>
-		 
-		<div>
-		<label for="firstname">First Name</label>
-		<input type="text" name="fname" value="' . ( isset( $_POST['fname']) ? $first_name : null ) . '">
-		</div>
-		 
-		<div>
-		<label for="website">Last Name</label>
-		<input type="text" name="lname" value="' . ( isset( $_POST['lname']) ? $last_name : null ) . '">
-		</div>
-		 
-		<div>
-		<label for="nickname">Nickname</label>
-		<input type="text" name="nickname" value="' . ( isset( $_POST['nickname']) ? $nickname : null ) . '">
-		</div>
-		 
-		<div>
-		<label for="bio">About / Bio</label>
-		<textarea name="bio">' . ( isset( $_POST['bio']) ? $bio : null ) . '</textarea>
-		</div>
+		
+		
 		<input type="submit" name="submit" value="Register"/>
 		</form>
 		';
 	}
-	function registration_validation( $username, $password, $email, $website, $first_name, $last_name, $nickname, $bio )  {
+	function registration_validation( $username, $password, $email )  {
 		global $reg_errors;
 		$reg_errors = new WP_Error;
 		
@@ -234,6 +238,7 @@
 			$reg_errors->add( 'email', 'Email Already in use' );
 		}
 		if ( is_wp_error( $reg_errors ) ) {
+			echo '<script type="text/javascript">jQuery(document).ready(function($) {jQuery("#show_register").click();});</script>';
 			foreach ( $reg_errors->get_error_messages() as $error ) {
 			 
 				echo '<div>';
@@ -251,11 +256,6 @@
 			'user_login'    =>   $username,
 			'user_email'    =>   $email,
 			'user_pass'     =>   $password,
-			'user_url'      =>   $website,
-			'first_name'    =>   $first_name,
-			'last_name'     =>   $last_name,
-			'nickname'      =>   $nickname,
-			'description'   =>   $bio,
 			);
 			$user = wp_insert_user( $userdata );
 			echo 'Registration complete. Goto <a href="' . get_site_url() . '/wp-login.php">login page</a>.';   
@@ -267,48 +267,28 @@
 			registration_validation(
 			$_POST['username'],
 			$_POST['password'],
-			$_POST['email'],
-			$_POST['website'],
-			$_POST['fname'],
-			$_POST['lname'],
-			$_POST['nickname'],
-			$_POST['bio']
+			$_POST['email']
 			);
 			 
 			// sanitize user form input
-			global $username, $password, $email, $website, $first_name, $last_name, $nickname, $bio;
+			global $username, $password, $email;
 			$username   =   sanitize_user( $_POST['username'] );
 			$password   =   esc_attr( $_POST['password'] );
 			$email      =   sanitize_email( $_POST['email'] );
-			$website    =   esc_url( $_POST['website'] );
-			$first_name =   sanitize_text_field( $_POST['fname'] );
-			$last_name  =   sanitize_text_field( $_POST['lname'] );
-			$nickname   =   sanitize_text_field( $_POST['nickname'] );
-			$bio        =   esc_textarea( $_POST['bio'] );
 	 
 			// call @function complete_registration to create the user
 			// only when no WP_error is found
 			complete_registration(
 			$username,
 			$password,
-			$email,
-			$website,
-			$first_name,
-			$last_name,
-			$nickname,
-			$bio
+			$email
 			);
 		}
 	 
 		registration_form(
 			$username,
 			$password,
-			$email,
-			$website,
-			$first_name,
-			$last_name,
-			$nickname,
-			$bio
+			$email
 			);
 	}	
 ?>

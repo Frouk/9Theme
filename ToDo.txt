@@ -27,7 +27,7 @@ Steps:
 4)create custom my likes template
 5)create better comments.php
 6)create upload system
-7)add wordpress crap like wp_footer(),escape characters everywhere and check security shits.
+7)add wordpress crap like wp_footer(),escape characters everywhere and check security shits.,break functions.php to smaller files.
 8)design style,possible make multiple different styles(some close to other site like 9gag or the old 9nsfw)
 9)allow full customization from wordpress interface?
 10)edit everything to follow "Theme Development Standards"

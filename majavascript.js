@@ -14,10 +14,19 @@ jQuery(document).ready(function($) {
     // Show the login dialog box on click
     jQuery('a#show_login').on('click', function(e){
         jQuery('body').prepend('<div class="login_overlay"></div>');
-        jQuery('#popup').fadeIn(500);
+        jQuery('#popuplogin').fadeIn(500);
         jQuery('div.login_overlay, form#login a.close').on('click', function(){
            jQuery('div.login_overlay').remove();
-            jQuery('#popup').hide();
+            jQuery('#popuplogin').hide();
+        });
+        e.preventDefault();
+    });
+	jQuery('a#show_register').on('click', function(e){
+        jQuery('body').prepend('<div class="login_overlay"></div>');
+        jQuery('#popupregister').fadeIn(500);
+        jQuery('div.login_overlay, form#register a.close').on('click', function(){
+           jQuery('div.login_overlay').remove();
+            jQuery('#popupregister').hide();
         });
         e.preventDefault();
     });

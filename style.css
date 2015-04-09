@@ -309,7 +309,7 @@ Single End
 /*
 Register/login and shit Start
 */
-#popup{
+#popuplogin{
     display: none;
     background-color: #FFFFFF;
     position: fixed;
@@ -320,7 +320,17 @@ Register/login and shit Start
     left: 50%;
     margin-left: -200px;
 }
-
+#popupregister{
+    display: none;
+    background-color: #FFFFFF;
+    position: fixed;
+    top: 200px;
+    padding: 40px 25px 25px 25px;
+    width: 350px;
+    z-index: 999;
+    left: 50%;
+    margin-left: -200px;
+}
 .login_overlay{
     height: 100%;
     width: 100%;

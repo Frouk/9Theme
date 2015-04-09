@@ -14,9 +14,9 @@
 
 <body <?php body_class(); ?>>
 
-		<div id="popup">
+		<div id="popuplogin">
 		 <?php global $user_login;
-
+			
 			if(isset($_GET['login']) && $_GET['login'] == 'failed')
 			{
 				?>	
@@ -48,15 +48,21 @@
                                 ); 
 					wp_login_form($args);			
             }
-
+			
+			//custom_registration_function();
         ?> 
 		</div>
-		
+		<div id="popupregister">
+			<?php custom_registration_function(); ?>
+		</div>
 		<header id="top-nav">
 			<div class="nav-wrap"><nav>
 				<div id="logo"><li><a href=<?php echo get_bloginfo(wpurl) . ">" .get_bloginfo(); ?></a></li></div>
 				<div id="menuz"><?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?></div>
-				<div id="usercrap"><li><a id="show_login" href="javascript:void(0);"><?php echo get_bloginfo(); ?></a></li></div>
+				<div id="usercrap"><li>
+					<a id="show_login" href="javascript:void(0);">Login</a>
+					<a id="show_register" href="javascript:void(0);">Register</a>
+				</li></div>
 			</nav></div>
 		</header>
 		

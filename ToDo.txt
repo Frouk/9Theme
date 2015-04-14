@@ -2,6 +2,9 @@
 -allow user accounts upload/upvote/downvote
 -possible make a few theme styles (examples:9gag/old 9nsfw)
 
+-"My likes" page might be server intensive,might skip it for now.
+-Will need to make "Most liked post" with custom field query.
+-reputation field on comments,my posts upvotes,might link to reputation explained page.
 
 Usefull Links:
 http://wordpress.stackexchange.com/questions/76034/theme-activation-create-database-tables
@@ -19,6 +22,7 @@ https://pippinsplugins.com/creating-custom-front-end-registration-and-login-form
 http://code.tutsplus.com/tutorials/creating-a-custom-wordpress-registration-form-plugin--cms-20968
 http://designmodo.com/wordpress-custom-registration/
 http://cubiq.org/front-end-user-registration-and-login-in-wordpress
+https://wordpress.org/support/topic/custom-multiple-query_posts-ids (My like page)
 
 Steps:
 1)create allmost all templates to be used,with crappy style

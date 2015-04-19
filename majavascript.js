@@ -1,10 +1,10 @@
- function my_js_function() 
+ function vote($var1,$var2) 
 {
      jQuery.ajax({
      url: my_ajax_script.ajaxurl,
-     data: ({action : 'domyshit'}),
+     data: ({action : 'domyshit',para=$var,para2=$var2}),
      success: function() {
-      //Do stuff here
+      //jQuery change color
      }
      });
 }

@@ -4,6 +4,8 @@
 	//Create upvote/downvote/novote function which will be used on myjavascript with ajax
 	//Create getmylikes function with "page" parameter
 	
+	//addvote is as bad as it gets,should be used only in debugging mode
+	
 	//DEBUGGING
 	
 	
@@ -12,8 +14,22 @@
 			add_action("wp_ajax_nopriv_domyshit", "domyshit");
 			add_action("wp_ajax_domyshit", "domyshit");
 			function domyshit(){
-				$var = get_current_user_id();
-				addtest($var,666);
+				if ((isset($_POST['para']))and((isset($_POST['para2'])))) {
+					$vote=0;
+					if($_POST['para2']==1){
+						$vote=1;
+					}elseif ($_POST['para2']=2){
+						$vote=2;
+					}else {
+						die();
+					}
+					$userid=$_POST['para'];
+					if(get_userdata($userid)==false){
+						die();
+					}
+					$var = get_current_user_id();
+					addvote($var,$_POST['para'],$vote);
+				}
 				die();
 			}
 	
@@ -36,18 +52,25 @@
 		) $charset_collate;";
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
+			
+
 	}
 		
 		
 
-	function addtest($user,$id){
+	function addvote($user,$id,$vote){
+	
+	
 		global $wpdb;
 		$charset_collate = $wpdb->get_charset_collate();
 		$table_name = $wpdb->prefix . "updownvotes"; 
 		$sql = "INSERT INTO wp_updownvotes ()
-				VALUES ($user,$id,1);";
+				VALUES ($user,$id,$vote);";
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
+	
+		$liked_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(post_id) FROM $wpdb->posts WHERE post_id =$id AND upvote=%d",'1'));
+		add_post_meta($id, 'likes', $liked_count, true ) || update_post_meta($id, 'likes', $liked_count);
 		
 	}
 

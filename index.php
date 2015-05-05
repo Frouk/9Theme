@@ -15,8 +15,8 @@
 					<div id="postdata">
 						<div id="stats">900 points - <?php comments_number( 'No comments', 'One comment', '% comments' ); ?></div>
 						<div class="vote">
-							<li><a class="voteup" href="javascript:void(0);" onclick="UpVote();"></a></li>
-							<li><a class="votedown" href="javascript:void(0);" onclick="DownVote();"></a></li>
+							<li><a class="voteup" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,1);"></a></li>
+							<li><a class="votedown" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,2);"></a></li>
 						</div>
 					</div>
 				</div>

@@ -126,7 +126,7 @@
 			wp_enqueue_script( 'function', get_template_directory_uri().'/majavascript.js', 'jquery', true);
 			wp_localize_script( 'function', 'my_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		}
-		add_action('template_redirect', 'javascript');
+		add_action('template_redirect', 'load_javascript');
 	
 	//Login/Register forms and php functions shit
 	

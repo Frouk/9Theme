@@ -6,7 +6,7 @@
     -upvote system,account elo
     -automatic posting from my database or other sites
     -uploading to imgur
-
+    -moderators aprove deny post page
 
 -"My likes" page might be server intensive,might skip it for now.
 -Will need to make "Most liked post" with custom field query.

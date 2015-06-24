@@ -15,6 +15,52 @@ Nein
 
 
 
+/*<Work On Progress>
+NewerPages
+OlderPages
+*/
+
+#tags{
+float: right;
+}
+
+#Paging{
+
+}
+#Paging a{
+	color: #999999;
+	font-size: 16px;
+	line-height: 48px;
+	height: 44px;
+	display: block;
+	padding: 0 5px;
+}
+#NewerPages {
+	float: left;:
+}
+#OlderPages {
+	float: right;
+}
+
+#TagTitle{
+position:relative;
+height: 43px;
+top:10px;
+margin-bottom: 20px;
+color: #222222;
+font-size: 20px;
+font-family:arial;
+font-weight:bold!important;
+text-decoration: underline;
+}
+
+
+
+
+
+/*</Work On Progress>*/
+
+
 body{
 	background-color: #0000;
 	margin: 0;
@@ -65,18 +111,12 @@ header#top-nav a{
 	font-weight: bold;
 }
 
-
-
-
 header#top-nav .nav-wrap {
 	width: 1068px;
 	height: 46px;
 	margin: 0 auto;
 	position: relative;
 }
-
-
-
 
 #logo{
 }
@@ -199,6 +239,7 @@ MainPage Start
 	float: left;
 	min-height: 100%;
  	height: auto !important;
+	margin-top: 30px;
 }
 
 #singlepost{
@@ -297,12 +338,22 @@ Single Start
 	width: 728px;
 }
 #pp_content img{
-	width: 728px;	
+	width: 620px;	
 	height: auto;
 }
 #pp_data{
-	
+	width: 620px;
+	height: 54px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	position: relative;
 }
+#pp_data li{
+margin: 0 10px 0 0;
+float: left;
+list-style: none;
+}
+
 #pp_comments{
 	position relative;
 }

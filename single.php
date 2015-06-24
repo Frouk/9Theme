@@ -15,10 +15,11 @@
 							<li><a class="votedown" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,2);"></a></li>
 						</div>
 					</div>
-				<div id="pp_comments"></div>	
+				<div id="pp_comments">
+				<?php comments_template( '', true ); ?>
+				</div>	
 			</div>
 		<?php endwhile; /* end loop */ ?>
-		<?php comments_template( '', true ); ?>
 	</div>
 	
 </div>

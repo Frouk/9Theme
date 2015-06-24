@@ -8,7 +8,27 @@
 	
 	//DEBUGGING
 	
+	function mytheme_comment($comment, $args, $depth) {
+		$GLOBALS['comment'] = $comment;
 	
+		?>
+			<div id="comment-entry">
+				<div id="comment-avatar">
+				<?php echo get_avatar( $comment, '50' ); ?>
+				</div>
+				<div id="comment-notavatar">
+					<div id="comment-info">
+						<?php comment_author(); ?> :
+					</div>
+					<div id="comment-text">
+						<?php comment_text(); ?>
+					</div>
+				</div>
+			</div>
+
+		
+		<?php
+	}
 
 		//Allows javascript to call domyshit with ajax
 			add_action("wp_ajax_nopriv_domyshit", "domyshit");

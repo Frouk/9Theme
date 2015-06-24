@@ -15,10 +15,7 @@ Nein
 
 
 
-/*<Work On Progress>
-NewerPages
-OlderPages
-*/
+/*<Work On Progress>*/
 
 #tags{
 float: right;
@@ -55,6 +52,32 @@ text-decoration: underline;
 }
 
 
+#commentlist{
+
+}
+#comment-entry{
+	width: 100%;
+	height: 60px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #ddd;
+}
+#comment-avatar{
+	float: left;
+}
+#comment-notavatar{
+	margin-left: 60px;
+}
+#comment-info{
+	font-weight:bold!important;
+	text-decoration: underline;
+}
+#comment-text{
+	padding-top: 4px;
+	padding-left: 4px;
+}
+#commentlist{
+	
+}
 
 
 
@@ -70,27 +93,23 @@ body{
 	font-weight: normal;
 	height:100%;
 }
-
 h1,li, ol, p, pre, td, th, ul{
 	margin: 0;
 	padding: 0;
 	outline: 0;
 }
 
-/*
-	HEADER START
-*/
+
+/*<HEADER START>*/
 header#top-nav {
 	background-color: #f4f4f4;
 	width: 100%;
 	height: 46px;
 	border-bottom: 1px solid #ddd;
 }
-
 header#top-nav li{
 	list-style: none;
 }
-
 header#top-nav a{				
 	text-decoration:none;
 	float:left;
@@ -110,22 +129,18 @@ header#top-nav a{
 	text-align: center;
 	font-weight: bold;
 }
-
 header#top-nav .nav-wrap {
 	width: 1068px;
 	height: 46px;
 	margin: 0 auto;
 	position: relative;
 }
-
 #logo{
 }
 #logo a{				
 	color: #111!important;
 	font-size: 33px;
 }
-
-
 #menuz{
 }
 #menuz a{				
@@ -136,11 +151,9 @@ header#top-nav .nav-wrap {
 	display: block;
 	padding: 0 5px;
 }
-
 .current-menu-item a{
     color: #ee0005 !important;
 }
-
 #usercrap {
 	float: right;
 }
@@ -148,28 +161,19 @@ header#top-nav .nav-wrap {
 	color: #f811fc!important;
 	font-size: 16px;
 }
-
-/*
-HEADER END
-*/
+/*</HEADER END>*/
 
 
-/*
-SIDEBAR START
-*/
+/*<SIDEBAR START>*/
 #sidebar{
 	width:150px;
 	overflow: hidden;
 	float: right;
 }
-/*
-SIDEBAR END
-*/
+/*</SIDEBAR END>*/
 
 
-/*
-FOOTER Start
-*/
+/*<FOOTER Start>*/
 footer#bot-nav{
 	width: 100%;
 	height: 46px;
@@ -177,7 +181,6 @@ footer#bot-nav{
 footer#bot-nav li{
 	list-style: none;
 }
-
 #footermenu a{				
 	text-decoration:none;
 	float:left;
@@ -198,7 +201,6 @@ footer#bot-nav li{
 	height: 44px;
 	display: block;
 }
-
 footer#bot-nav .nav-wrap {
 	border-top: 1px solid #ddd;
 	width: 1068px;
@@ -206,24 +208,16 @@ footer#bot-nav .nav-wrap {
 	margin: 0 auto;
 	position: relative;
 }
-
-/*
-FOOTER END
-*/
+/*</FOOTER END>*/
 
 
-
-/*
-MainPage Start
-*/
-
+/*<MainPage Start>*/
 #container{
 	position: relative;
 	overflow: hidden;
 	margin: 0 auto;
 	clear: both;
 }
-
 #main{
 	width: 940px;
 	margin: 20px auto;
@@ -232,7 +226,6 @@ MainPage Start
   	margin: 0 auto;
 	clear: both;
 }
-
 #posts{
 	width: 600px;
 	overflow: hidden;
@@ -241,7 +234,6 @@ MainPage Start
  	height: auto !important;
 	margin-top: 30px;
 }
-
 #singlepost{
 	border-bottom:30px;
 	border-bottom: 1px solid #eee;
@@ -252,7 +244,6 @@ MainPage Start
 	font-size: 22px;
 	font-weight: bold;
 }
-
 #posttitle a{
 	font-size: 22px;
 	color: #000;
@@ -261,12 +252,10 @@ MainPage Start
 #posttitle a:hover {
   color: blue;
 }
-
 #postcontent{
 	width: 600px;
 	margin-top: 10px;
 }
-
 #postcontent img{
 	width: 500px;	
 	height: auto;
@@ -278,13 +267,11 @@ MainPage Start
 	margin-bottom: 10px;
 	position: relative;
 }
-
 #postdata li{
 margin: 0 10px 0 0;
 float: left;
 list-style: none;
 }
-
 .vote{
 	margin: 7px 0 0 0;
 }
@@ -313,14 +300,10 @@ background: url(http://i.imgur.com/7FGuyWG.png) no-repeat -42px -32px;
 #stats {
 
 }
+/*</MainPage END>*/
 
-/*
-MainPage END
-*/
 
-/*
-Single Start
-*/
+/*<Single Start>*/
 #postpage{
 	width: 1068px;
 	margin: 20px auto;
@@ -353,18 +336,16 @@ margin: 0 10px 0 0;
 float: left;
 list-style: none;
 }
-
 #pp_comments{
-	position relative;
+	padding-top: 70px;
+	margin-top: 70px;
+	width: 620px;
+	border-top: 2px solid #000;
 }
+/*</Single End>*/
 
-/*
-Single End
-*/
 
-/*
-Register/login and shit Start
-*/
+/*<Register/login and shit Start>*/
 #popuplogin{
     display: none;
     background-color: #FFFFFF;
@@ -395,9 +376,11 @@ Register/login and shit Start
     position: fixed;
     z-index: 998;
 }
+/*</Register/login and shit End>*/
+
+
+/*<Comments>*/
 
 
 
-/*
-Register/login and shit End
-*/
+/*</Comments>*/

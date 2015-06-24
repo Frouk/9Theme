@@ -29,6 +29,7 @@ http://code.tutsplus.com/tutorials/creating-a-custom-wordpress-registration-form
 http://designmodo.com/wordpress-custom-registration/
 http://cubiq.org/front-end-user-registration-and-login-in-wordpress
 https://wordpress.org/support/topic/custom-multiple-query_posts-ids (My like page)
+https://codex.wordpress.org/Function_Reference/wp_list_comments
 
 Steps:
 1)create allmost all templates to be used,with crappy style

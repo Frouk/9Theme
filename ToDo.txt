@@ -2,6 +2,12 @@
 -allow user accounts upload/upvote/downvote
 -possible make a few theme styles (examples:9gag/old 9nsfw)
 
+-will make seperate plugins for specific jobs:
+    -upvote system,account elo
+    -automatic posting from my database or other sites
+    -uploading to imgur
+
+
 -"My likes" page might be server intensive,might skip it for now.
 -Will need to make "Most liked post" with custom field query.
 -reputation field on comments,my posts upvotes,might link to reputation explained page.

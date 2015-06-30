@@ -3,14 +3,14 @@
 	//On theme switch setup likes database table
 	//Create upvote/downvote/novote function which will be used on myjavascript with ajax
 	//Create getmylikes function with "page" parameter
-	
+
 	//addvote is as bad as it gets,should be used only in debugging mode
-	
+
 	//DEBUGGING
-	
+
 	function mytheme_comment($comment, $args, $depth) {
 		$GLOBALS['comment'] = $comment;
-	
+
 		?>
 			<div id="comment-entry">
 				<div id="comment-avatar">
@@ -26,7 +26,7 @@
 				</div>
 			</div>
 
-		
+
 		<?php
 	}
 
@@ -52,54 +52,54 @@
 				}
 				die();
 			}
-	
-	
+
+
 	add_action("after_switch_theme", "createtablez");
 	function createtablez(){
-		
+
 		global $wpdb;
 		$charset_collate = $wpdb->get_charset_collate();
-		
-		$table_name = $wpdb->prefix . "updownvotes"; 
+
+		$table_name = $wpdb->prefix . "updownvotes";
 
 		$sql = "CREATE TABLE $table_name (
 		  user_id bigint(20) NOT NULL,
 		  post_id bigint(20) NOT NULL,
 		  upvote tinyint(1) NOT NULL,
-		  UNIQUE KEY keyid (user_id,post_id),  
+		  UNIQUE KEY keyid (user_id,post_id),
 		  KEY user_id (user_id),
 		  KEY post_id (post_id)
 		) $charset_collate;";
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
-			
+
 
 	}
-		
-		
+
+
 
 	function addvote($user,$id,$vote){
-	
-	
+
+
 		global $wpdb;
 		$charset_collate = $wpdb->get_charset_collate();
-		$table_name = $wpdb->prefix . "updownvotes"; 
+		$table_name = $wpdb->prefix . "updownvotes";
 		$sql = "INSERT INTO wp_updownvotes ()
 				VALUES ($user,$id,$vote);";
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );
-	
+
 		$liked_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(post_id) FROM $wpdb->posts WHERE post_id =$id AND upvote=%d",'1'));
 		add_post_meta($id, 'likes', $liked_count, true ) || update_post_meta($id, 'likes', $liked_count);
-		
+
 	}
 
-	
-	
+
+
 	//End of DEBUGGING
-	
+
 	//Theme Customization
-		
+
 		// custom menu support
 		add_theme_support( 'menus' );
 		if ( function_exists( 'register_nav_menus' ) ) {
@@ -116,7 +116,7 @@
 
 
 	//Security
-	
+
 		// removes detailed login error information for security
 		add_filter('login_errors',create_function('$a', "return null;"));
 		// removes the WordPress version from your header for security
@@ -134,22 +134,22 @@
 		}
 		add_action( 'admin_init', 'restrict_admin', 1 );
 
-	
+
 	//Initializations
-		
+
 		function mh_load_my_script() {
 			wp_enqueue_script( 'jquery' );
 		}
 		add_action( 'wp_enqueue_scripts', 'mh_load_my_script' );
-		
+
 		function load_javascript(){
 			wp_enqueue_script( 'function', get_template_directory_uri().'/majavascript.js', 'jquery', true);
 			wp_localize_script( 'function', 'my_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		}
 		add_action('template_redirect', 'load_javascript');
-	
+
 	//Login/Register forms and php functions shit
-	
+
 		add_action( 'wp_login_failed', 'pu_login_failed' ); // hook failed login
 		function pu_login_failed( $user ) {
 			// check what page the login attempt is coming from
@@ -199,7 +199,7 @@
 			global $user_login;
 			if(isset($_GET['login']) && $_GET['login'] == 'failed')
 				{
-					echo'	
+					echo'
 						<script type="text/javascript">jQuery(document).ready(function($) {jQuery("#show_login").click();});</script>
 						<div class="login_error">
 							<p>FAILED: Try again!</p>
@@ -212,7 +212,7 @@
 						$referrer = $_SERVER['HTTP_REFERER'];
 						$args = array(
 									'echo'           => true,
-									'redirect'       => $referrer, 
+									'redirect'       => $referrer,
 									'form_id'        => 'loginform',
 									'label_username' => __( 'Username' ),
 									'label_password' => __( 'Password' ),
@@ -225,31 +225,31 @@
 									'remember'       => true,
 									'value_username' => NULL,
 									'value_remember' => true
-									); 
-						wp_login_form($args);			
+									);
+						wp_login_form($args);
 				}
-		
+
 		}
 		function registration_form( $username, $password, $email ) {
-			
+
 			echo '
 			<form action="' . $_SERVER['REQUEST_URI'] . '" method="post">
 			<div>
 			<label for="username">Username <strong>*</strong></label>
 			<input type="text" name="username" value="' . ( isset( $_POST['username'] ) ? $username : null ) . '">
 			</div>
-			 
+
 			<div>
 			<label for="password">Password <strong>*</strong></label>
 			<input type="password" name="password" value="' . ( isset( $_POST['password'] ) ? $password : null ) . '">
 			</div>
-			 
+
 			<div>
 			<label for="email">Email <strong>*</strong></label>
 			<input type="text" name="email" value="' . ( isset( $_POST['email']) ? $email : null ) . '">
 			</div>
-			
-			
+
+
 			<input type="submit" name="submit" value="Register"/>
 			</form>
 			';
@@ -257,7 +257,7 @@
 		function registration_validation( $username, $password, $email )  {
 			global $reg_errors;
 			$reg_errors = new WP_Error;
-			
+
 			if ( empty( $username ) || empty( $password ) || empty( $email ) ) {
 				$reg_errors->add('field', 'Required form field is missing');
 			}
@@ -282,12 +282,12 @@
 			if ( is_wp_error( $reg_errors ) ) {
 				echo '<script type="text/javascript">jQuery(document).ready(function($) {jQuery("#show_register").click();});</script>';
 				foreach ( $reg_errors->get_error_messages() as $error ) {
-				 
+
 					echo '<div>';
 					echo '<strong>ERROR</strong>:';
 					echo $error . '<br/>';
 					echo '</div>';
-					 
+
 				}
 			}
 		}
@@ -300,9 +300,9 @@
 				'user_pass'     =>   $password,
 				);
 				$user = wp_insert_user( $userdata );
-				echo 'Registration complete. Goto <a href="' . get_site_url() . '/wp-login.php">login page</a>.';   
+				echo 'Registration complete. Goto <a href="' . get_site_url() . '/wp-login.php">login page</a>.';
 			}
-		}	
+		}
 		function custom_registration_function() {
 			if ( isset($_POST['submit'] ) ) {
 				registration_validation(
@@ -310,13 +310,13 @@
 				$_POST['password'],
 				$_POST['email']
 				);
-				 
+
 				// sanitize user form input
 				global $username, $password, $email;
 				$username   =   sanitize_user( $_POST['username'] );
 				$password   =   esc_attr( $_POST['password'] );
 				$email      =   sanitize_email( $_POST['email'] );
-		 
+
 				// call @function complete_registration to create the user
 				// only when no WP_error is found
 				complete_registration(
@@ -325,11 +325,11 @@
 				$email
 				);
 			}
-		 
+
 			registration_form(
 				$username,
 				$password,
 				$email
 				);
-		}	
+		}
 ?>

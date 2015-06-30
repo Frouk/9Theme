@@ -7,7 +7,7 @@
 				<div id="pp_title"><?php the_title(); ?></div>
 				<div id="pp_content"><?php the_content(); ?></div>
 				<div id="pp_data">
-						<div id="stats">900 points - <?php comments_number( 'No comments', 'One comment', '% comments' ); ?>
+						<div id="stats">900 points - <?php comments_number( 'No comments', 'One comment', '% comments' ); ?> by <?php the_author_posts_link(); ?>
 							<div id="tags"> <?php the_tags( 'Tags:', ',', '.' ); ?> </div>
 						</div>
 						<div class="vote">
@@ -17,10 +17,10 @@
 					</div>
 				<div id="pp_comments">
 				<?php comments_template( '', true ); ?>
-				</div>	
+				</div>
 			</div>
 		<?php endwhile; /* end loop */ ?>
 	</div>
-	
+
 </div>
 <?php get_footer(); ?>

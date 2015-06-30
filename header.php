@@ -30,9 +30,8 @@
 						<a id="show_register" href="javascript:void(0);">Register</a>';
 					}else{echo '
 						<a id="show_settings" href="javascript:void(0);">My Profile</a>
-						<a id="Logout" href="javascript:void(0);">Logout</a>';
+						<a id="Logout" href="';echo wp_logout_url();echo '">Logout</a>';
 					} ?>
 				</li></div>
 			</nav></div>
 		</header>
-		

@@ -30,69 +30,75 @@
 		<?php
 	}
 
-		//Allows javascript to call domyshit with ajax
-			add_action("wp_ajax_nopriv_domyshit", "domyshit");
-			add_action("wp_ajax_domyshit", "domyshit");
-			function domyshit(){
-				if ((isset($_POST['para']))and((isset($_POST['para2'])))) {
-					$vote=0;
-					if($_POST['para2']==1){
-						$vote=1;
-					}elseif ($_POST['para2']=2){
-						$vote=2;
-					}else {
-						die();
+
+
+
+		//UpvoteDownvote System
+
+			//Allows javascript to call domyshit with ajax
+				add_action("wp_ajax_nopriv_domyshit", "vote");
+				add_action("wp_ajax_domyshit", "vote");
+
+				//All vote call will pass through here,should add security checks.
+				function vote(){
+
+					if ((isset($_POST['para1']))and((isset($_POST['para2'])))) {
+
+						$para1=$_POST['para1'];
+						$para2=$_POST['para2'];
+
+						if (get_post_status($para1)==false) die();
+
+						$var = get_current_user_id();
+
+						switch ($para2) {
+					    case 0:
+					        removevote($var,$para1)
+					        break;
+					    case 1:
+									addvote($var,$para1,1);
+									break;
+					    case 2:
+									addvote($var,$para1,0);
+									break;
+							default:
+					        die();
+						}
+						$var = get_current_user_id();
+						addvote($var,$_POST['para'],$vote);
 					}
-					$userid=$_POST['para'];
-					if(get_userdata($userid)==false){
-						die();
-					}
-					$var = get_current_user_id();
-					addvote($var,$_POST['para'],$vote);
+					die();
 				}
-				die();
-			}
 
 
-	add_action("after_switch_theme", "createtablez");
-	function createtablez(){
+				add_action("after_switch_theme", "createtablez");
+				function createtablez(){
+					global $wpdb;
+					$charset_collate = $wpdb->get_charset_collate();
+					$table_name = $wpdb->prefix . "updownvotes";
+					$sql = "CREATE TABLE $table_name (
+					  user_id bigint(20) NOT NULL,
+					  post_id bigint(20) NOT NULL,
+					  upvote tinyint(1) NOT NULL,
+					  UNIQUE KEY keyid (user_id,post_id)
+					) $charset_collate;";
+					require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+					dbDelta( $sql );
 
-		global $wpdb;
-		$charset_collate = $wpdb->get_charset_collate();
+				}
 
-		$table_name = $wpdb->prefix . "updownvotes";
+				function addvote($user,$id,$vote){
+					global $wpdb;
+					$table_name = $wpdb->prefix . "updownvotes";
+					$replaced=$wpdb->replace( $table_name, array('user_id'=>$user,'post_id'=>$id,'upvote'=>$vote));
+				}
 
-		$sql = "CREATE TABLE $table_name (
-		  user_id bigint(20) NOT NULL,
-		  post_id bigint(20) NOT NULL,
-		  upvote tinyint(1) NOT NULL,
-		  UNIQUE KEY keyid (user_id,post_id),
-		  KEY user_id (user_id),
-		  KEY post_id (post_id)
-		) $charset_collate;";
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		dbDelta( $sql );
+				function removevote($user,$id){
+					global $wpdb;
+					$table_name = $wpdb->prefix . "updownvotes";
+					$wpdb->delete( $table_name, array( 'user_id'=>$user,'post_id'=>$id ));
+				}
 
-
-	}
-
-
-
-	function addvote($user,$id,$vote){
-
-
-		global $wpdb;
-		$charset_collate = $wpdb->get_charset_collate();
-		$table_name = $wpdb->prefix . "updownvotes";
-		$sql = "INSERT INTO wp_updownvotes ()
-				VALUES ($user,$id,$vote);";
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		dbDelta( $sql );
-
-		$liked_count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(post_id) FROM $wpdb->posts WHERE post_id =$id AND upvote=%d",'1'));
-		add_post_meta($id, 'likes', $liked_count, true ) || update_post_meta($id, 'likes', $liked_count);
-
-	}
 
 
 

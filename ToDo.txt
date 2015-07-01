@@ -30,6 +30,7 @@ http://designmodo.com/wordpress-custom-registration/
 http://cubiq.org/front-end-user-registration-and-login-in-wordpress
 https://wordpress.org/support/topic/custom-multiple-query_posts-ids (My like page)
 https://codex.wordpress.org/Function_Reference/wp_list_comments
+http://wordpress.stackexchange.com/questions/30241/wp-query-order-results-by-meta-value
 
 Steps:
 1)create allmost all templates to be used,with crappy style
@@ -87,5 +88,4 @@ later:
 Issues:
 1)Something is wrong with wordpress and jquery.
 Getting uncaught-referenceerror-jquery-is-not-defined whilst using wp_enqueue_script( 'jquery' );,have to import jquery on head.
-Also need to replace # with jQuery 
-
+Also need to replace # with jQuery

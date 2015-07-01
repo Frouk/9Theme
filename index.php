@@ -6,7 +6,7 @@
 			<div id="TagTitle"></div>
 			<?php query_posts('paged=' . get_query_var('paged'));?>
        		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-				
+
 				<div id="singlepost">
         				<div id="posttitle">
 						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
@@ -15,12 +15,12 @@
 						<a href="<?php the_permalink(); ?>"><?php the_content(); ?></a>
 					</div>
 					<div id="postdata">
-						<div id="stats">900 points - <?php comments_number( 'No comments', 'One comment', '% comments' ); ?>
+						<div id="stats"><a id=<?php echo '"score ' . get_the_ID() . '"'; ?>>900</a> points - <?php comments_number( 'No comments', 'One comment', '% comments' ); ?>
 							<div id="tags"> <?php the_tags( 'Tags:', ',', '.' ); ?> </div>
 						</div>
 						<div class="vote">
-							<li><a class="voteup" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,1);"></a></li>
-							<li><a class="votedown" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,2);"></a></li>
+							<li><a id=<?php echo '"upvoteicon ' . get_the_ID() . '" '; ?>class="voteup" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,1);"></a></li>
+							<li><a id=<?php echo '"downvoteicon ' . get_the_ID() . '" '; ?>class="votedown" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,2);"></a></li>
 						</div>
 					</div>
 				</div>

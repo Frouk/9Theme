@@ -291,10 +291,10 @@ background: url(http://i.imgur.com/7FGuyWG.png) no-repeat;
 .votedown{
 background: url(http://i.imgur.com/7FGuyWG.png) no-repeat 0 -32px;
 }
-.voteup .active{
+.voteupactive{
 background: url(http://i.imgur.com/7FGuyWG.png) no-repeat -42px 0;
 }
-.votedown .active{
+.votedownactive{
 background: url(http://i.imgur.com/7FGuyWG.png) no-repeat -42px -32px;
 }
 #stats {

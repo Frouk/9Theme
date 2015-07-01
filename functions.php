@@ -53,7 +53,7 @@
 
 						switch ($para2) {
 					    case 0:
-					        removevote($var,$para1)
+					        removevote($var,$para1);
 					        break;
 					    case 1:
 									addvote($var,$para1,1);
@@ -64,8 +64,6 @@
 							default:
 					        die();
 						}
-						$var = get_current_user_id();
-						addvote($var,$_POST['para'],$vote);
 					}
 					die();
 				}

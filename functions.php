@@ -86,21 +86,23 @@
 					global $wpdb;
 					$table_name = $wpdb->prefix . "updownvotes";
 					$replaced=$wpdb->replace( $table_name, array('user_id'=>$user,'post_id'=>$id,'upvote'=>$vote));
+					updatevotes($id);
 				}
 
 				function removevote($user,$id){
 					global $wpdb;
 					$table_name = $wpdb->prefix . "updownvotes";
 					$wpdb->delete( $table_name, array( 'user_id'=>$user,'post_id'=>$id ));
+					updatevotes($id);
 				}
 
 				//Need to find a better way to do this.
 				//Will need to keep a counter for each post or call this with a 1/X chance every time,to update on average every X times
-				function updatevotes($id,$num){
+				function updatevotes($id){
 					global $wpdb;
 					$table_name = $wpdb->prefix . "updownvotes";
 					$positive = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE post_id = $id AND upvote=1");
-					$negative = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE post_id = $idAND upvote=0");
+					$negative = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE post_id = $id AND upvote=0");
 					update_post_meta($id, 'postscore', $positive-$negative);
 				}
 

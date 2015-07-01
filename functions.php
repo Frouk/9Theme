@@ -86,34 +86,22 @@
 					global $wpdb;
 					$table_name = $wpdb->prefix . "updownvotes";
 					$replaced=$wpdb->replace( $table_name, array('user_id'=>$user,'post_id'=>$id,'upvote'=>$vote));
-					if($vote==1){
-						indecrease($id,$replaced);
-					}else{
-						indecrease($id,$replaced*(-1));
-					}
-
 				}
 
 				function removevote($user,$id){
 					global $wpdb;
 					$table_name = $wpdb->prefix . "updownvotes";
-					$vote = $wpdb->get_row("SELECT $vote FROM $table_name WHERE post_id = $id AND user_id=$user");
-					if($vote==1){
-						indecrease($id,-1);
-					}else{
-						indecrease($id,1);
-					}
 					$wpdb->delete( $table_name, array( 'user_id'=>$user,'post_id'=>$id ));
 				}
 
-				//might miss increases if called simultaneously
-				function indecrease($id,$num){
-					$prev =  get_post_meta( $id, 'postscore' );
-					if(prev==false){
-						update_post_meta($id, 'postscore', ((int)$prev)+$num);
-					}else{
-						add_post_meta($id, 'postscore', $num, true);
-					}
+				//Need to find a better way to do this.
+				//Will need to keep a counter for each post or call this with a 1/X chance every time,to update on average every X times
+				function updatevotes($id,$num){
+					global $wpdb;
+					$table_name = $wpdb->prefix . "updownvotes";
+					$positive = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE post_id = $id AND upvote=1");
+					$negative = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE post_id = $idAND upvote=0");
+					update_post_meta($id, 'postscore', $positive-$negative);
 				}
 
 

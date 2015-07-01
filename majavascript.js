@@ -1,8 +1,8 @@
- function vote($var1,$var2) 
+ function vote($var1,$var2)
 {
      jQuery.ajax({
      url: my_ajax_script.ajaxurl,
-     data: ({action : 'domyshit',para:$var1,para2:$var2}),
+     data: ({action : 'vote',para1:$var1,para2:$var2}),
      success: function() {
       //jQuery change color
      }

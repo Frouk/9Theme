@@ -36,8 +36,8 @@
 		//UpvoteDownvote System
 
 			//Allows javascript to call domyshit with ajax
-				add_action("wp_ajax_nopriv_domyshit", "vote");
-				add_action("wp_ajax_domyshit", "vote");
+				add_action("wp_ajax_nopriv_vote", "vote");
+				add_action("wp_ajax_vote", "vote");
 
 				//All vote call will pass through here,should add security checks.
 				function vote(){

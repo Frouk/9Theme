@@ -78,7 +78,7 @@
 					  user_id bigint(20) NOT NULL,
 					  post_id bigint(20) NOT NULL,
 					  upvote tinyint(1) NOT NULL,
-					  UNIQUE KEY keyid (user_id,post_id)
+					  PRIMARY KEY (user_id,post_id)
 					) $charset_collate;";
 					require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 					dbDelta( $sql );

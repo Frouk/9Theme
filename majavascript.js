@@ -2,7 +2,7 @@
 {
      jQuery.ajax({
      url: my_ajax_script.ajaxurl,
-     data: ({action : 'vote',para1:$var1,para2:$var2}),
+     data: ({action : 'vote',para1:1132,para2:0}),
      success: function() {
       //jQuery change color
      }

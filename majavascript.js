@@ -1,7 +1,6 @@
  function vote(var1,var2)
 {
-     alert(var1);
-     alert(var2);
+     document.getElementById("22").setAttribute("href", "http://google.com");
      jQuery.ajax({
      url: my_ajax_script.ajaxurl,
      data: ({action : 'vote',para1:var1,para2:var2}),

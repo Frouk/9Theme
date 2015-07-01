@@ -76,7 +76,7 @@ text-decoration: underline;
 	padding-left: 4px;
 }
 #commentlist{
-	
+
 }
 
 
@@ -110,7 +110,7 @@ header#top-nav {
 header#top-nav li{
 	list-style: none;
 }
-header#top-nav a{				
+header#top-nav a{
 	text-decoration:none;
 	float:left;
 	display: block;
@@ -119,7 +119,7 @@ header#top-nav a{
 	padding-bottom: 20px;
 	padding-left: 20pt;
 	height: 20px;
-	line-height: 20px;                       
+	line-height: 20px;
 	font-family:arial;
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -137,13 +137,13 @@ header#top-nav .nav-wrap {
 }
 #logo{
 }
-#logo a{				
+#logo a{
 	color: #111!important;
 	font-size: 33px;
 }
 #menuz{
 }
-#menuz a{				
+#menuz a{
 	color: #999999;
 	font-size: 16px;
 	line-height: 48px;
@@ -181,13 +181,13 @@ footer#bot-nav{
 footer#bot-nav li{
 	list-style: none;
 }
-#footermenu a{				
+#footermenu a{
 	text-decoration:none;
 	float:left;
 	display: block;
 	padding-left: 20pt;
 	height: 20px;
-	line-height: 20px;                       
+	line-height: 20px;
 	font-family:arial;
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -257,7 +257,7 @@ footer#bot-nav .nav-wrap {
 	margin-top: 10px;
 }
 #postcontent img{
-	width: 500px;	
+	width: 500px;
 	height: auto;
 }
 #postdata{
@@ -291,7 +291,7 @@ background: url(http://i.imgur.com/7FGuyWG.png) no-repeat;
 .votedown{
 background: url(http://i.imgur.com/7FGuyWG.png) no-repeat 0 -32px;
 }
-.voteup  .active{
+.voteup .active{
 background: url(http://i.imgur.com/7FGuyWG.png) no-repeat -42px 0;
 }
 .votedown .active{
@@ -321,7 +321,7 @@ background: url(http://i.imgur.com/7FGuyWG.png) no-repeat -42px -32px;
 	width: 728px;
 }
 #pp_content img{
-	width: 620px;	
+	width: 620px;
 	height: auto;
 }
 #pp_data{

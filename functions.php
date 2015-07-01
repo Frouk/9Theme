@@ -42,10 +42,8 @@
 				//All vote call will pass through here,should add security checks.
 				function vote(){
 
-					if ((isset($_POST['para1']))and((isset($_POST['para2'])))) {
-
-						$para1=$_POST['para1'];
-						$para2=$_POST['para2'];
+						$para1=$_REQUEST['para1'];
+						$para2=$_REQUEST['para2'];
 
 						if (get_post_status($para1)==false) die();
 
@@ -64,7 +62,6 @@
 							default:
 					        die();
 						}
-					}
 					die();
 				}
 

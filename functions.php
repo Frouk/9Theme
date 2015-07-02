@@ -85,40 +85,53 @@
 				function addvote($user,$id,$vote){
 					global $wpdb;
 					$table_name = $wpdb->prefix . "updownvotes";
-
-
-					$previous=$wpdb->get_row( "SELECT IFNULL( SELECT upvote FROM $table_name WHERE user_id=$user AND post_id=$id),-1");
-					if ($previous==-1){
-						$replaced=$wpdb->replace( $table_name, array('user_id'=>5331,'post_id'=>$id,'upvote'=>$vote));
+					$previous=$wpdb->get_row( "SELECT upvote FROM $table_name WHERE user_id=$user AND post_id=$id");
+					if (count($previous)==0){
+						if($vote==1){
+							$wpdb->replace( $table_name, array('user_id'=>$user,'post_id'=>$id,'upvote'=>$vote));
+							indecrease($id,1);
+						}else{
+							$wpdb->replace( $table_name, array('user_id'=>$user,'post_id'=>$id,'upvote'=>$vote));
+							indecrease($id,-1);
+						}
 					}elseif($previous->upvote==1){
-						$replaced=$wpdb->replace( $table_name, array('user_id'=>5332,'post_id'=>$id,'upvote'=>$vote));
+						if($vote==0){
+							$wpdb->replace( $table_name, array('user_id'=>$user,'post_id'=>$id,'upvote'=>$vote));
+							indecrease($id,-2);
+						}
 					}elseif($previous->upvote==0){
-						$replaced=$wpdb->replace( $table_name, array('user_id'=>5333,'post_id'=>$id,'upvote'=>$vote));
+						if($vote==1){
+							$wpdb->replace( $table_name, array('user_id'=>$user,'post_id'=>$id,'upvote'=>$vote));
+							indecrease($id,2);
+						}
 					}
-
-
-				//	$replaced=$wpdb->replace( $table_name, array('user_id'=>$user,'post_id'=>$id,'upvote'=>$vote));
-					//updatevotes($id);
 				}
 
 				function removevote($user,$id){
 					global $wpdb;
 					$table_name = $wpdb->prefix . "updownvotes";
-					$wpdb->delete( $table_name, array( 'user_id'=>$user,'post_id'=>$id ));
-					updatevotes($id);
+					$previous=$wpdb->get_row( "SELECT upvote FROM $table_name WHERE user_id=$user AND post_id=$id");
+					if (count($previous)==0){
+
+					}elseif($previous->upvote==1){
+						$wpdb->delete( $table_name, array( 'user_id'=>$user,'post_id'=>$id ));
+						indecrease($id,-1);
+					}elseif($previous->upvote==0){
+						$wpdb->delete( $table_name, array( 'user_id'=>$user,'post_id'=>$id ));
+						indecrease($id,1);
+					}
+
 				}
 
-				//Need to find a better way to do this.
-				//Will need to keep a counter for each post or call this with a 1/X chance every time,to update on average every X times
-				//SQL indexing might help
-				function updatevotes($id){
-					global $wpdb;
-					$table_name = $wpdb->prefix . "updownvotes";
-					$positive = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE post_id = $id AND upvote=1");
-					$negative = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE post_id = $id AND upvote=0");
-					update_post_meta($id, 'postscore', $positive-$negative);
-					//will use account website meta for user score
-					}
+				//Might miss some updates if called simultaneously,could fix with 'mutex'
+				function indecrease($id,$num){
+					$prev =  get_post_meta( $id, 'postscore' );
+					update_post_meta($id, 'postscore', (var_dump($prev)+$num));
+					$post = get_post( $id );
+					$prev =  get_user_meta( $post->post_author, 'user_score' );
+					update_user_meta($post->post_author, 'user_score', (var_dump($prev)+$num));
+				}
+
 
 
 	//End of DEBUGGING

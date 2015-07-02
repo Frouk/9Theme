@@ -29,6 +29,15 @@
 	      <input id="submit_my_image_upload" name="submit_my_image_upload" type="submit" value="Upload" />
       </form>
     </div>
+    <div id="popupposturl">
+      <form id="PostUploadUrl" method="post" action="#" enctype="multipart/form-data">
+        <p><label>Title :</label><input type="text" id ="post-title" name="post-title" /></p>
+        <p><label>URL :</label><input type="text" id ="post-url" name="post-url" /></p>
+        <?php wp_nonce_field( 'my_image_upload_url', 'my_image_upload_url_nonce' ); ?>
+        <input id="submit_my_image_upload_url" name="submit_my_image_upload_url" type="submit" value="Upload" />
+      </form>
+    </div>
+
       <?php
 
       // Check that the nonce is valid, and the user can edit this post.
@@ -42,22 +51,56 @@
       	// Let WordPress handle the upload.
       	// Remember, 'my_image_upload' is the name of our file input in our form above.
       	$attachment_id = media_handle_upload( 'my_image_upload', $_POST['post_id'] );
-      	if ( is_wp_error( $attachment_id ) ) {
+
+        if ( is_wp_error( $attachment_id ) ) {
       		// There was an error uploading the image.
       	} else {
-          wp_insert_post( array(
-    				'post_author'	=> $user_id,
-    				'post_title'	=> $_POST['post-title'],
-    				'post_type'     => 'post',
-    				'post_content'	=> '<img src="'.wp_get_attachment_url($attachment_id).'"/>',
-    				'post_status'	=> 'publish'
-				) );
-      	}
+            wp_insert_post( array(
+      				'post_author'	=> $user_id,
+      				'post_title'	=> $_POST['post-title'],
+      				'post_type'     => 'post',
+      				'post_content'	=> '<img src="'.wp_get_attachment_url($attachment_id).'"/>',
+      				'post_status'	=> 'publish'
+  				) );
+          ?>
+          <script type='text/javascript'>  window.location="/";</script>
+        	<?php
+        }
 
-      } else {
+        } else {
 
-      	// The security check failed, maybe show the user an error.
-      }
+        	// The security check failed, maybe show the user an error.
+        }
+
+        //URL
+
+      if (isset( $_POST['my_image_upload_url_nonce'],$_POST['post-title'],$_POST['post-url'])	&& wp_verify_nonce( $_POST['my_image_upload_url_nonce'], 'my_image_upload_url' ))
+      {
+        	// These files need to be included as dependencies when on the front end.
+        	require_once( ABSPATH . 'wp-admin/includes/image.php' );
+        	require_once( ABSPATH . 'wp-admin/includes/file.php' );
+        	require_once( ABSPATH . 'wp-admin/includes/media.php' );
+
+
+            wp_insert_post( array(
+        				'post_author'	=> $user_id,
+        				'post_title'	=> $_POST['post-title'],
+        				'post_type'     => 'post',
+        				'post_content'	=> '<img src="'.$_POST['post-url'].'"/>',
+        				'post_status'	=> 'publish'
+    				) );
+            ?>
+            <script type='text/javascript'>
+              window.location="/";
+            </script>'
+          	<?php
+
+
+        } else {
+
+          	// The security check failed, maybe show the user an error.
+        }
+
 
     }?>
 

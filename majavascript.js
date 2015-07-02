@@ -61,4 +61,13 @@ jQuery(document).ready(function($) {
        });
        e.preventDefault();
    });
+   jQuery('a#show_upload_url').on('click', function(e){
+       jQuery('body').prepend('<div class="login_overlay"></div>');
+       jQuery('#popupposturl').fadeIn(500);
+       jQuery('div.login_overlay, form#PostUploadUrl a.close').on('click', function(){
+          jQuery('div.login_overlay').remove();
+           jQuery('#popupposturl').hide();
+       });
+       e.preventDefault();
+   });
 });

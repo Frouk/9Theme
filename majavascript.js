@@ -52,4 +52,13 @@ jQuery(document).ready(function($) {
        });
        e.preventDefault();
    });
+   jQuery('a#show_upload').on('click', function(e){
+       jQuery('body').prepend('<div class="login_overlay"></div>');
+       jQuery('#popuppost').fadeIn(500);
+       jQuery('div.login_overlay, form#PostUpload a.close').on('click', function(){
+          jQuery('div.login_overlay').remove();
+           jQuery('#popuppost').hide();
+       });
+       e.preventDefault();
+   });
 });

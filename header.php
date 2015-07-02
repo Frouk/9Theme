@@ -19,7 +19,51 @@
 		echo '</div>
 		<div id="popupregister">';
 			custom_registration_function();
-		echo '</div>';}?>
+		echo '</div>'; }else{?>
+
+    <div id="popuppost">
+      <form id="PostUpload" method="post" action="#" enctype="multipart/form-data">
+        <p><label>Title :</label><input type="text" id ="post-title" name="post-title" /></p>
+	      <p><input type="file" name="my_image_upload" id="my_image_upload"  multiple="false" /></p>
+	      <?php wp_nonce_field( 'my_image_upload', 'my_image_upload_nonce' ); ?>
+	      <input id="submit_my_image_upload" name="submit_my_image_upload" type="submit" value="Upload" />
+      </form>
+    </div>
+      <?php
+
+      // Check that the nonce is valid, and the user can edit this post.
+      if (isset( $_POST['my_image_upload_nonce'],$_POST['post-title'])	&& wp_verify_nonce( $_POST['my_image_upload_nonce'], 'my_image_upload' ))
+      {
+      	// These files need to be included as dependencies when on the front end.
+      	require_once( ABSPATH . 'wp-admin/includes/image.php' );
+      	require_once( ABSPATH . 'wp-admin/includes/file.php' );
+      	require_once( ABSPATH . 'wp-admin/includes/media.php' );
+
+      	// Let WordPress handle the upload.
+      	// Remember, 'my_image_upload' is the name of our file input in our form above.
+      	$attachment_id = media_handle_upload( 'my_image_upload', $_POST['post_id'] );
+      	if ( is_wp_error( $attachment_id ) ) {
+      		// There was an error uploading the image.
+      	} else {
+          wp_insert_post( array(
+    				'post_author'	=> $user_id,
+    				'post_title'	=> $_POST['post-title'],
+    				'post_type'     => 'post',
+    				'post_content'	=> '<img src="'.wp_get_attachment_url($attachment_id).'"/>',
+    				'post_status'	=> 'publish'
+				) );
+      	}
+
+      } else {
+
+      	// The security check failed, maybe show the user an error.
+      }
+
+    }?>
+
+
+
+
 		<header id="top-nav">
 			<div class="nav-wrap"><nav>
 				<div id="logo"><li><a href=<?php echo get_bloginfo(wpurl) . ">" .get_bloginfo(); ?></a></li></div>
@@ -29,7 +73,7 @@
 						<a id="show_login" href="javascript:void(0);">Login</a>
 						<a id="show_register" href="javascript:void(0);">Register</a>';
 					}else{echo '
-						<a id="show_settings" href="javascript:void(0);">My Profile</a>
+						<a id="show_upload" href="javascript:void(0);">Upload</a>
 						<a id="Logout" href="';echo wp_logout_url();echo '">Logout</a>';
 					} ?>
 				</li></div>

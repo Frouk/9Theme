@@ -368,6 +368,17 @@ list-style: none;
     left: 50%;
     margin-left: -200px;
 }
+#popuppost{
+		display: none;
+		background-color: #FFFFFF;
+		position: fixed;
+		top: 200px;
+		padding: 40px 25px 25px 25px;
+		width: 350px;
+		z-index: 999;
+		left: 50%;
+		margin-left: -200px;
+}
 .login_overlay{
     height: 100%;
     width: 100%;

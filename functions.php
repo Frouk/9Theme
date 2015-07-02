@@ -8,6 +8,31 @@
 
 	//DEBUGGING
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	function mytheme_comment($comment, $args, $depth) {
 		$GLOBALS['comment'] = $comment;
 

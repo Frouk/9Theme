@@ -126,10 +126,10 @@
 				//Might miss some updates if called simultaneously,could fix with 'mutex'
 				function indecrease($id,$num){
 					$prev =  get_post_meta( $id, 'postscore' );
-					update_post_meta($id, 'postscore', (var_dump($prev)+$num));
+					update_post_meta($id, 'postscore', intval($prev[0])+$num);
 					$post = get_post( $id );
 					$prev =  get_user_meta( $post->post_author, 'user_score' );
-					update_user_meta($post->post_author, 'user_score', (var_dump($prev)+$num));
+					update_user_meta($post->post_author, 'user_score', (intval($prev[0])+$num));
 				}
 
 

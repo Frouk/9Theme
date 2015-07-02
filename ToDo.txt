@@ -32,7 +32,24 @@ https://wordpress.org/support/topic/custom-multiple-query_posts-ids (My like pag
 https://codex.wordpress.org/Function_Reference/wp_list_comments
 http://wordpress.stackexchange.com/questions/30241/wp-query-order-results-by-meta-value
 
-Steps:
+10 days steps:
+finish the upvote system even not so optimised
+simple upload system for local image hosting
+fix all bugs,hide wordpress dashboard,errors/redirects on login/register and so on
+new upload system,imgur api,image scalling,image-gif watermark,possible on a plugin //if difficult leave for after launch
+add shit to allow plugins on theme
+create a few styles //After this point can beta launch
+
+moderators aprove posts page,delete comment/post
+automatic-massive uploads system
+user settings change avatar-password (reset password - search for ready plugin)
+user profile page with uploads-likes
+
+
+
+
+
+Old Steps:
 1)create allmost all templates to be used,with crappy style
 2)create login/register/settings tab
 3)create all php functions needed

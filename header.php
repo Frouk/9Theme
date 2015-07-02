@@ -22,6 +22,7 @@
 		echo '</div>'; }else{?>
 
     <div id="popuppost">
+      <a id="show_upload_url" href="javascript:void(0);">Upload via Url</a>
       <form id="PostUpload" method="post" action="#" enctype="multipart/form-data">
         <p><label>Title :</label><input type="text" id ="post-title" name="post-title" /></p>
 	      <p><input type="file" name="my_image_upload" id="my_image_upload"  multiple="false" /></p>
@@ -30,6 +31,7 @@
       </form>
     </div>
     <div id="popupposturl">
+      <a id="show_upload" href="javascript:void(0);">Upload via file</a>
       <form id="PostUploadUrl" method="post" action="#" enctype="multipart/form-data">
         <p><label>Title :</label><input type="text" id ="post-title" name="post-title" /></p>
         <p><label>URL :</label><input type="text" id ="post-url" name="post-url" /></p>

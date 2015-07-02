@@ -53,6 +53,8 @@ jQuery(document).ready(function($) {
        e.preventDefault();
    });
    jQuery('a#show_upload').on('click', function(e){
+      jQuery('div.login_overlay').remove();
+      jQuery('#popupposturl').hide();
        jQuery('body').prepend('<div class="login_overlay"></div>');
        jQuery('#popuppost').fadeIn(500);
        jQuery('div.login_overlay, form#PostUpload a.close').on('click', function(){
@@ -62,6 +64,8 @@ jQuery(document).ready(function($) {
        e.preventDefault();
    });
    jQuery('a#show_upload_url').on('click', function(e){
+     jQuery('div.login_overlay').remove();
+     jQuery('#popuppost').hide();
        jQuery('body').prepend('<div class="login_overlay"></div>');
        jQuery('#popupposturl').fadeIn(500);
        jQuery('div.login_overlay, form#PostUploadUrl a.close').on('click', function(){

@@ -59,7 +59,7 @@
       	} else {
             wp_insert_post( array(
       				'post_author'	=> $user_id,
-      				'post_title'	=> $_POST['post-title'],
+      				'post_title'	=> sanitize_text_field($_POST['post-title']),
       				'post_type'     => 'post',
       				'post_content'	=> '<img src="'.wp_get_attachment_url($attachment_id).'"/>',
       				'post_status'	=> 'publish'
@@ -86,9 +86,9 @@
 
             wp_insert_post( array(
         				'post_author'	=> $user_id,
-        				'post_title'	=> $_POST['post-title'],
+        				'post_title'	=>sanitize_text_field($_POST['post-title']),
         				'post_type'     => 'post',
-        				'post_content'	=> '<img src="'.$_POST['post-url'].'"/>',
+        				'post_content'	=> '<img src="'. esc_url($_POST['post-url']).'"/>',
         				'post_status'	=> 'publish'
     				) );
             ?>

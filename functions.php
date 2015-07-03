@@ -43,7 +43,14 @@
 				</div>
 				<div id="comment-notavatar">
 					<div id="comment-info">
-						<?php comment_author(); ?> :
+						<?php echo comment_author() . ' '.$comment->user_id; ?> :
+						<?php if ($comment->user_id>0){
+							$score=get_user_meta( $comment->user_id, 'user_score');
+							echo comment_author() . '('. $score[0].') :';
+						}else{
+							echo comment_author() . '(Guest) :';
+						}
+						?>
 					</div>
 					<div id="comment-text">
 						<?php comment_text(); ?>
@@ -56,13 +63,11 @@
 	}
 
 
-
+	//End of DEBUGGING
 
 		//UpvoteDownvote System
-
-			//Allows javascript to call domyshit with ajax
+				//Also need an init on inits.
 				add_action("wp_ajax_vote", "vote");
-
 				//All vote call will pass through here,should add security checks.
 				function vote(){
 
@@ -88,8 +93,6 @@
 						}
 					die();
 				}
-
-
 				add_action("after_switch_theme", "createtablez");
 				function createtablez(){
 					global $wpdb;
@@ -103,9 +106,7 @@
 					) $charset_collate;";
 					require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 					dbDelta( $sql );
-
 				}
-
 				function addvote($user,$id,$vote){
 					global $wpdb;
 					$table_name = $wpdb->prefix . "updownvotes";
@@ -130,7 +131,6 @@
 						}
 					}
 				}
-
 				function removevote($user,$id){
 					global $wpdb;
 					$table_name = $wpdb->prefix . "updownvotes";
@@ -144,9 +144,7 @@
 						$wpdb->delete( $table_name, array( 'user_id'=>$user,'post_id'=>$id ));
 						indecrease($id,1);
 					}
-
 				}
-
 				//Might miss some updates if called simultaneously,could fix with 'mutex'
 				function indecrease($id,$num){
 					$prev =  get_post_meta( $id, 'postscore' );
@@ -157,8 +155,6 @@
 				}
 
 
-
-	//End of DEBUGGING
 
 	//Theme Customization
 

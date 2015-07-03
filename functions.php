@@ -61,7 +61,6 @@
 		//UpvoteDownvote System
 
 			//Allows javascript to call domyshit with ajax
-				add_action("wp_ajax_nopriv_vote", "vote");
 				add_action("wp_ajax_vote", "vote");
 
 				//All vote call will pass through here,should add security checks.
@@ -275,7 +274,7 @@
 						$referrer = $_SERVER['HTTP_REFERER'];
 						$args = array(
 									'echo'           => true,
-									'redirect'       => $referrer,
+									'redirect'       => '/',
 									'form_id'        => 'loginform',
 									'label_username' => __( 'Username' ),
 									'label_password' => __( 'Password' ),
@@ -395,4 +394,11 @@
 				$email
 				);
 		}
+		function auto_login_new_user( $user_id ) {
+        wp_set_current_user($user_id);
+        wp_set_auth_cookie($user_id);
+        wp_redirect( home_url() );
+        exit;
+    }
+    add_action( 'user_register', 'auto_login_new_user' );
 ?>

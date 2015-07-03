@@ -119,7 +119,7 @@
 						<a id="show_register" href="javascript:void(0);">Register</a>';
 					}else{echo '
 						<a id="show_upload" href="javascript:void(0);">Upload</a>
-						<a id="Logout" href="';echo wp_logout_url();echo '">Logout</a>';
+						<a id="Logout" href="';echo wp_logout_url(home_url());echo '">Logout</a>';
 					} ?>
 				</li></div>
 			</nav></div>

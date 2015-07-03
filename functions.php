@@ -43,17 +43,16 @@
 				</div>
 				<div id="comment-notavatar">
 					<div id="comment-info">
-						<?php echo comment_author() . ' '.$comment->user_id; ?> :
 						<?php if ($comment->user_id>0){
 							$score=get_user_meta( $comment->user_id, 'user_score');
 							echo comment_author() . '('. $score[0].') :';
 						}else{
-							echo comment_author() . '(Guest) :';
+							echo esc_attr(comment_author()) . '(Guest) :';
 						}
 						?>
 					</div>
 					<div id="comment-text">
-						<?php comment_text(); ?>
+						<?php esc_attr(comment_text()); ?>
 					</div>
 				</div>
 			</div>

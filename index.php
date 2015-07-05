@@ -3,7 +3,7 @@
 <div id="container">
 	<div id="main">
 		<div id="posts">
-			<div id="TagTitle"></div>
+			<div id="PageTitleBox"><div id="PageTitle">Hot</div></div>
 			<?php query_posts('paged=' . get_query_var('paged'));?>
        		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 

@@ -19,14 +19,17 @@
 
 ';
 			custom_login();
-		echo '
-      <div class="login-help">
-          <a href="#">Register</a> • <a href="#">Forgot Password</a>
-      </div>
-    </div>
-		<div id="popupregister">';
+		echo '<div class="login-help">
+      <a id="show_register"href="javascript:void(0);">Register</a> • <a href="#">Forgot Password</a>
+    </div></div>
+		<div id="popupregister">
+      <h1>Register</h1><br>';
 			custom_registration_function();
-		echo '</div>'; }else{?>
+		  echo '
+      <div class="login-help">
+        <a id="show_login"href="javascript:void(0);">Log-in</a>
+      </div>
+    </div>'; }else{?>
 
     <div id="popuppost">
       <form id="PostUpload" method="post" action="#" enctype="multipart/form-data">

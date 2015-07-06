@@ -241,7 +241,7 @@
 					echo'
 						<script type="text/javascript">jQuery(document).ready(function($) {jQuery("#show_login").click();});</script>
 						<div class="login_error">
-							<p>FAILED: Try again!</p>
+							<p>Wrong Username and Password combination!</p>
 						</div>
 					';
 				}
@@ -272,7 +272,7 @@
 		function registration_form( $username, $password, $email ) {
 
 			echo '
-			<form action="' . $_SERVER['REQUEST_URI'] . '" method="post">
+			<form action="' . home_url()  . '" method="post">
 			<div>
 			<label for="username">Username <strong>*</strong></label>
 			<input type="text" name="username" value="' . ( isset( $_POST['username'] ) ? $username : null ) . '">
@@ -284,7 +284,7 @@
 			</div>
 
 			<div>
-			<label for="email">Email <strong>*</strong></label>
+			<label for="email">Email (Optional)</label>
 			<input type="text" name="email" value="' . ( isset( $_POST['email']) ? $email : null ) . '">
 			</div>
 
@@ -297,7 +297,7 @@
 			global $reg_errors;
 			$reg_errors = new WP_Error;
 
-			if ( empty( $username ) || empty( $password ) || empty( $email ) ) {
+			if ( empty( $username ) || empty( $password ) ) {
 				$reg_errors->add('field', 'Required form field is missing');
 			}
 			if ( 4 > strlen( $username ) ) {
@@ -312,22 +312,17 @@
 			if ( 5 > strlen( $password ) ) {
 				$reg_errors->add( 'password', 'Password length must be greater than 5' );
 			}
-			if ( !is_email( $email ) ) {
-				$reg_errors->add( 'email_invalid', 'Email is not valid' );
-			}
+
 			if ( email_exists( $email ) ) {
 				$reg_errors->add( 'email', 'Email Already in use' );
 			}
 			if ( is_wp_error( $reg_errors ) ) {
 				echo '<script type="text/javascript">jQuery(document).ready(function($) {jQuery("#show_register").click();});</script>';
+				echo'<div class="login_error">';
 				foreach ( $reg_errors->get_error_messages() as $error ) {
-
-					echo '<div>';
-					echo '<strong>ERROR</strong>:';
-					echo $error . '<br/>';
-					echo '</div>';
-
+					echo '<p>'.$error . '</p>';
 				}
+				echo '</div>';
 			}
 		}
 		function complete_registration() {
@@ -339,7 +334,6 @@
 				'user_pass'     =>   $password,
 				);
 				$user = wp_insert_user( $userdata );
-				echo 'Registration complete. Goto <a href="' . get_site_url() . '/wp-login.php">login page</a>.';
 			}
 		}
 		function custom_registration_function() {

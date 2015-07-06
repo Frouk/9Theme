@@ -22,7 +22,7 @@ Nein
 }
 
 #Paging{
-	//
+
 }
 #Paging a{
 	color: #999999;
@@ -37,34 +37,6 @@ Nein
 }
 #OlderPages {
 	float: right;
-}
-
-
-#commentlist{
-	/* */
-}
-#comment-entry{
-	width: 100%;
-	height: 60px;
-	margin-bottom: 20px;
-	border-bottom: 1px solid #ddd;
-}
-#comment-avatar{
-	float: left;
-}
-#comment-notavatar{
-	margin-left: 60px;
-}
-#comment-info{
-	font-weight:bold!important;
-	text-decoration: underline;
-}
-#comment-text{
-	padding-top: 4px;
-	padding-left: 4px;
-}
-#commentlist{
-	/* */
 }
 
 
@@ -283,6 +255,20 @@ footer#bot-nav .nav-wrap {
 	margin: 0 auto;
 	position: relative;
 }
+#frouk{
+	float:right;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: center;
+  color: #111111;
+  font-size: 12px;
+  line-height: 48px;
+  height: 44px;
+  display: block;
+}
+#frouk a{
+	text-decoration: none;
+}
 /*</FOOTER END>*/
 
 
@@ -383,7 +369,7 @@ footer#bot-nav .nav-wrap {
 	text-indent: -999px;
 }
 .voteup{
-	background: url(http://i.imgur.com/7FGuyWG.png) no-repeat;
+	background: url(images/vote.png) no-repeat;
 }
 .votedown{
 	background: url(http://i.imgur.com/7FGuyWG.png) no-repeat 0 -32px;
@@ -442,7 +428,7 @@ footer#bot-nav .nav-wrap {
 /*</Single End>*/
 
 
-/*<Register/login and shit Start>*/
+/*Froms and shit Start>*/
 #popuplogin{
     display: none;
     background-color: #FFFFFF;
@@ -495,11 +481,36 @@ footer#bot-nav .nav-wrap {
     position: fixed;
     z-index: 998;
 }
-/*</Register/login and shit End>*/
-
+/*</Register/login and shit End>http://i.imgur.com/yNYexSq.png*/
 
 /*<Comments>*/
 
+#commentlist{
+	/* */
+}
+#comment-entry{
+	width: 100%;
+	height: 60px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #ddd;
+}
+#comment-avatar{
+	float: left;
+}
+#comment-notavatar{
+	margin-left: 60px;
+}
+#comment-info{
+	font-weight:bold!important;
+	text-decoration: underline;
+}
+#comment-text{
+	padding-top: 4px;
+	padding-left: 4px;
+}
+#commentlist{
+	/* */
+}
 
 
 /*</Comments>*/

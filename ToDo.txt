@@ -5,12 +5,27 @@
 -will make seperate plugins for specific jobs:
     -upvote system,account elo
     -automatic posting from my database or other sites
-    -uploading to imgur
+    -uploading to imgur,image scalling,image-gif watermark
     -moderators aprove deny post page
 
--"My likes" page might be server intensive,might skip it for now.
+Steps:
+-Make the basic theme.
+-Create imgur uploads plugin.
+-Create Moderators aprove/deny plugin.
+-Create automatic posting plugin.
+-User settings,email,password avatar change.
+-User Profile page
+
+Later:
+-edit everything to follow "Theme Development Standards".
+-allow full customization from wordpress interface.
+-breaks functions.php to more files or plugins.
+-expiriment with more styles.
+
+Ideas:
+-add hidden field,honey-pot, at registration form for bots.
 -Will need to make "Most liked post" with custom field query.
--reputation field on comments,my posts upvotes,might link to reputation explained page.
+-reputation field on comments,my posts upvotes,might link to reputation explained page.//might be 9nsfw specific
 
 Usefull Links:
 http://wordpress.stackexchange.com/questions/76034/theme-activation-create-database-tables
@@ -32,77 +47,6 @@ https://wordpress.org/support/topic/custom-multiple-query_posts-ids (My like pag
 https://codex.wordpress.org/Function_Reference/wp_list_comments
 http://wordpress.stackexchange.com/questions/30241/wp-query-order-results-by-meta-value
 
-10 days steps:
-finish the upvote system even not so optimised
-simple upload system for local image hosting
-fix all bugs,hide wordpress dashboard,errors/redirects on login/register and so on
-new upload system,imgur api,image scalling,image-gif watermark,possible on a plugin //if difficult leave for after launch
-add shit to allow plugins on theme
-create a few styles //After this point can beta launch
-
-moderators aprove posts page,delete comment/post
-automatic-massive uploads system
-user settings change avatar-password (reset password - search for ready plugin)
-user profile page with uploads-likes
-
-
-
-
-
-Old Steps:
-1)create allmost all templates to be used,with crappy style
-2)create login/register/settings tab
-3)create all php functions needed
-4)create custom my likes template
-5)create better comments.php
-6)create upload system
-7)add wordpress crap like wp_footer(),escape characters everywhere and check security shits.,break functions.php to smaller files,make sure nobody goes to /wp-admin/.
-8)design style,possible make multiple different styles(some close to other site like 9gag or the old 9nsfw)
-9)allow full customization from wordpress interface?
-10)edit everything to follow "Theme Development Standards"
-
-
-1)Templates
--main
--category
--tag (multiple tags)
--author
--single
--comments
--header
--sidebar
--footer
--404
-
-later:
--liked
--myprofile page
--comments improved
-
-2)//Replacing when logged in and "account settings tab left"
--popup style
--register/login/settings
--settings:basic user info,logout
-
-3)
--better database structure,use foreign key?
--like/dislike/removelike post
--create a custom post field,likes counter for post,have a chance to refresh it on every like?
--create a custom user field,likes on all my posts,refresh now and then
--get posts liked by user,somehow
-
-4)
--will need to work with functions.php and find a way to query user liked posts,the wordpress style.
-
-5)
--allow anonymous posts
--users avatar,will also edit settings to allow custom avatar then
--each account should show rating-upvotes earned-reputation.
-
-7)
--add hidden field,honey-pot, at registration form for bots.
-
-Issues:
-1)Something is wrong with wordpress and jquery.
-Getting uncaught-referenceerror-jquery-is-not-defined whilst using wp_enqueue_script( 'jquery' );,have to import jquery on head.
-Also need to replace # with jQuery
+Usefull plugins:
+WP EasyScroll Posts by  Vivacity Infotech Pvt. Ltd. for infinite scrolling #postslist / #Paging / #OlderPages a:first / #singlepost
+Q2W3 Fixed Widget/HTML Javascript Adder by Max Bond/Aakash Chakravarthy for sidebar-ads

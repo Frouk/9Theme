@@ -35,6 +35,8 @@ jQuery(document).ready(function($) {
 
    // Show the login dialog box on click
    jQuery('a#show_login').on('click', function(e){
+     jQuery('div.login_overlay').remove();
+     jQuery('#popupregister').hide();
        jQuery('body').prepend('<div class="login_overlay"></div>');
        jQuery('#popuplogin').fadeIn(500);
        jQuery('div.login_overlay, form#login a.close').on('click', function(){
@@ -44,6 +46,8 @@ jQuery(document).ready(function($) {
        e.preventDefault();
    });
  jQuery('a#show_register').on('click', function(e){
+   jQuery('div.login_overlay').remove();
+   jQuery('#popuplogin').hide();
        jQuery('body').prepend('<div class="login_overlay"></div>');
        jQuery('#popupregister').fadeIn(500);
        jQuery('div.login_overlay, form#register a.close').on('click', function(){

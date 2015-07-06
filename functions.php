@@ -10,11 +10,11 @@
 
 	register_sidebar(array('name'=>'Sidebar',
 
-		'before_widget' => '<div class="sidebar-widget">',
+		'before_widget' => '<div class="sidebar-widget"><div class="sidebar-widget-box">',
 
 		'after_widget' => '</div></div>',
 
-		'before_title' => '<div id="sidebar-widget-title">',
+		'before_title' => '</div><div id="sidebar-widget-title">',
 
 		'after_title' => '</div><div class="sidebar-widget-box">',
 

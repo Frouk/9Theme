@@ -4,6 +4,7 @@
 	<div id="main">
 		<div id="posts">
 			<div id="PageTitleBox"><div id="PageTitle">Hot</div></div>
+			<div id="postslist">
 			<?php query_posts('paged=' . get_query_var('paged'));?>
        		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -33,7 +34,7 @@
 			<?php endwhile; else: ?>
 				<?php _e('It seems there are no posts here.'); ?></p>
 			<?php endif; ?>
-
+			</div>
 			<div id="Paging">
 				<div id="NewerPages"><?php previous_posts_link('&laquo; Newer Entries') ?></div>
 				<div id="OlderPages"><?php next_posts_link('Older Entries &raquo;') ?></div>

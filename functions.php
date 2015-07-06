@@ -8,40 +8,6 @@
 
 	//DEBUGGING
 
-	register_sidebar(array('name'=>'Sidebar',
-
-		'before_widget' => '<div class="sidebar-widget"><div class="sidebar-widget-box">',
-
-		'after_widget' => '</div></div>',
-
-		'before_title' => '</div><div id="sidebar-widget-title">',
-
-		'after_title' => '</div><div class="sidebar-widget-box">',
-
-	));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	function mytheme_comment($comment, $args, $depth) {
 		$GLOBALS['comment'] = $comment;
@@ -181,6 +147,12 @@
 
 		}
 
+		register_sidebar(array('name'=>'Sidebar',
+			'before_widget' => '<div class="sidebar-widget"><div class="sidebar-widget-box">',
+			'after_widget' => '</div></div>',
+			'before_title' => '</div><div id="sidebar-widget-title">',
+			'after_title' => '</div><div class="sidebar-widget-box">',
+		));
 
 	//Security
 

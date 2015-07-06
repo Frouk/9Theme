@@ -14,9 +14,16 @@
 
 <body <?php body_class(); ?>>
 		<?php if (!is_user_logged_in()) {echo '
-		<div id="popuplogin">';
+		<div id="popuplogin">
+      <h1>Log-in</h1><br>
+
+';
 			custom_login();
-		echo '</div>
+		echo '
+      <div class="login-help">
+          <a href="#">Register</a> • <a href="#">Forgot Password</a>
+      </div>
+    </div>
 		<div id="popupregister">';
 			custom_registration_function();
 		echo '</div>'; }else{?>

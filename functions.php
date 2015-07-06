@@ -12,11 +12,11 @@
 
 		'before_widget' => '<div class="sidebar-widget">',
 
-		'after_widget' => '</div>',
+		'after_widget' => '</div></div>',
 
 		'before_title' => '<div id="sidebar-widget-title">',
 
-		'after_title' => '</div>',
+		'after_title' => '</div><div class="sidebar-widget-box">',
 
 	));
 

@@ -8,7 +8,17 @@
 
 	//DEBUGGING
 
+	register_sidebar(array('name'=>'Sidebar',
 
+		'before_widget' => '<div class="sidebar-widget">',
+
+		'after_widget' => '</div>',
+
+		'before_title' => '<div id="sidebar-widget-title">',
+
+		'after_title' => '</div>',
+
+	));
 
 
 

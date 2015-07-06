@@ -10,6 +10,7 @@
 
 Steps:
 -Make the basic theme.
+-remember upvotes
 -Create imgur uploads plugin.
 -Create Moderators aprove/deny plugin.
 -Create automatic posting plugin.
@@ -26,6 +27,7 @@ Ideas:
 -add hidden field,honey-pot, at registration form for bots.
 -Will need to make "Most liked post" with custom field query.
 -reputation field on comments,my posts upvotes,might link to reputation explained page.//might be 9nsfw specific
+-go to top button
 
 Usefull Links:
 http://wordpress.stackexchange.com/questions/76034/theme-activation-create-database-tables

@@ -22,19 +22,29 @@
 		echo '</div>'; }else{?>
 
     <div id="popuppost">
-      <a id="show_upload_url" href="javascript:void(0);">Upload via Url</a>
       <form id="PostUpload" method="post" action="#" enctype="multipart/form-data">
-        <p><label>Title :</label><input type="text" id ="post-title" name="post-title" /></p>
-	      <p><input type="file" name="my_image_upload" id="my_image_upload"  multiple="false" /></p>
+        <div id="formtitle">Upload an Image</div>
+        <label>Title</label>
+        <p><input type="text" id ="post-title" name="post-title" /></p>
+        <label>File</label>
+	      <p>
+          <input type="file" name="my_image_upload" id="my_image_upload"  multiple="false" />
+          <a id="show_upload_url" href="javascript:void(0);">Upload via Url</a>
+        </p>
 	      <?php wp_nonce_field( 'my_image_upload', 'my_image_upload_nonce' ); ?>
 	      <input id="submit_my_image_upload" name="submit_my_image_upload" type="submit" value="Upload" />
       </form>
     </div>
     <div id="popupposturl">
-      <a id="show_upload" href="javascript:void(0);">Upload via file</a>
-      <form id="PostUploadUrl" method="post" action="#" enctype="multipart/form-data">
-        <p><label>Title :</label><input type="text" id ="post-title" name="post-title" /></p>
-        <p><label>URL :</label><input type="text" id ="post-url" name="post-url" /></p>
+      <form id="PostUpload" method="post" action="#" enctype="multipart/form-data">
+        <div id="formtitle">Upload an Image</div>
+        <label>Title</label>
+        <p><input type="text" id ="post-title" name="post-title" /></p>
+        <label>File Url</label>
+        <p>
+          <input type="text" id ="post-url" name="post-url" />
+          <a id="show_upload" href="javascript:void(0);">Upload via local file</a>
+        </p>
         <?php wp_nonce_field( 'my_image_upload_url', 'my_image_upload_url_nonce' ); ?>
         <input id="submit_my_image_upload_url" name="submit_my_image_upload_url" type="submit" value="Upload" />
       </form>

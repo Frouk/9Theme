@@ -59,6 +59,7 @@
         <input id="submit_my_image_upload_url" name="submit_my_image_upload_url" type="submit" value="Upload" />
       </form>
     </div>
+    <?php }?>
      <?php manageuploads();?>
 
 		<header id="top-nav">

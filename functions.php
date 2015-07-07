@@ -59,7 +59,7 @@
 						'post_content'	=> '<img src="'.wp_get_attachment_url($attachment_id).'"/>',
 						'post_status'	=> 'publish'
 				) );
-				echo '<script type='text/javascript'>  window.location="/";</script>';
+				echo '<script type=\'text/javascript\'>  window.location="/";</script>';
 			}
 
 		} else {

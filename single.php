@@ -20,7 +20,7 @@
 								<li><a id=<?php echo '"downvoteicon ' . get_the_ID() . '" '; ?>class="votedown" href="javascript:void(0);" onclick="jQuery('#show_login').click();"></a></li>
 						<?php } ?>
 						</div>
-						<div id="postedby">Posted by <?php echo '<a href="';echo get_author_posts_url(get_the_author_meta( 'ID' )); echo '">';echo get_the_author_meta('display_name');echo'(';echo get_the_author_meta('user_score');echo ')</a>';?></div>
+						<div id="postedby">Posted by <?php echo '<a href="';echo get_author_posts_url(get_the_author_meta( 'ID' )); echo '">';echo get_the_author_meta('display_name');echo'(';$scor=get_the_author_meta('user_score');if($scor[0]==""){echo 0;}else{echo $scor[0];} echo ')</a>';?></div>
 				</div>
 				<div id="pp_comments">
 				<?php comments_template( '', true ); ?>

@@ -21,7 +21,9 @@
 					<div id="comment-info">
 						<?php if ($comment->user_id>0){
 							$score=get_user_meta( $comment->user_id, 'user_score');
-							echo comment_author() . '('. $score[0].') :';
+							echo '<a href="'.get_author_posts_url($comment->user_id).'">'.'dd';
+							echo comment_author();
+							echo '('. $score[0].')</a> :';
 						}else{
 							echo esc_attr(comment_author()) . '(Guest) :';
 						}

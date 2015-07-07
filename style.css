@@ -487,17 +487,19 @@ footer#bot-nav .nav-wrap {
 
 /*<Single Start>*/
 #postpage{
-	width: 1068px;
-	margin: 20px auto;
+  width: 720px;
+  margin: 100px auto;
+  float: left;
 }
 #pp_post{
 	width: 800px;
 }
 #pp_title{
-	width: 800px;
-	font-size: 26px;
-	margin-bottom: 7px;
-	font-weight: bold;
+  width: 800px;
+  font-size: 22px;
+  margin-bottom: 7px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.1);
+  color: #222222;
 }
 #pp_content{
 	width: 728px;
@@ -518,11 +520,21 @@ footer#bot-nav .nav-wrap {
 	float: left;
 	list-style: none;
 }
+#postedby{
+  float:right;
+  margin-top:15px;
+}
+#postedby a{
+  text-decoration: none;
+  color: #218df3;
+}
+#postedby a:hover{
+  color: #24bbff;
+}
 #pp_comments{
 	padding-top: 70px;
-	margin-top: 70px;
 	width: 620px;
-	border-top: 2px solid #000;
+	border-top: 2px solid #9D9B9B;
 }
 /*</Single End>*/
 

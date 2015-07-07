@@ -3,7 +3,8 @@
 <div id="container">
 	<div id="main">
 		<div id="posts">
-			<div id="TagTitle"><?php single_cat_title(); ?></div>
+			<div id="PageTitleBox"><div id="PageTitle"><?php single_cat_title(); ?></div></div>
+			<div id="postslist">
 			<?php $yo=get_cat_ID(single_cat_title('', false));  query_posts('cat='.$yo.'&paged=' . get_query_var('paged'));?>
        		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -33,7 +34,7 @@
 			<?php endwhile; else: ?>
 				<?php _e('It seems there are no posts here.'); ?></p>
 			<?php endif; ?>
-
+		</div>
 			<div id="Paging">
 				<div id="NewerPages"><?php previous_posts_link('&laquo; Newer Entries') ?></div>
 				<div id="OlderPages"><?php next_posts_link('Older Entries &raquo;') ?></div>

@@ -1,10 +1,7 @@
 <?php
 	//Todo:
-	//On theme switch setup likes database table
-	//Create upvote/downvote/novote function which will be used on myjavascript with ajax
 	//Create getmylikes function with "page" parameter
-
-	//addvote is as bad as it gets,should be used only in debugging mode
+	//Commentes allow html tags and i cant remove them
 
 	//DEBUGGING
 
@@ -21,16 +18,16 @@
 					<div id="comment-info">
 						<?php if ($comment->user_id>0){
 							$score=get_user_meta( $comment->user_id, 'user_score');
-							echo '<a href="'.get_author_posts_url($comment->user_id).'">'.'dd';
+							echo '<a href="'.get_author_posts_url($comment->user_id).'">';
 							echo comment_author();
-							echo '('. $score[0].')</a> :';
+							echo '('. $score[0].')</a>';
 						}else{
 							echo esc_attr(comment_author()) . '(Guest) :';
 						}
 						?>
 					</div>
 					<div id="comment-text">
-						<?php esc_attr(comment_text()); ?>
+						<?php echo esc_attr(comment_text()); ?>
 					</div>
 				</div>
 			</div>

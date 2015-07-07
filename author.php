@@ -10,7 +10,9 @@
 <div id="container">
 	<div id="main">
 		<div id="posts">
-			<div id="TagTitle">Uploads by<?php echo $curauth->nickname ?></div>
+			<div id="PageTitleBox"><div id="PageTitle">Uploads by <?php echo $curauth->nickname ?></div></div>
+			<div id="postslist">
+
 			<?php $yo=$curauth->ID;  query_posts('author='.$yo.'&paged=' . get_query_var('paged'));?>
        		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
@@ -40,7 +42,7 @@
 			<?php endwhile; else: ?>
 				<?php _e('It seems there are no posts here.'); ?></p>
 			<?php endif; ?>
-
+		</div>
 			<div id="Paging">
 				<div id="NewerPages"><?php previous_posts_link('&laquo; Newer Entries') ?></div>
 				<div id="OlderPages"><?php next_posts_link('Older Entries &raquo;') ?></div>

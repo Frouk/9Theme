@@ -20,7 +20,9 @@
 							$score=get_user_meta( $comment->user_id, 'user_score');
 							echo '<a href="'.get_author_posts_url($comment->user_id).'">';
 							echo comment_author();
-							echo '('. $score[0].')</a>';
+							echo '(';
+							if($score[0]==""){echo 0;}else{echo $score[0];}
+							echo ')</a>';
 						}else{
 							echo esc_attr(comment_author()) . '(Guest) :';
 						}

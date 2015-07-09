@@ -18,7 +18,14 @@ Nein
 /*<Work On Progress>*/
 
 
-
+#pagecontent{
+	width: 600px;
+	overflow: hidden;
+	float: left;
+	min-height: 100%;
+ 	height: auto !important;
+	margin-top: 70px;
+}
 
 
 

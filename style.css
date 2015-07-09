@@ -663,4 +663,18 @@ form#PostUpload input[type='submit']{
   border-bottom: 1px solid #ddd;
   padding-bottom: 25px;
 }
+.upload_error{
+	text-align: center;
+color: red;
+margin-top: 17px;
+margin-bottom: 10px;
+font-size: 17px;
+}
+.upload_success{
+	text-align: center;
+	color: green;
+	margin-top: 17px;
+	margin-bottom: 10px;
+	font-size: 17px;
+}
 /*</Comments>*/

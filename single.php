@@ -6,7 +6,7 @@
 		<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 			<div id="pp_post">
 				<div id="pp_title"><?php the_title(); ?></div>
-				<div id="pp_content"><?php the_content(); ?></div>
+				<div id="pp_content"><a href="<?php the_permalink(); ?>"><?php the_content(); ?></a></div>
 				<div id="pp_data">
 						<div id="stats"><a id=<?php echo '"score ' . get_the_ID() . '"'; ?>><?php $scored=get_post_meta(get_the_ID(),'postscore',true);if($scored==""){echo 0;}else{echo $scored;} ?></a> points - <?php comments_number( 'No comments', 'One comment', '% comments' ); ?>
 								<div id="tags"> <?php the_tags( 'Tags:', ',', '.' ); ?> </div>

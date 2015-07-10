@@ -5,7 +5,7 @@
 		<div id="posts">
 			<div id="PageTitleBox"><div id="PageTitle">Tag: <?php single_tag_title(); ?></div></div>
 			<div id="postslist">
-			<?php $yo=single_tag_title("", false); query_posts('tag='.$yo.'&paged=' . get_query_var('paged'));?>
+			<?php $yo=get_query_var('tag'); query_posts('tag='.$yo.'&paged=' . get_query_var('paged'));?>
        		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 				<div id="singlepost">

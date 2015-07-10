@@ -430,4 +430,8 @@
         exit;
     }
     add_action( 'user_register', 'auto_login_new_user' );
+		add_action('init', 'do_output_buffer');
+		function do_output_buffer() {
+		        ob_start();
+		}
 ?>

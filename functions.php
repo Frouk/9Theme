@@ -1,7 +1,4 @@
 <?php
-	//Todo:
-	//Create getmylikes function with "page" parameter
-	//Commentes allow html tags and i cant remove them
 
 	//DEBUGGING
 
@@ -186,6 +183,20 @@
 					$prev =  get_user_meta( $post->post_author, 'user_score' );
 					update_user_meta($post->post_author, 'user_score', (intval($prev[0])+$num));
 				}
+				//Really bad for sites with many signed up users
+				function checkvote($id){
+					global $wpdb;
+					$table_name = $wpdb->prefix . "updownvotes";
+					$user = get_current_user_id();
+					$previous=$wpdb->get_row( "SELECT upvote FROM $table_name WHERE user_id=$user AND post_id=$id");
+					if (count($previous)==0){
+						return '-1';
+					}elseif($previous->upvote==1){
+						return '1';
+					}elseif($previous->upvote==0){
+						return '0';
+					}
+				}
 
 
 
@@ -199,7 +210,8 @@
 				  'header-menu' => 'Header Menu',
 				  'sidebar-menu' => 'Sidebar Menu',
 				  'footer-menu' => 'Footer Menu',
-				  'logged-in-menu' => 'Logged In Menu'
+				  'logged-in-menu' => 'Logged In Menu',
+					'mobile-header-menu' => 'Mobile Header Menu'
 				)
 			);
 
@@ -433,5 +445,17 @@
 		add_action('init', 'do_output_buffer');
 		function do_output_buffer() {
 		        ob_start();
+		}
+
+		function disable_password_reset() { return false; }
+		add_filter ( 'allow_password_reset', 'disable_password_reset' );
+
+		add_filter( 'widget_tag_cloud_args', 'my_widget_tag_cloud_args' );
+		function my_widget_tag_cloud_args( $args ) {
+			$args['number'] = 60;
+			$args['largest'] = 22;
+			$args['smallest'] = 9;
+			$args['unit'] = 'px';
+			return $args;
 		}
 ?>

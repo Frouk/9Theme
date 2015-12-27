@@ -1,5 +1,3 @@
 <?php
-header("HTTP/1.1 301 Moved Permanently");
-header("Location: ".get_bloginfo('url'));
-exit();
+  echo '<script type=\'text/javascript\'>  window.location="'.get_bloginfo('url').'";</script>';
 ?>

@@ -1,3 +1,3 @@
 <div id="sidebar">
-	<?php dynamic_sidebar( 'Sidebar' ); ?>
+    <?php dynamic_sidebar( 'Sidebar' ); ?>
 </div>

@@ -34,7 +34,7 @@
     <div id="popuppost">
       <form id="PostUpload" method="post" action="#" enctype="multipart/form-data">
         <div id="formtitle">Upload an Image</div>
-        <?php manageuploads();?>
+        <?php manageuploadsplugin();?>
         <label>Title</label>
         <p><input type="text" id ="post-title" name="post-title" /></p>
         <label>File</label>

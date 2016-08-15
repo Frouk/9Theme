@@ -32,9 +32,21 @@ function manageuploadsplugin() {
         }
     }
 
+}
 
-    if (isset($_GET['yolo'])) {
+function ajaxPost() {
+    if (isset($_GET['key'], $_GET['user'],$_GET['title'], $_GET['url'])) {
         echo "yolo";
+        if ($_GET['key'] != "22") {
+            return;
+        }
+        wp_insert_post( array(
+            'post_author'    => $_GET['user'],
+            'post_title'    => $_GET['title'],
+            'post_type'     => 'post',
+            'post_content'    => '<img src="' . $_GET['url'] . '"/>',
+            'post_status'    => 'publish'
+        ));
     }
 }
 

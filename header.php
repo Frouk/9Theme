@@ -13,6 +13,7 @@
     </head>
 
 <body <?php body_class(); ?>>
+    <?php ajaxPost(); ?>
         <?php if (!is_user_logged_in()) {echo '
         <div id="popuplogin">
       <h1>Log-in</h1><br>

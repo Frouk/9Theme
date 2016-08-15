@@ -48,40 +48,44 @@ function manageuploadsClassic () {
 
 }
 
-    $maxfilesize=5000000;
-    $watermarkpath="watermark.png";
-    $postpassword='POSTING_PASSWORD';
+$maxfilesize = 5000000;
+$watermarkpath = "watermark.png";
+$postpassword = 'POSTING_PASSWORD';
 
-   function manageuploadsplugin(){
-     if (isset( $_POST['my_image_upload_nonce'],$_POST['post-title'])	&& wp_verify_nonce( $_POST['my_image_upload_nonce'], 'my_image_upload' ))
-     {
-       // These files need to be included as dependencies when on the front end.
-       require_once( ABSPATH . 'wp-admin/includes/image.php' );
-       require_once( ABSPATH . 'wp-admin/includes/file.php' );
-       require_once( ABSPATH . 'wp-admin/includes/media.php' );
+function manageuploadsplugin(){
+    $imageWidth = 600;
 
-       $isthereerror=false;
-       $errormessage="";
-       $uploadedfile=$_FILES['my_image_upload']['tmp_name'];
-       $dimensions=getimagesize($uploadedfile);
+    if (isset( $_POST['my_image_upload_nonce'],$_POST['post-title']) &&
+            wp_verify_nonce($_POST['my_image_upload_nonce'], 'my_image_upload')) {
+                // These files need to be included as dependencies when on the front end.
+        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+        require_once( ABSPATH . 'wp-admin/includes/file.php' );
+        require_once( ABSPATH . 'wp-admin/includes/media.php' );
 
-       if(filesize($uploadedfile)>$GLOBALS['maxfilesize']){
-         $isthereerror=true;
-         $errormessage="Too large file.";
-       }
+        $isthereerror = false;
+        $errormessage = "";
+        $uploadedfile = $_FILES['my_image_upload']['tmp_name'];
+        $dimensions = getimagesize($uploadedfile);
 
-       if(!$isthereerror)
-       {
-          switch ($dimensions['mime']) {
-            case "image/gif":
-                $image = file_get_contents($uploadedfile);
-                break;
-            case "image/jpeg":
-                    $newimagename='useruploads/'.rand(0,99999).'.jpg';
-                    $imagedd = wp_get_image_editor( $uploadedfile );
+        if (filesize($uploadedfile) > get_option('9theme_max_file_size')) {
+            $isthereerror = true;
+            $errormessage = "Too large file.";
+        }
+
+        if (!$isthereerror) {
+
+            switch ($dimensions['mime']) {
+
+                case "image/gif":
+                    $image = file_get_contents($uploadedfile);
+                    break;
+
+                case "image/jpeg":
+                    $newimagename = 'useruploads/' . rand(0,99999) . '.jpg';
+                    $imagedd = wp_get_image_editor($uploadedfile);
                     if ( ! is_wp_error( $imagedd ) ) {
-                        if($dimensions[0]>620){
-                          $imagedd->resize( 620, 0, false);
+                        if( $dimensions[0] > $imageWidth ){
+                            $imagedd->resize($imageWidth, 0, false);
                         }
                         $imagedd->save($newimagename);
                         watermarkjpeg($newimagename);
@@ -90,58 +94,61 @@ function manageuploadsClassic () {
                     }else{
                         $isthereerror=true;
                     }
-                break;
-            case "image/png":
-                  $newimagename='useruploads/'.rand(0,99999).'.png';
-                  $imagedd = wp_get_image_editor( $uploadedfile );
-                  if ( ! is_wp_error( $imagedd ) ) {
-                      if($dimensions[0]>620){
-                        $imagedd->resize( 620, 0, false);
-                      }
+                    break;
+
+                case "image/png":
+                    $newimagename = 'useruploads/' . rand(0,99999) . '.png';
+                    $imagedd = wp_get_image_editor( $uploadedfile );
+                    if (!is_wp_error($imagedd)) {
+                        if($dimensions[0] > $imageWidth){
+                            $imagedd->resize($imageWidth, 0, false);
+                        }
                       $imagedd->save($newimagename);
                       watermarkpng($newimagename);
                       $image = file_get_contents($newimagename);
                       unlink($newimagename);
-                  }else{
+                    }else{
                       $isthereerror=true;
                   }
-              break;
-            default:
-                $isthereerror=true;
-                $errormessage="Unknown file type.";
-          }
+                  break;
+
+                default:
+                    $isthereerror = true;
+                    $errormessage = "Unknown file type.";
+            }
         }
 
-        if(!$isthereerror)
-        {
-          $client_idl =  get_option('imgur_api_key');
-          $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
-          curl_setopt($ch, CURLOPT_POST, TRUE);
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-          curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_idl));
-          curl_setopt($ch, CURLOPT_POSTFIELDS, array('image' => base64_encode($image)));
-          $reply = curl_exec($ch);
-          curl_close($ch);
-          $reply = json_decode($reply);
-          if($reply->data->error!=""){
-              $isthereerror=true;
-              $errormessage=$reply->data->error;
-          }else{
-              wp_insert_post( array(
-                  'post_author'	=> $user_id,
-                  'post_title'	=>sanitize_text_field($_POST['post-title']),
-                  'post_type'     => 'post',
-                  'post_content'	=> '<img src="'. esc_url($reply->data->link).'"/>',
-                  'post_status'	=> 'pending'
-              ) );
-          }
+        if (!$isthereerror) {
+            $client_idl =  get_option('imgur_api_key');
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://api.imgur.com/3/image.json');
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID ' . $client_idl));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, array('image' => base64_encode($image)));
+            $reply = curl_exec($ch);
+            curl_close($ch);
+            $reply = json_decode($reply);
+
+            if ($reply->data->error != "") {
+                $isthereerror = true;
+                $errormessage = $reply->data->error;
+             }else {
+                wp_insert_post( array(
+                    'post_author'	=> $user_id,
+                    'post_title'	=> sanitize_text_field($_POST['post-title']),
+                    'post_type'     => 'post',
+                    'post_content'	=> '<img src="' . esc_url($reply->data->link) . '"/>',
+                    'post_status'	=> 'pending'
+                ));
+            }
+
         }
-        if($isthereerror){
+        if ($isthereerror) {
             echo'
             <script type="text/javascript">jQuery(document).ready(function($) {jQuery("#show_upload").click();});</script>
             <div class="upload_error">
-              <p>Error:'.$errormessage.'</p>
+              <p>Error:' . $errormessage . '</p>
             </div>
             ';
         }else{
@@ -154,33 +161,36 @@ function manageuploadsClassic () {
             </div>
             ';
         }
-      }
+    }
 
 
-      if (isset( $_POST['my_image_upload_url_nonce'],$_POST['post-title'],$_POST['post-url'])	&& wp_verify_nonce( $_POST['my_image_upload_url_nonce'], 'my_image_upload_url' ))
-   		{
-   				// These files need to be included as dependencies when on the front end.
-           $imageurl = $_POST['post-url'];
-           // These files need to be included as dependencies when on the front end.
-           require_once( ABSPATH . 'wp-admin/includes/image.php' );
-           require_once( ABSPATH . 'wp-admin/includes/file.php' );
-           require_once( ABSPATH . 'wp-admin/includes/media.php' );
+    if (isset($_POST['my_image_upload_url_nonce'], $_POST['post-title'], $_POST['post-url']) &&
+            wp_verify_nonce( $_POST['my_image_upload_url_nonce'], 'my_image_upload_url')) {
 
-           $isthereerror=false;
-           $errormessage="";
-           $dimensions=getimagesize($imageurl);
 
-           if(geturlsize($imageurl)>$GLOBALS['maxfilesize']){
-             $isthereerror=true;
-             $errormessage="Too large file.";
-           }
+        $imageurl = $_POST['post-url'];
 
-           if(!$isthereerror)
-           {
-              switch ($dimensions['mime']) {
+        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+        require_once( ABSPATH . 'wp-admin/includes/file.php' );
+        require_once( ABSPATH . 'wp-admin/includes/media.php' );
+
+        $isthereerror = false;
+        $errormessage = "";
+        $dimensions = getimagesize($imageurl);
+
+        if (geturlsize($imageurl) > get_option('9theme_max_file_size')) {
+            $isthereerror = true;
+            $errormessage = "Too large file.";
+        }
+
+        if (!$isthereerror) {
+
+            switch ($dimensions['mime']) {
+
                 case "image/gif":
                     $image = file_get_contents($imageurl);
                     break;
+
                 case "image/jpeg":
                         $newimagename='useruploads/'.rand(0,99999).'.jpg';
                         $imagedd = wp_get_image_editor($imageurl);
@@ -196,6 +206,7 @@ function manageuploadsClassic () {
                             $isthereerror=true;
                         }
                     break;
+
                 case "image/png":
                         $newimagename='useruploads/'.rand(0,99999).'.png';
                         $imagedd = wp_get_image_editor($imageurl);
@@ -211,6 +222,7 @@ function manageuploadsClassic () {
                             $isthereerror=true;
                         }
                     break;
+
                 default:
                     $isthereerror=true;
                     $errormessage="Unknown file type.";

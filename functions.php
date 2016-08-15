@@ -1,6 +1,6 @@
 <?php
     require 'functions/user.php';
-    require 'functions/uploads.php';
+    require 'functions/uploads2.php';
     require 'functions/upvotes.php';
     require 'functions/settings.php';
 

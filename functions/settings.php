@@ -16,7 +16,7 @@ function my_cool_plugin_create_menu() {
 function register_my_cool_plugin_settings() {
 	//register our settings
 	register_setting( '9theme_settings-group', 'imgur_api_key' );
-	register_setting( '9theme_settings-group', 'some_other_option' );
+	register_setting( '9theme_settings-group', '9theme_max_file_size' );
 	register_setting( '9theme_settings-group', 'option_etc' );
 }
 
@@ -35,8 +35,8 @@ function my_9theme_settings() {
         </tr>
 
         <tr valign="top">
-        <th scope="row">Some Other Option</th>
-        <td><input type="text" name="some_other_option" value="<?php echo esc_attr( get_option('some_other_option') ); ?>" /></td>
+        <th scope="row">Max file size</th>
+        <td><input type="text" name="9theme_max_file_size" value="<?php echo esc_attr( get_option('9theme_max_file_size') ); ?>" /></td>
         </tr>
 
         <tr valign="top">

@@ -1,14 +1,13 @@
 <?php
 
-// Calls try Upload returns message according to status.
 function manageuploadsplugin() {
     if (isset($_POST['post-title'])) {
         $result = "NotUploaded";
         if (isset($_POST['my_image_upload_nonce']) && wp_verify_nonce($_POST['my_image_upload_nonce'], 'my_image_upload')) {
-            $result = tryUpload(true);
+            $result = tryUpload(true, -1);
         }
         if (isset($_POST['my_image_upload_url_nonce'], $_POST['post-url']) && wp_verify_nonce($_POST['my_image_upload_url_nonce'], 'my_image_upload_url')) {
-            $result = tryUpload(false);
+            $result = tryUpload(false, -1);
         }
 
         if ($result == "NotUploaded"){
@@ -40,17 +39,13 @@ function ajaxPost() {
         if ($_GET['key'] != "22") {
             return;
         }
-        wp_insert_post( array(
-            'post_author'    => $_GET['user'],
-            'post_title'    => $_GET['title'],
-            'post_type'     => 'post',
-            'post_content'    => '<img src="' . $_GET['url'] . '"/>',
-            'post_status'    => 'publish'
-        ));
+        $_POST['post-url'] = $_GET['url'];
+        $_POST['post-title'] = $_GET['title'];
+        tryUpload(false, $_GET['user']);
     }
 }
 
-function tryUpload ($uploadFromDisk) {
+function tryUpload ($uploadFromDisk, $myUserid) {
 
     require_once(ABSPATH . 'wp-admin/includes/image.php');
     require_once(ABSPATH . 'wp-admin/includes/file.php');
@@ -113,7 +108,7 @@ function tryUpload ($uploadFromDisk) {
             break;
 
         default:
-            return "Unknown file type.";
+            return postFromSource($imageFile);
 
     }
 
@@ -131,15 +126,18 @@ function tryUpload ($uploadFromDisk) {
     if ($reply->data->error != "") {
         return $reply->data->error;
     } else {
-        insertPost(sanitize_text_field($_POST['post-title']),  esc_url($reply->data->link) );
+        if ($myUserid == -1){
+            $myUserid = $user_id;
+        }
+        insertPost(sanitize_text_field($_POST['post-title']),  esc_url($reply->data->link), $myUserid);
     }
 
     return "Success";
 }
 
-function insertPost($title , $postContent) {
+function insertPost($title , $postContent, $myUserid) {
     wp_insert_post( array(
-        'post_author'    => $user_id,
+        'post_author'    => $myUserid,
         'post_title'    => sanitize_text_field($title),
         'post_type'     => 'post',
         'post_content'    => '<img src="' . $postContent . '"/>',
@@ -163,5 +161,73 @@ function watermarkgif($imagepath){
 function watermarkjpeg($imagepath){
 }
 function watermarkpng($imagepath){
+}
+
+function postFromSource($url) {
+
+    if (strpos($url, 'imgur.com/a/') > 0) {
+        postFromImgurAlbum($url);
+        return "Success";
+    } elseif (strpos($url, 'a/a/') > 0) {
+        return "peos";
+    }
+
+    echo "$url";
+}
+
+function postFromImgurAlbum($url) {
+
+    $returned_content = get_data($url);
+    $needle = "\"//i.imgur.com/";
+    $lastPos = 0;
+    $positions = array();
+    $urls = array();
+
+    // Find position of all imgur image url occurances.
+    while (($lastPos = strpos($returned_content, $needle, $lastPos)) !== false) {
+        $positions[] = $lastPos;
+        $lastPos = $lastPos + strlen($needle);
+    }
+
+    foreach ($positions as $value) {
+        $pos2 = strpos($returned_content,'" ',$value);
+        $peos = substr($returned_content,$value,$pos2-$value);
+
+        // Check that strings looks like imgur image
+        switch (substr($peos,-4)) {
+            case '.gif':
+            case '.png':
+            case '.jpg':
+            case 'gifv':
+                if (strlen($peos) < 28) {
+                    $urls[] = 'http:' . substr($peos, 1);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    $urls = array_unique($urls);
+    foreach ($urls as $individualUrl) {
+        // echo $individualUrl . "<br>";
+        $_POST['post-url'] = $individualUrl;
+        tryUpload(false, -1);
+    }
+}
+
+
+function postFromReddit($url) {
+    //can also post comments from reddit
+}
+
+function get_data($url) {
+    $ch = curl_init();
+    $timeout = 5;
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
 }
 ?>

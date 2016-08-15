@@ -2,6 +2,7 @@
     require 'functions/user.php';
     require 'functions/uploads.php';
     require 'functions/upvotes.php';
+    require 'functions/settings.php';
 
     //echo getIt();
     //DEBUGGING

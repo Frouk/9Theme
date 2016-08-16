@@ -79,3 +79,48 @@ jQuery(document).ready(function($) {
        e.preventDefault();
    });
 });
+
+function videoFull(item) {
+	//⊞ ∷ ⧉ ⊠
+	var docelem = item.parentElement.childNodes[1];
+	 if (docelem.requestFullscreen) {
+		    docelem.requestFullscreen();
+		}
+		else if (docelem.mozRequestFullScreen) {
+		    docelem.mozRequestFullScreen();
+		}
+		else if (docelem.webkitRequestFullscreen) {
+		    docelem.webkitRequestFullscreen();
+		}
+		else if (docelem.msRequestFullscreen) {
+		    docelem.msRequestFullscreen();
+		}
+}
+
+function onVideoReady(mediaPlayer) {
+	mediaPlayer.controls = false;
+	/*
+	mediaPlayer.addEventListener('play', function() {
+	}, false);
+	mediaPlayer.addEventListener('pause', function() {
+	}, false);
+
+	mediaPlayer.addEventListener('ended', function() {
+		this.currentTime = 0;
+		this.play();
+	}, false);
+	*/
+}
+
+function togglePlayPause(herrow) {
+    herrow = herrow.childNodes[1];
+
+    console.log(herrow);
+	if (herrow.paused || herrow.ended) {
+		herrow.parentElement.childNodes[4].style.display = "none";
+		herrow.play();
+	} else {
+		herrow.parentElement.childNodes[4].style.display = "inherit";
+		herrow.pause();
+	}
+}

@@ -165,17 +165,23 @@ function watermarkpng($imagepath){
 
 function postFromSource($url) {
 
-    if (strpos($url, 'imgur.com/a/') > 0) {
+    if (substr($url,-5) == '.gifv'){
+        postGifv($url);
+    } elseif (strpos($url, 'imgur.com/a/') > 0) {
         postFromImgurAlbum($url);
         return "Success";
-    } elseif (strpos($url, 'a/a/') > 0) {
-        return "peos";
+    } elseif (strpos($url, '//imgur.com/gallery/') > 0) {
+        postFromImgurAlbum($url, true);
+        return "Success";
+    } elseif (strpos($url, '//www.reddit.com/r/') > 0) {
+        postFromReddit($url);
+        return "Success";
     }
 
     echo "$url";
 }
 
-function postFromImgurAlbum($url) {
+function postFromImgurAlbum($url, $postFirstOnly) {
 
     $returned_content = get_data($url);
     $needle = "\"//i.imgur.com/";
@@ -191,7 +197,7 @@ function postFromImgurAlbum($url) {
 
     foreach ($positions as $value) {
         $pos2 = strpos($returned_content,'" ',$value);
-        $peos = substr($returned_content,$value,$pos2-$value);
+        $peos = substr($returned_content, $value, $pos2-$value);
 
         // Check that strings looks like imgur image
         switch (substr($peos,-4)) {
@@ -201,6 +207,11 @@ function postFromImgurAlbum($url) {
             case 'gifv':
                 if (strlen($peos) < 28) {
                     $urls[] = 'http:' . substr($peos, 1);
+                    if ($postFirstOnly) {
+                        $_POST['post-url'] = $urls[0];
+                        tryUpload(false, -1);
+                        return "S";
+                    }
                 }
                 break;
             default:
@@ -215,9 +226,40 @@ function postFromImgurAlbum($url) {
     }
 }
 
+function postGifv($url) {
+    $imgurPostId = substr($url, 0, -5);
+    $postContent ="</a>
+    <div id=\"video-container\" onclick='togglePlayPause(this);'>
+    	<video loop id='media-video' poster=\"$imgurPostId" . "h.jpg\" oncanplay=\"onVideoReady(this)\">
+    		<source src='$imgurPostId.mp4' type='video/mp4'>
+    	</video>
+    	<div id=\"videoOverlay\">&rtrif;</div>
+    </div>
+    <a>";
+
+
+    if (isset($_GET['user'])) {
+        $myUserid = $_GET['user'];
+    } else {
+        $myUserid = $user_id;
+    }
+    $title = $_POST['post-title'];
+    wp_insert_post( array(
+        'post_author'    => $myUserid,
+        'post_title'    => sanitize_text_field($title),
+        'post_type'     => 'post',
+        'post_content'    => $postContent,
+        'post_status'    => 'publish'
+    ));
+}
 
 function postFromReddit($url) {
     //can also post comments from reddit
+    $returned_content = get_data($url . '.json');
+    $decodedData = json_decode($returned_content, true);
+    $_POST['post-url'] = $decodedData[0]['data']['children'][0]['data']['url'];
+    $_POST['post-title'] = $decodedData[0]['data']['children'][0]['data']['title'];
+    tryUpload(false, -1);
 }
 
 function get_data($url) {

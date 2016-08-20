@@ -26,20 +26,23 @@ function vote(){
         }
     die();
 }
+
 add_action("after_switch_theme", "createtablez");
+
 function createtablez(){
     global $wpdb;
     $charset_collate = $wpdb->get_charset_collate();
     $table_name = $wpdb->prefix . "updownvotes";
     $sql = "CREATE TABLE $table_name (
-      user_id bigint(20) NOT NULL,
-      post_id bigint(20) NOT NULL,
-      upvote tinyint(1) NOT NULL,
-      PRIMARY KEY (user_id,post_id)
-    ) $charset_collate;";
+                user_id bigint(20) NOT NULL,
+                post_id bigint(20) NOT NULL,
+                upvote tinyint(1) NOT NULL,
+                PRIMARY KEY (user_id,post_id)
+            ) $charset_collate;";
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
 }
+
 function addvote($user,$id,$vote){
     global $wpdb;
     $table_name = $wpdb->prefix . "updownvotes";
@@ -78,7 +81,8 @@ function removevote($user,$id){
         indecrease($id,1);
     }
 }
-//Might miss some updates if called simultaneously,could fix with 'mutex'
+
+// Might miss some updates if called simultaneously.
 function indecrease($id,$num){
     $prev =  get_post_meta( $id, 'postscore' );
     update_post_meta($id, 'postscore', intval($prev[0])+$num);

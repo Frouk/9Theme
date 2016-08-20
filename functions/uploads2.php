@@ -176,6 +176,9 @@ function postFromSource($url) {
     } elseif (strpos($url, '//www.reddit.com/r/') > 0) {
         postFromReddit($url);
         return "Success";
+    } elseif (strpos($url, '9gag.com/gag/') > 0) {
+        postFrom9gag($url);
+        return "Success";
     }
 
     echo "$url";
@@ -260,6 +263,36 @@ function postFromReddit($url) {
     $_POST['post-url'] = $decodedData[0]['data']['children'][0]['data']['url'];
     $_POST['post-title'] = $decodedData[0]['data']['children'][0]['data']['title'];
     tryUpload(false, -1);
+}
+
+function postFrom9gag($url) {
+    $gagPostId = substr($url, -7);
+    // http://img-9gag-fun.9cache.com/photo/ae64PbQ_460s.jpg
+    // http://img-9gag-fun.9cache.com/photo/ae64PbQ_460sv.mp4
+    $postContent ="</a>
+    <div id=\"video-container\" onclick='togglePlayPause(this);'>
+        <video loop id='media-video' poster='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460s.jpg' oncanplay=\"onVideoReady(this)\">
+            <source src='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460sv.mp4' type='video/mp4'>
+            <source src='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460svwm.webm' type='video/webm'>
+
+        </video>
+        <div id=\"videoOverlay\">&rtrif;</div>
+    </div>
+    <a>";
+
+    if (isset($_GET['user'])) {
+        $myUserid = $_GET['user'];
+    } else {
+        $myUserid = $user_id;
+    }
+    $title = $_POST['post-title'];
+    wp_insert_post( array(
+        'post_author'    => $myUserid,
+        'post_title'    => sanitize_text_field($title),
+        'post_type'     => 'post',
+        'post_content'    => $postContent,
+        'post_status'    => 'publish'
+    ));
 }
 
 function get_data($url) {

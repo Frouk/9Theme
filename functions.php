@@ -50,6 +50,7 @@
             register_nav_menus(
                 array(
                   'header-menu' => 'Header Menu',
+                  'header-secondary-menu' => 'Header Second Menu',
                   'sidebar-menu' => 'Sidebar Menu',
                   'footer-menu' => 'Footer Menu',
                   'logged-in-menu' => 'Logged In Menu',

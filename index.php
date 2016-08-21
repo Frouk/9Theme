@@ -47,7 +47,11 @@
                 <div id="OlderPages"><?php next_posts_link('Older Entries &raquo;') ?></div>
             </div>
         </div>
-        <?php get_sidebar(); ?>
+
+        <div id="sidebar-container">
+            <div id="sidebar-dummy"></div>
+            <?php get_sidebar(); ?>
+        </div>
     </div>
 
 <?php get_footer(); ?>

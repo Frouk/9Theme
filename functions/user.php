@@ -1,4 +1,5 @@
 <?php
+
 add_action( 'wp_login_failed', 'pu_login_failed' ); // hook failed login
 function pu_login_failed( $user ) {
     // check what page the login attempt is coming from
@@ -17,6 +18,7 @@ function pu_login_failed( $user ) {
         exit;
     }
 }
+
 add_action( 'authenticate', 'pu_blank_login');
 function pu_blank_login( $user ){
     // check what page the login attempt is coming from
@@ -44,6 +46,7 @@ function pu_blank_login( $user ){
 
     }
 }
+
 function custom_login() {
     global $user_login;
     if(isset($_GET['login']) && $_GET['login'] == 'failed')
@@ -79,6 +82,7 @@ function custom_login() {
         }
 
 }
+
 function registration_form( $username, $password, $email ) {
 
     echo '
@@ -103,6 +107,7 @@ function registration_form( $username, $password, $email ) {
     </form>
     ';
 }
+
 function registration_validation( $username, $password, $email )  {
     global $reg_errors;
     $reg_errors = new WP_Error;
@@ -135,6 +140,7 @@ function registration_validation( $username, $password, $email )  {
         echo '</div>';
     }
 }
+
 function complete_registration() {
     global $reg_errors, $username, $password, $email;
     if ( 1 > count( $reg_errors->get_error_messages() ) ) {
@@ -146,12 +152,13 @@ function complete_registration() {
         $user = wp_insert_user( $userdata );
     }
 }
+
 function custom_registration_function() {
     if ( isset($_POST['submit'] ) ) {
         registration_validation(
-        $_POST['username'],
-        $_POST['password'],
-        $_POST['email']
+            $_POST['username'],
+            $_POST['password'],
+            $_POST['email']
         );
 
         // sanitize user form input
@@ -163,9 +170,9 @@ function custom_registration_function() {
         // call @function complete_registration to create the user
         // only when no WP_error is found
         complete_registration(
-        $username,
-        $password,
-        $email
+            $username,
+            $password,
+            $email
         );
     }
 
@@ -173,21 +180,25 @@ function custom_registration_function() {
         $username,
         $password,
         $email
-        );
+    );
 }
+
 function auto_login_new_user( $user_id ) {
-wp_set_current_user($user_id);
-wp_set_auth_cookie($user_id);
-wp_redirect( home_url() );
-exit;
+    wp_set_current_user($user_id);
+    wp_set_auth_cookie($user_id);
+    wp_redirect( home_url() );
+    exit;
 }
+
 add_action( 'user_register', 'auto_login_new_user' );
 add_action('init', 'do_output_buffer');
 function do_output_buffer() {
-        ob_start();
+    ob_start();
 }
 
-function disable_password_reset() { return false; }
 add_filter ( 'allow_password_reset', 'disable_password_reset' );
+function disable_password_reset() {
+    return false;
+}
 
 ?>

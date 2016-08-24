@@ -17,7 +17,7 @@
                     </div>
                     <div id="postdata">
                         <div id="stats"><a id=<?php echo '"score ' . get_the_ID() . '"'; ?>><?php $scored=get_post_meta(get_the_ID(),'postscore',true);if($scored==""){echo 0;}else{echo $scored;} ?></a> points - <?php comments_number( 'No comments', 'One comment', '% comments' ); ?>
-                            <div id="tags"> <?php the_tags( 'Tags:', ',', '' ); ?> </div>
+                            <div id="tags"> <?php the_tags( 'Tags: ', ', ', '' ); ?> </div>
                         </div>
                         <div class="vote">
                             <?php if (is_user_logged_in()) {?>

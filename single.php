@@ -45,7 +45,10 @@
             </div>
         <?php endwhile; /* end loop */ ?>
     </div>
-<?php get_sidebar(); ?>
+    <div id="sidebar-container">
+        <div id="sidebar-dummy"></div>
+        <?php get_sidebar(); ?>
+    </div>
 </div>
 </div>
 <?php get_footer(); ?>

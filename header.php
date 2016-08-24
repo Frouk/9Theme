@@ -39,19 +39,19 @@
 
         } else { ?>
 
-            <div id="popuppost">
-            <form id="PostUpload" method="post" action="#" enctype="multipart/form-data">
-                <div id="formtitle">Upload an Image</div>
-                <?php manageuploadsplugin();?>
-                <label>Title</label>
-                <p><input type="text" id ="post-title" name="post-title" /></p>
-                    <label>File</label>
-                <p>
-                <input type="file" name="my_image_upload" id="my_image_upload" accept="image/gif,image/png,image/jpeg"/>
-                <a id="show_upload_url" href="javascript:void(0);">Upload via Url</a>
-                </p>
-                <?php wp_nonce_field( 'my_image_upload', 'my_image_upload_nonce' ); ?>
-                <input id="submit_my_image_upload" name="submit_my_image_upload" type="submit" value="Upload" />
+        <div id="popuppost">
+        <form id="PostUpload" method="post" action="#" enctype="multipart/form-data">
+            <div id="formtitle">Upload an Image</div>
+            <?php manageuploadsplugin();?>
+            <label>Title</label>
+            <p><input type="text" id ="post-title" name="post-title" /></p>
+                <label>File</label>
+            <p>
+            <input type="file" name="my_image_upload" id="my_image_upload" accept="image/gif,image/png,image/jpeg"/>
+            <a id="show_upload_url" href="javascript:void(0);">Upload via Url</a>
+            </p>
+            <?php wp_nonce_field( 'my_image_upload', 'my_image_upload_nonce' ); ?>
+            <input id="submit_my_image_upload" name="submit_my_image_upload" type="submit" value="Upload" />
         </form>
         </div>
 
@@ -72,7 +72,7 @@
     <?php } ?>
 
         <div id="full-screen-menu">
-            <div id="top-right-button"></div>
+            <div id="top-right-button">X</div>
             <div id="bot_full_screen"></div>
         </div>
 

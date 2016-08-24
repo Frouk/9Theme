@@ -121,32 +121,34 @@ function videoFull(item) {
 function onVideoReady(mediaPlayer) {
 	mediaPlayer.controls = false;
 
-	mediaPlayer.addEventListener('ended', function() {
-		this.currentTime = 0;
-        if (isScrolledIntoView(mediaPlayer)) {
-            this.play();
-        } else {
-            mediaPlayer.parentElement.childNodes[4].style.display = "inherit";
-            this.pause();
-        }
-	}, false);
-
-    // If autoplay :
-    //mediaPlayer.play();
-    //mediaPlayer.parentElement.childNodes[4].style.display = "none";
-
-    // can add a hook when new page loads to pause all previous videos.
+    mediaPlayer.addEventListener('play', function() {
+            mediaPlayer.parentElement.childNodes[4].style.display = "none";
+    }, false);
 }
 
 function togglePlayPause(herrow) {
     herrow = herrow.childNodes[1];
 	if (herrow.paused || herrow.ended) {
-		herrow.parentElement.childNodes[4].style.display = "none";
+		//herrow.parentElement.childNodes[4].style.display = "none";
 		herrow.play();
 	} else {
 		herrow.parentElement.childNodes[4].style.display = "inherit";
 		herrow.pause();
 	}
+
+    // if user clicks play button most likely has auto play turned off,
+    // thus it's logical to stop video from playing when he scrolls away.
+    herrow.loop = false;
+    herrow.addEventListener('ended', function() {
+		this.currentTime = 0;
+        if (isScrolledIntoView(this)) {
+            this.play();
+        } else {
+            this.parentElement.childNodes[4].style.display = "inherit";
+            this.pause();
+        }
+	}, false);
+
 }
 
 function isScrolledIntoView(el) {

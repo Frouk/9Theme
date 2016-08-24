@@ -179,8 +179,11 @@ function postFromSource($url) {
     } elseif (strpos($url, '9gag.com/gag/') > 0) {
         postFrom9gag($url);
         return "Success";
+    } elseif (strpos($url, '//gfycat.com/') > 0) {
+        postFrom9gag($url);
+        return "Success";
     }
-
+fycat
     echo "$url";
 }
 
@@ -233,7 +236,7 @@ function postGifv($url) {
     $imgurPostId = substr($url, 0, -5);
     $postContent ="</a>
     <div id=\"video-container\" onclick='togglePlayPause(this);'>
-    	<video loop id='media-video' poster=\"$imgurPostId" . "h.jpg\" oncanplay=\"onVideoReady(this)\">
+    	<video autoplay loop id='media-video' poster=\"$imgurPostId" . "h.jpg\" oncanplay=\"onVideoReady(this)\">
     		<source src='$imgurPostId.mp4' type='video/mp4'>
     	</video>
     	<div id=\"videoOverlay\">&rtrif;</div>
@@ -271,7 +274,7 @@ function postFrom9gag($url) {
     // http://img-9gag-fun.9cache.com/photo/ae64PbQ_460sv.mp4
     $postContent ="</a>
     <div id=\"video-container\" onclick='togglePlayPause(this);'>
-        <video loop id='media-video' poster='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460s.jpg' oncanplay=\"onVideoReady(this)\">
+        <video autoplay loop id='media-video' poster='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460s.jpg' oncanplay=\"onVideoReady(this)\">
             <source src='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460sv.mp4' type='video/mp4'>
             <source src='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460svwm.webm' type='video/webm'>
 
@@ -293,6 +296,10 @@ function postFrom9gag($url) {
         'post_content'    => $postContent,
         'post_status'    => 'publish'
     ));
+}
+
+function postFromGfycat($url) {
+
 }
 
 function get_data($url) {

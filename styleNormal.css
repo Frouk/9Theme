@@ -321,7 +321,7 @@
         -webkit-border-top-right-radius: 5px;
     }
     #posts{
-        width: 600px;
+        width: 580px;
         overflow: hidden;
         float: left;
         min-height: 100%;
@@ -330,7 +330,6 @@
     }
     #postslist{
         padding: 10px;
-          margin: 10px;
     }
     #singlepost{
         border-bottom:30px;
@@ -338,7 +337,7 @@
         margin-bottom:30px;
     }
     #posttitle{
-        width: 600px;
+        width: 550px;
         font-size: 22px;
         margin-bottom: 10px;
     }
@@ -350,10 +349,10 @@
       color: #555;
     }
     #postcontent{
-        width: 600px;
+        width: 550px;
     }
     #postcontent img{
-        width: 500px;
+        width: 550px;
         height: auto;
     }
     #postdata{
@@ -648,7 +647,7 @@
     }
     #comment-text p{
         overflow: hidden;
-      text-overflow: ellipsis;
+        text-overflow: ellipsis;
     }
     #commentlist{
         /* */
@@ -656,27 +655,31 @@
     #postcommenttextarea{
       width: 100%;
     }
+
     #postcommenttextarea textarea{
-      height: 50px;
+        height: 50px;
         box-sizing: border-box;
         border-radius: 1px;
         resize: none;
         width: 570px;
         line-height: 1.6em;
     }
+
     #pp_comments input[type='button']{
       float:right;
     }
+
     #respond{
       border-bottom: 1px solid #ddd;
       padding-bottom: 25px;
     }
+
     .upload_error{
         text-align: center;
-    color: red;
-    margin-top: 17px;
-    margin-bottom: 10px;
-    font-size: 17px;
+        color: red;
+        margin-top: 17px;
+        margin-bottom: 10px;
+        font-size: 17px;
     }
     .upload_success{
         text-align: center;
@@ -689,12 +692,16 @@
 
 
 
-    #video-container {
-    	width: 600px;
+    #pp_content #video-container {
+    	width: 620px;
     	height:auto;
         position: relative;
     }
-
+    #postcontent #video-container {
+        width: 550px;
+        height:auto;
+        position: relative;
+    }
     #media-video {
     	width:100%;
     	height:100%;
@@ -702,18 +709,16 @@
     }
 
     #videoFull {
-     	position: absolute;
-        bottom: 0;
-        right: 27px;
-        color: black;
-        font-size: 42px;
-        background: gray;
-        line-height: 42px;
-        height: 42px;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        color: white;
+        font-size: 27px;
+        line-height: 27px;
+        height: 27px;
     }
 
     #videoOverlay {
-        display: none;
         top: 0;
         left: 0;
         right: 0;

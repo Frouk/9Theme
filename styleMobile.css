@@ -123,11 +123,11 @@
     }
     #PageTitle {
         color: #222222;
-        font-size: 26px;
+        font-size: 24px;
         font-weight: normal !important;
         text-align: center;
         text-decoration: underline;
-        padding-top: 20px;
+        padding-top: 17px;
         padding-bottom: 20px;
     }
 
@@ -166,13 +166,12 @@
 
     #videoFull {
         position: absolute;
-        bottom: 0;
-        right: 27px;
-        color: black;
-        font-size: 42px;
-        background: gray;
-        line-height: 42px;
-        height: 42px;
+        bottom: 1px;
+        right: 1px;
+        color: white;
+        font-size: 27px;
+        line-height: 27px;
+        height: 27px;
     }
 
     #videoOverlay {
@@ -204,6 +203,8 @@
     }
     .vote{
         margin: 7px 0 0 0;
+        height: 40px;
+        float: left;
     }
     .vote a{
         position: relative;
@@ -229,10 +230,128 @@
     }
     #tags{
         float: right;
-        width: 50%;
+        max-width: 50%;
     }
     /*<POSTLIST ENDS>*/
 
+    /* Singlepost Starts */
+    #pp_post {
+        margin: 0 auto;
+        width: 97%;
+    }
+
+    #pp_title{
+    	font-size: 14px;
+    	margin-bottom: 7px;
+        font-weight: bold;
+    }
+
+    #pp_content img{
+    	width: 100%;
+    	height: auto;
+    }
+
+    #pp_data{
+        width: 99%;
+        height: 55px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        position: relative;
+        border-bottom: solid 1px #ddd;
+        padding-bottom: 10px;
+    }
+    #pp_data li{
+        margin: 0 10px 0 0;
+        float: left;
+        list-style: none;
+    }
+
+    #postedby {
+        display: none;
+        float: right;
+        height: 40px;
+        line-height: 67px;
+    }
+    /* Singlepost Ends */
+
+    /* Commeents Start */
+    #pp_comments{
+        width: 100%;
+    }
+    #commentlist{
+        /* */
+    }
+    #comment-entry{
+      min-height: 60px;
+      height: 100%;
+      overflow: hidden;
+      border-bottom: 1px solid #ddd;
+      background-color: #EDEDED;
+      padding-top: 10px;
+    }
+    #comment-avatar{
+        float: left;
+    }
+    #comment-notavatar{
+        margin-left: 60px;
+    }
+    #comment-info{
+        font-weight:bold!important;
+    }
+    #comment-info a{
+      text-decoration: none;
+      color: #218df3;
+    }
+    #comment-info a:hover{
+      text-decoration: underline;
+      color: #218df3;
+    }
+    #comment-text{
+        padding-top: 4px;
+        padding-left: 4px;
+    }
+    #comment-text p{
+        overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #commentlist{
+        /* */
+    }
+    #postcommenttextarea{
+
+    }
+    #postcommenttextarea textarea{
+        height: 50px;
+        box-sizing: border-box;
+        border-radius: 1px;
+        resize: none;
+        width: calc(100% - 50px);
+        line-height: 1.6em;
+    }
+    #pp_comments input[type='button']{
+      float:right;
+    }
+    #respond{
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 25px;
+      width: 100%;
+      display: block;
+    }
+    .upload_error{
+        text-align: center;
+        color: red;
+        margin-top: 17px;
+        margin-bottom: 10px;
+        font-size: 17px;
+    }
+    .upload_success{
+        text-align: center;
+        color: green;
+        margin-top: 17px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+    /* Comments End */
     /* SIDEBAR/FULLSCREEN Start*/
 
     #full-screen-menu {
@@ -442,5 +561,44 @@
         text-align: left;
         cursor: default;
         padding-right: 10px;
+    }
+    #NewerPages {
+        display: none;
+    }
+    #bot-nav {
+        display: none;
+    }
+
+    #OlderPages {
+        text-align: center;
+    }
+
+    #OlderPages a{
+    	text-decoration: none;
+    	text-align: center;
+    	font-size: 17px;
+    	width: 60%;
+    	margin-top: 8px;
+    	margin-bottom: 8px;
+    	color: #fff;
+    	background-color: #09f;
+    	padding: 6px 13px;
+    	border: 1px solid #09f;
+    	border-radius: 2px;
+    	box-shadow: 0 1px 0 rgba(0,0,0,.08);
+    	cursor: pointer;
+    	text-decoration: none;
+    	display: inline-block;
+    	text-align: center;
+    	-webkit-appearance: none;
+    }
+
+}
+@media only screen and (max-device-width : 352px) {
+    header#top-nav a{
+        font-size: 18px;
+    }
+    #side-menu-link{
+        font-size: 37px;
     }
 }

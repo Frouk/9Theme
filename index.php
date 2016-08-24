@@ -20,17 +20,26 @@
                             <div id="tags"> <?php the_tags( 'Tags: ', ', ', '' ); ?> </div>
                         </div>
                         <div class="vote">
-                            <?php if (is_user_logged_in()) {?>
-                                <?php $hasivote=checkvote(get_the_ID()); if($hasivote=='-1'){?>
-                                    <li><a id=<?php echo '"upvoteicon ' . get_the_ID() . '" '; ?>class="voteup" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,1);"></a></li>
-                                    <li><a id=<?php echo '"downvoteicon ' . get_the_ID() . '" '; ?>class="votedown" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,2);"></a></li>
-                                <?php }elseif($hasivote=='0'){?>
-                                    <li><a id=<?php echo '"upvoteicon ' . get_the_ID() . '" '; ?>class="voteup" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,1);"></a></li>
-                                    <li><a id=<?php echo '"downvoteicon ' . get_the_ID() . '" '; ?>class="votedownactive" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,0);"></a></li><?php }else{ ?>
-                                        <li><a id=<?php echo '"upvoteicon ' . get_the_ID() . '" '; ?> class="voteupactive" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,0);"></a></li>
-                                <li><a id=<?php echo '"downvoteicon ' . get_the_ID() . '" '; ?>class="votedown" href="javascript:void(0);" onclick="vote(<?php echo get_the_ID(); ?>,2);"></a></li>
-                                <?php } ?>
-                        <?php }else{ ?>
+                            <?php if (is_user_logged_in()) {
+                                $theId = get_the_ID();
+                                $hasivote = checkvote($theId);
+                                if ($hasivote == 1) {
+                                    echo "<li><a id='upvoteicon {$theId}' class='voteupactive' href='javascript:void(0);' onclick='vote({$theId}, 0);'></a></li>";
+                                } else {
+                                    echo "<li><a id='upvoteicon {$theId}' class='voteup' href='javascript:void(0);'onclick='vote({$theId}, 1);'></a></li>";
+                                }
+                                if ($hasivote  == 0) {
+                                    echo "<li><a id='downvoteicon {$theId}' class='votedownactive' href='javascript:void(0);' onclick='vote({$theId}, 0);'></a></li>";
+                                } else {
+                                    echo "<li><a id='downvoteicon {$theId}' class='votedown' href='javascript:void(0);' onclick='vote({$theId}, 2);'></a></li>";
+
+                                }
+                                //echo "
+                                //<li><a id='upvoteicon {$theId}' class='voteup' href='javascript:void(0);' onclick='vote({$theId}, 1);'></a></li>
+                                //<li><a id='downvoteicon {$theId}' class='votedown' href='javascript:void(0);' onclick='vote({$theId}, 2);'></a></li>
+                                //";
+
+                            }else{ ?>
                                 <li><a id=<?php echo '"upvoteicon ' . get_the_ID() . '" '; ?>class="voteup" href="javascript:void(0);" onclick="jQuery('#show_login').click();"></a></li>
                                 <li><a id=<?php echo '"downvoteicon ' . get_the_ID() . '" '; ?>class="votedown" href="javascript:void(0);" onclick="jQuery('#show_login').click();"></a></li>
                         <?php } ?>
@@ -43,8 +52,8 @@
             <?php endif; ?>
             </div>
             <div id="Paging">
-                <div id="NewerPages"><?php previous_posts_link('&laquo; Newer Entries') ?></div>
-                <div id="OlderPages"><?php next_posts_link('Older Entries &raquo;') ?></div>
+                <div id="NewerPages"><?php previous_posts_link('&laquo; Newer Posts') ?></div>
+                <div id="OlderPages"><?php next_posts_link('Older Posts &raquo;') ?></div>
             </div>
         </div>
 

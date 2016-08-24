@@ -43,8 +43,8 @@
             <?php endif; ?>
         </div>
             <div id="Paging">
-                <div id="NewerPages"><?php previous_posts_link('&laquo; Newer Entries') ?></div>
-                <div id="OlderPages"><?php next_posts_link('Older Entries &raquo;') ?></div>
+                <div id="NewerPages"><?php previous_posts_link('&laquo; Newer Posts') ?></div>
+                <div id="OlderPages"><?php next_posts_link('Older Posts &raquo;') ?></div>
             </div>
         </div>
         <?php get_sidebar(); ?>

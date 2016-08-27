@@ -229,6 +229,11 @@ function postFromImgurAlbum($url, $postFirstOnly) {
         // echo $individualUrl . "<br>";
         $_POST['post-url'] = $individualUrl;
         tryUpload(false, -1);
+
+        // Mporw na balw sto inser post enan elenxo gia album post,
+        // kai otan einai album post na min kanei insert alla na ta bazei se ena queue
+        // Meta apo afto to loop trabaw ta watermarked links kai ta kanw post
+        // ws album
     }
 }
 

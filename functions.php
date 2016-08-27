@@ -71,12 +71,14 @@
 
         // removes detailed login error information for security
         add_filter('login_errors',create_function('$a', "return null;"));
+
         // removes the WordPress version from your header for security
         function wb_remove_version() {
-            return '<!--built on the Whiteboard Framework-->';
+            return '<!--built with Drupal-->';
         }
         add_filter('the_generator', 'wb_remove_version');
         add_filter('show_admin_bar', '__return_false');
+
         //restricts access to admin area
         function restrict_admin()
         {

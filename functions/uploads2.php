@@ -136,6 +136,10 @@ function tryUpload ($uploadFromDisk, $myUserid) {
 }
 
 function insertPost($title , $postContent, $myUserid) {
+    if (isset($_POST['album-post'])) {
+        $_POST['album-post'] = $_POST['album-post'] . '<img src="' . $postContent . '"/>';
+        return;
+    }
     wp_insert_post( array(
         'post_author'    => $myUserid,
         'post_title'    => sanitize_text_field($title),
@@ -225,16 +229,29 @@ function postFromImgurAlbum($url, $postFirstOnly) {
         }
     }
     $urls = array_unique($urls);
+
+    $_POST['album-post'] = " ";
+
     foreach ($urls as $individualUrl) {
-        // echo $individualUrl . "<br>";
         $_POST['post-url'] = $individualUrl;
         tryUpload(false, -1);
-
-        // Mporw na balw sto inser post enan elenxo gia album post,
-        // kai otan einai album post na min kanei insert alla na ta bazei se ena queue
-        // Meta apo afto to loop trabaw ta watermarked links kai ta kanw post
-        // ws album
     }
+
+    $numberOfPosts = substr_count($_POST['album-post'], "<img ");
+    $postContent = "<div id='image-slide' data-currentimage='1' data-lastimage='{$numberOfPosts}' onclick='nextImage(event, this,1)'>
+                                {$_POST['album-post']}
+                                <div id='next-image-button' style='left:0;' onclick='nextImage(event, this.parentElement,-1)'><p>❮<p></div>
+                                <div id='next-image-button' style='right:0;' onclick='nextImage(event, this.parentElement,1)'><p>❯</p></div>
+                                <span id='image-counter'>1/{$numberOfPosts}</span>
+                            </div>" ;
+
+    wp_insert_post( array(
+        'post_author'    => 1,
+        'post_title'    => 'album test',
+        'post_type'     => 'post',
+        'post_content'    => $postContent,
+        'post_status'    => 'publish'
+    ));
 }
 
 function postGifv($url) {

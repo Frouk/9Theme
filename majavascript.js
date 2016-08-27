@@ -160,11 +160,11 @@ function isScrolledIntoView(el) {
 
 function nextImage(event, element, change) {
     event.preventDefault();
+    event.stopPropagation();
+    var currentImage = parseInt(element.dataset.currentimage);
+    var lastImage = parseInt(element.dataset.lastimage);
 
-    var currentImage = parseInt(element.parentElement.dataset.currentimage);
-    var lastImage = parseInt(element.parentElement.dataset.lastimage);
-
-    element.parentElement.getElementsByTagName('img')[currentImage - 1].style.display = "none";
+    element.getElementsByTagName('img')[currentImage - 1].style.display = "none";
 
     currentImage = currentImage + change;
 
@@ -173,7 +173,16 @@ function nextImage(event, element, change) {
     } else if (currentImage > lastImage) {
         currentImage = 1;
     }
-    element.parentElement.getElementsByTagName('img')[currentImage - 1].style.display = "inherit";
-    element.parentElement.setAttribute("data-currentimage", currentImage);
-    element.parentElement.getElementsByTagName("span")[0].innerHTML = currentImage + "/" + lastImage;
+    element.getElementsByTagName('img')[currentImage - 1].style.display = "inherit";
+    element.setAttribute("data-currentimage", currentImage);
+    element.getElementsByTagName("span")[0].innerHTML = currentImage + "/" + lastImage;
+}
+function setSwipeListener(element) {
+    alert(element);
+    jQuery(element.parentElement).on("swipeleft",function(){
+        alert("yolo");
+    });
+    jQuery(element.parentElement).on("swipe",function(){
+        alert("yolgo");
+    });
 }

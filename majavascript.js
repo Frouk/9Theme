@@ -1,5 +1,4 @@
-function vote(var1,var2)
-{
+function vote(var1, var2) {
     var uped = (document.getElementById("upvoteicon "+ var1).getAttribute("class")=="voteup") ? 0 : -1;
     var downed = (document.getElementById("downvoteicon "+ var1).getAttribute("class")=="votedown") ? 0 : 1;
 
@@ -157,4 +156,24 @@ function isScrolledIntoView(el) {
     var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
 
     return isVisible;
+}
+
+function nextImage(event, element, change) {
+    event.preventDefault();
+
+    var currentImage = parseInt(element.parentElement.dataset.currentimage);
+    var lastImage = parseInt(element.parentElement.dataset.lastimage);
+
+    element.parentElement.getElementsByTagName('img')[currentImage - 1].style.display = "none";
+
+    currentImage = currentImage + change;
+
+    if (currentImage < 1) {
+        currentImage = lastImage;
+    } else if (currentImage > lastImage) {
+        currentImage = 1;
+    }
+    element.parentElement.getElementsByTagName('img')[currentImage - 1].style.display = "inherit";
+    element.parentElement.setAttribute("data-currentimage", currentImage);
+    element.parentElement.getElementsByTagName("span")[0].innerHTML = currentImage + "/" + lastImage;
 }

@@ -308,7 +308,7 @@ function postFromGfycat($url) {
 
     $pos = strpos($gfyvideo,'gfycat.com/') + 11;
     $postThumb = substr($gfyvideo, $pos);
-//https://thumbs.gfycat.com/FlakyCreamyHornshark-poster.jpg
+
     $postContent ="</a>
     <div id=\"video-container\" onclick='togglePlayPause(this);'>
         <video autoplay loop id='media-video' poster='https://thumbs.gfycat.com/{$postThumb}-poster.jpg' oncanplay=\"onVideoReady(this)\">

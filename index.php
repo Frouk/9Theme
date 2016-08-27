@@ -1,5 +1,5 @@
 <?php  get_header(); ?>
-<?php define( "DONOTCACHEPAGE", true ); ?>
+
 <div id="container">
     <div id="main">
         <div id="posts">
@@ -9,7 +9,7 @@
                <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
                 <div id="singlepost">
-                        <div id="posttitle">
+                    <div id="posttitle">
                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                     </div>
                     <div id="postcontent">
@@ -39,7 +39,7 @@
                                 //<li><a id='downvoteicon {$theId}' class='votedown' href='javascript:void(0);' onclick='vote({$theId}, 2);'></a></li>
                                 //";
 
-                            }else{ ?>
+                            } else { ?>
                                 <li><a id=<?php echo '"upvoteicon ' . get_the_ID() . '" '; ?>class="voteup" href="javascript:void(0);" onclick="jQuery('#show_login').click();"></a></li>
                                 <li><a id=<?php echo '"downvoteicon ' . get_the_ID() . '" '; ?>class="votedown" href="javascript:void(0);" onclick="jQuery('#show_login').click();"></a></li>
                         <?php } ?>

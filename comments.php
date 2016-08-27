@@ -29,7 +29,7 @@ function CheckLength()
 }
 </script>
 <?php if ( get_option('comment_registration') && !is_user_logged_in() ) : ?>
-    <p>You must be <a href="">logged in</a> to post a comment.</p>
+    <p>You must be <a href="javascript:void(0);" onclick="jQuery('#show_login').click();">Logged in</a> to post a comment.</p>
 <?php else : ?>
     <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
     <?php if ( is_user_logged_in() ) : ?>

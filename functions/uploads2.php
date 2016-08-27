@@ -180,10 +180,10 @@ function postFromSource($url) {
         postFrom9gag($url);
         return "Success";
     } elseif (strpos($url, '//gfycat.com/') > 0) {
-        postFrom9gag($url);
+        postFromGfycat($url);
         return "Success";
     }
-fycat
+
     echo "$url";
 }
 
@@ -240,6 +240,7 @@ function postGifv($url) {
     		<source src='$imgurPostId.mp4' type='video/mp4'>
     	</video>
     	<div id=\"videoOverlay\">&rtrif;</div>
+        <div id=\"videoFull\" onclick=\"videoFull(this)\">⇲</div>
     </div>
     <a>";
 
@@ -277,9 +278,9 @@ function postFrom9gag($url) {
         <video autoplay loop id='media-video' poster='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460s.jpg' oncanplay=\"onVideoReady(this)\">
             <source src='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460sv.mp4' type='video/mp4'>
             <source src='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460svwm.webm' type='video/webm'>
-
         </video>
         <div id=\"videoOverlay\">&rtrif;</div>
+        <div id=\"videoFull\" onclick=\"videoFull(this)\">⇲</div>
     </div>
     <a>";
 
@@ -299,7 +300,39 @@ function postFrom9gag($url) {
 }
 
 function postFromGfycat($url) {
+    $returned_content = get_data($url);
 
+    $pos = strpos($returned_content,'id="webmSource" src="')+29;
+    $pos2 = strpos($returned_content,'.webm" type="video/webm">',$pos);
+    $gfyvideo = substr($returned_content, $pos, $pos2-$pos);
+
+    $pos = strpos($gfyvideo,'gfycat.com/') + 11;
+    $postThumb = substr($gfyvideo, $pos);
+//https://thumbs.gfycat.com/FlakyCreamyHornshark-poster.jpg
+    $postContent ="</a>
+    <div id=\"video-container\" onclick='togglePlayPause(this);'>
+        <video autoplay loop id='media-video' poster='https://thumbs.gfycat.com/{$postThumb}-poster.jpg' oncanplay=\"onVideoReady(this)\">
+            <source src='https://{$gfyvideo}.mp4' type='video/mp4'>
+            <source src='https://{$gfyvideo}.webm' type='video/webm'>
+        </video>
+        <div id=\"videoOverlay\">&rtrif;</div>
+        <div id=\"videoFull\" onclick=\"videoFull(this)\">⇲</div>
+    </div>
+    <a>";
+
+    if (isset($_GET['user'])) {
+        $myUserid = $_GET['user'];
+    } else {
+        $myUserid = $user_id;
+    }
+    $title = $_POST['post-title'];
+    wp_insert_post( array(
+        'post_author'    => $myUserid,
+        'post_title'    => sanitize_text_field($title),
+        'post_type'     => 'post',
+        'post_content'    => $postContent,
+        'post_status'    => 'publish'
+    ));
 }
 
 function get_data($url) {

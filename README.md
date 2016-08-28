@@ -11,8 +11,10 @@ Live Preview @ [9webm.com](http://9webm.com)
 * Automatically resize and watermark images
 * Automatically host images at imgur.com
 * Gif like html5 video player
+* Scrollable Album post type
 * User Upvotes and Scoring system
 * Set up user only categories
+* Hide Wordpress Dashboard from unauthorized users.
 * Compatibility with most Wordpress Plugins
 
 ## Recommended Wordpress Plugins
@@ -32,4 +34,4 @@ Upload using Wordpress Dashboard <br>
 * Allow users to upload custom avatars
 * SEO
 * Add Captcha support at user registration
-* Add more customization options
+* More Customization options

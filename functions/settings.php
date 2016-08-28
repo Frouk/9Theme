@@ -17,7 +17,7 @@ function register_my_cool_plugin_settings() {
 	//register our settings
 	register_setting( '9theme_settings-group', 'imgur_api_key' );
 	register_setting( '9theme_settings-group', '9theme_max_file_size' );
-	register_setting( '9theme_settings-group', 'option_etc' );
+	register_setting( '9theme_settings-group', '9theme_hidden_category' );
 }
 
 function my_9theme_settings() {
@@ -40,8 +40,8 @@ function my_9theme_settings() {
         </tr>
 
         <tr valign="top">
-        <th scope="row">Options, Etc.</th>
-        <td><input type="text" name="option_etc" value="<?php echo esc_attr( get_option('option_etc') ); ?>" /></td>
+        <th scope="row">Hidden Categories.</th>
+        <td><input type="text" name="9theme_hidden_category" value="<?php echo esc_attr( get_option('9theme_hidden_category') ); ?>" /></td>
         </tr>
     </table>
 

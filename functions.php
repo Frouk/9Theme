@@ -3,6 +3,7 @@
     require 'functions/uploads2.php';
     require 'functions/upvotes.php';
     require 'functions/settings.php';
+    require 'functions/hiddenCategory.php';
 
     //echo getIt();
     //DEBUGGING

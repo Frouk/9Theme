@@ -177,12 +177,3 @@ function nextImage(event, element, change) {
     element.setAttribute("data-currentimage", currentImage);
     element.getElementsByTagName("span")[0].innerHTML = currentImage + "/" + lastImage;
 }
-function setSwipeListener(element) {
-    alert(element);
-    jQuery(element.parentElement).on("swipeleft",function(){
-        alert("yolo");
-    });
-    jQuery(element.parentElement).on("swipe",function(){
-        alert("yolgo");
-    });
-}

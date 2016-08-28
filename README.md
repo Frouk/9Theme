@@ -1,6 +1,6 @@
 # 9Theme
 
-A 9Gag like Wordpress Theme.
+A 9Gag like Wordpress Theme. <br>
 Live Preview @ [9webm.com](http://9webm.com)
 
 ## Features
@@ -12,8 +12,8 @@ Live Preview @ [9webm.com](http://9webm.com)
 * Automatically host images at imgur.com
 * Gif like html5 video player
 * User Upvotes and Scoring system
+* Set up user only categories
 * Compatibility with most Wordpress Plugins
-
 
 ## Recommended Wordpress Plugins
 * [Infinite Scroll](https://wordpress.org/plugins/infinite-scroll/) By Beaver6813, dirkhaim, Paul Irish, benbalter, Glenn Nelson
@@ -21,9 +21,15 @@ Live Preview @ [9webm.com](http://9webm.com)
 * [WP Super Cache](https://wordpress.org/plugins/wp-super-cache/) By Automattic
 * [Contact Form 7](https://wordpress.org/plugins/contact-form-7/) By Takayuki Miyoshi
 
-
-Live Preview @ 9webm.com
-
 ## Installation
-Download 9Theme.zip .
-Upload using Wordpress Dashboard
+Download 9Theme.zip <br>
+Upload using Wordpress Dashboard <br>
+
+## ToDo
+* Security, code quality and documentation improvements
+* Create a few alternative styles
+* Add user activity pages with upvotes, comments etc
+* Allow users to upload custom avatars
+* SEO
+* Add Captcha support at user registration
+* Add more customization options

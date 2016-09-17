@@ -1,102 +1,66 @@
-function vote(var1, var2) {
-    var uped = (document.getElementById("upvoteicon "+ var1).getAttribute("class")=="voteup") ? 0 : -1;
-    var downed = (document.getElementById("downvoteicon "+ var1).getAttribute("class")=="votedown") ? 0 : 1;
-
-    if (var2 == 1) {
-       document.getElementById("upvoteicon "+ var1).setAttribute("class", "voteupactive");
-       document.getElementById("downvoteicon "+ var1).setAttribute("class", "votedown");
-       document.getElementById("upvoteicon "+ var1).setAttribute("onclick", "vote("+var1+",0);");
-       document.getElementById("downvoteicon "+ var1).setAttribute("onclick", "vote("+var1+",2);");
-       document.getElementById("score "+ var1).innerHTML=parseInt(document.getElementById("score "+ var1).innerHTML) + 1 + downed;
-    }else if (var2 == 2){
-       document.getElementById("upvoteicon " + var1).setAttribute("class", "voteup");
-       document.getElementById("downvoteicon " + var1).setAttribute("class", "votedownactive");
-       document.getElementById("upvoteicon " + var1).setAttribute("onclick", "vote("+var1+",1);");
-       document.getElementById("downvoteicon " + var1).setAttribute("onclick", "vote("+var1+",0);");
-       document.getElementById("score " + var1).innerHTML=parseInt(document.getElementById("score "+ var1).innerHTML) - 1 + uped;
-    }else{
-       document.getElementById("score " + var1).innerHTML=parseInt(document.getElementById("score "+ var1).innerHTML) + uped + downed;
-       document.getElementById("upvoteicon " + var1).setAttribute("class", "voteup");
-       document.getElementById("downvoteicon " + var1).setAttribute("class", "votedown");
-       document.getElementById("upvoteicon " + var1).setAttribute("onclick", "vote("+var1+",1);");
-       document.getElementById("downvoteicon " + var1).setAttribute("onclick", "vote("+var1+",2);");
-    }
-
-    jQuery.ajax({
-    url: my_ajax_script.ajaxurl,
-    data: ({action : 'vote',para1:var1,para2:var2}),
-    success: function() {
-     //jQuery change color
-    }
-    });
-}
-
 jQuery(document).ready(function($) {
 
    // Show the login dialog box on click
     jQuery('a#show_login').on('click', function(e){
-        jQuery('div.login_overlay').remove();
-        jQuery('#popupregister').hide();
-        jQuery('body').prepend('<div class="login_overlay"></div>');
-        jQuery('#popuplogin').fadeIn(500);
+        $('div.login_overlay').remove();
+        $('#popupregister').hide();
+        $('body').prepend('<div class="login_overlay"></div>');
+        $('#popuplogin').fadeIn(500);
         jQuery('div.login_overlay, form#login a.close').on('click', function(){
-            jQuery('div.login_overlay').remove();
-            jQuery('#popuplogin').hide();
+            $('div.login_overlay').remove();
+            $('#popuplogin').hide();
         });
         e.preventDefault();
    });
 
     jQuery('a#show_register').on('click', function(e){
-        jQuery('div.login_overlay').remove();
-        jQuery('#popuplogin').hide();
-        jQuery('body').prepend('<div class="login_overlay"></div>');
-        jQuery('#popupregister').fadeIn(500);
+        $('div.login_overlay').remove();
+        $('#popuplogin').hide();
+        $('body').prepend('<div class="login_overlay"></div>');
+        $('#popupregister').fadeIn(500);
         jQuery('div.login_overlay, form#register a.close').on('click', function(){
-            jQuery('div.login_overlay').remove();
-            jQuery('#popupregister').hide();
+            $('div.login_overlay').remove();
+            $('#popupregister').hide();
         });
         e.preventDefault();
     });
 
     jQuery('a#show_upload').on('click', function(e){
-        jQuery('div.login_overlay').remove();
-        jQuery('#popupposturl').hide();
-        jQuery('body').prepend('<div class="login_overlay"></div>');
-        jQuery('#popuppost').fadeIn(500);
+        $('div.login_overlay').remove();
+        $('#popupposturl').hide();
+        $('body').prepend('<div class="login_overlay"></div>');
+        $('#popuppost').fadeIn(500);
         jQuery('div.login_overlay, form#PostUpload a.close').on('click', function(){
-            jQuery('div.login_overlay').remove();
-            jQuery('#popuppost').hide();
+            $('div.login_overlay').remove();
+            $('#popuppost').hide();
         });
         e.preventDefault();
     });
 
     jQuery('a#show_upload_url').on('click', function(e){
-        jQuery('div.login_overlay').remove();
-        jQuery('#popuppost').hide();
-        jQuery('body').prepend('<div class="login_overlay"></div>');
-        jQuery('#popupposturl').fadeIn(500);
+        $('div.login_overlay').remove();
+        $('#popuppost').hide();
+        $('body').prepend('<div class="login_overlay"></div>');
+        $('#popupposturl').fadeIn(500);
         jQuery('div.login_overlay, form#PostUploadUrl a.close').on('click', function(){
-            jQuery('div.login_overlay').remove();
-            jQuery('#popupposturl').hide();
+            $('div.login_overlay').remove();
+            $('#popupposturl').hide();
         });
         e.preventDefault();
    });
 
    jQuery('div#side-menu-link').on('click', function(e){
        $('#full-screen-menu').fadeIn(500);
-
        $('#sidebar').insertAfter('#bot_full_screen');
        $('#usercrap').insertAfter('#bot_full_screen');
-
        e.preventDefault();
    });
 
    jQuery('div#top-right-button').on('click', function(e){
         $('#sidebar').insertAfter('#sidebar-dummy');
         $('#usercrap').insertAfter('#menuz');
-
-       $('#full-screen-menu').hide();
-       e.preventDefault();
+        $('#full-screen-menu').hide();
+        e.preventDefault();
    });
 });
 

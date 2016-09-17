@@ -27,8 +27,10 @@ function mh_load_my_script() {
 add_action( 'wp_enqueue_scripts', 'mh_load_my_script' );
 
 function load_javascript(){
-    wp_enqueue_script( 'function', get_template_directory_uri().'/scripts/javascript.js', 'jquery', true);
-    wp_localize_script( 'function', 'my_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+    wp_enqueue_script( 'main', get_template_directory_uri().'/scripts/javascript.js', 'jquery', true);
+
+    wp_enqueue_script( 'upvotes', get_template_directory_uri().'/scripts/upvotes.js', 'jquery', true);
+    wp_localize_script( 'upvotes', 'my_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
 add_action('template_redirect', 'load_javascript');
 

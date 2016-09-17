@@ -1,9 +1,9 @@
 <?php
-    require 'functions/user.php';
-    require 'functions/uploads2.php';
-    require 'functions/upvotes.php';
-    require 'functions/settings.php';
-    require 'functions/hiddenCategory.php';
+    require 'plugins/user.php';
+    require 'plugins/uploads2.php';
+    require 'plugins/upvotes.php';
+    require 'plugins/settings.php';
+    require 'plugins/hiddenCategory.php';
 
     //echo getIt();
     //DEBUGGING

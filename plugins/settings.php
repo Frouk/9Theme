@@ -21,35 +21,35 @@ function register_my_cool_plugin_settings() {
 }
 
 function my_9theme_settings() {
-?>
-<div class="wrap">
-<h1>Your Plugin Name</h1>
+	?>
+	<div class="wrap">
+	<h1>Your Plugin Name</h1>
 
-<form method="post" action="options.php">
-    <?php settings_fields( '9theme_settings-group' ); ?>
-    <?php do_settings_sections( '9theme_settings-group' ); ?>
-    <table class="form-table">
-        <tr valign="top">
-        <th scope="row">Imgur Api Key</th>
-        <td><input type="text" name="imgur_api_key" value="<?php echo esc_attr( get_option('imgur_api_key') ); ?>" /></td>
-        </tr>
+	<form method="post" action="options.php">
+	    <?php settings_fields( '9theme_settings-group' ); ?>
+	    <?php do_settings_sections( '9theme_settings-group' ); ?>
+	    <table class="form-table">
+	        <tr valign="top">
+	        <th scope="row">Imgur Api Key</th>
+	        <td><input type="text" name="imgur_api_key" value="<?php echo esc_attr( get_option('imgur_api_key') ); ?>" /></td>
+	        </tr>
 
-        <tr valign="top">
-        <th scope="row">Max file size</th>
-        <td><input type="text" name="9theme_max_file_size" value="<?php echo esc_attr( get_option('9theme_max_file_size') ); ?>" /></td>
-        </tr>
+	        <tr valign="top">
+	        <th scope="row">Max file size</th>
+	        <td><input type="text" name="9theme_max_file_size" value="<?php echo esc_attr( get_option('9theme_max_file_size') ); ?>" /></td>
+	        </tr>
 
-        <tr valign="top">
-        <th scope="row">Hidden Categories.</th>
-        <td><input type="text" name="9theme_hidden_category" value="<?php echo esc_attr( get_option('9theme_hidden_category') ); ?>" /></td>
-        </tr>
-    </table>
+	        <tr valign="top">
+	        <th scope="row">Hidden Categories.</th>
+	        <td><input type="text" name="9theme_hidden_category" value="<?php echo esc_attr( get_option('9theme_hidden_category') ); ?>" /></td>
+	        </tr>
+	    </table>
 
-    <?php submit_button(); ?>
+	    <?php submit_button(); ?>
 
-</form>
-</div>
-<?php
+	</form>
+	</div>
+	<?php
 }
 
 ?>

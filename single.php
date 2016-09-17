@@ -25,13 +25,7 @@
                                     echo "<li><a id='downvoteicon {$theId}' class='votedownactive' href='javascript:void(0);' onclick='vote({$theId}, 0);'></a></li>";
                                 } else {
                                     echo "<li><a id='downvoteicon {$theId}' class='votedown' href='javascript:void(0);' onclick='vote({$theId}, 2);'></a></li>";
-
                                 }
-                                //echo "
-                                //<li><a id='upvoteicon {$theId}' class='voteup' href='javascript:void(0);' onclick='vote({$theId}, 1);'></a></li>
-                                //<li><a id='downvoteicon {$theId}' class='votedown' href='javascript:void(0);' onclick='vote({$theId}, 2);'></a></li>
-                                //";
-
                             }else{ ?>
                                 <li><a id=<?php echo '"upvoteicon ' . get_the_ID() . '" '; ?>class="voteup" href="javascript:void(0);" onclick="jQuery('#show_login').click();"></a></li>
                                 <li><a id=<?php echo '"downvoteicon ' . get_the_ID() . '" '; ?>class="votedown" href="javascript:void(0);" onclick="jQuery('#show_login').click();"></a></li>

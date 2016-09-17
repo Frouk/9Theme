@@ -161,16 +161,38 @@ function geturlsize($url){
 }
 
 function watermarkgif($imagepath){
+    // Coming soon...
 }
+
 function watermarkjpeg($imagepath){
+    $im = imagecreatefromjpeg($imagepath);
+    $stamp = imagecreatefrompng(get_option('9theme_watermark_url'));
+    $marge_right = 1;
+    $marge_bottom = 1;
+    $sx = imagesx($stamp);
+    $sy = imagesy($stamp);
+    imagecopymerge($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp), 50);
+    imagejpeg($im, $imagepath);
+    imagedestroy($im);
 }
+
 function watermarkpng($imagepath){
+    $im = imagecreatefrompng($imagepath);
+    $stamp = imagecreatefrompng(get_option('9theme_watermark_url'));
+    $marge_right = 1;
+    $marge_bottom = 1;
+    $sx = imagesx($stamp);
+    $sy = imagesy($stamp);
+    imagecopymerge($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp), 50);
+    imagepng($im, $imagepath);
+    imagedestroy($im);
 }
 
 function postFromSource($url) {
 
     if (substr($url,-5) == '.gifv'){
         postGifv($url);
+        return "Success";
     } elseif (strpos($url, 'imgur.com/a/') > 0) {
         postFromImgurAlbum($url);
         return "Success";

@@ -17,6 +17,8 @@ function register_my_cool_plugin_settings() {
 	//register our settings
 	register_setting( '9theme_settings-group', 'imgur_api_key' );
 	register_setting( '9theme_settings-group', '9theme_max_file_size' );
+	register_setting( '9theme_settings-group', '9theme_watermark_url' );
+
 	register_setting( '9theme_settings-group', '9theme_hidden_category' );
 }
 
@@ -31,17 +33,22 @@ function my_9theme_settings() {
 	    <table class="form-table">
 	        <tr valign="top">
 	        <th scope="row">Imgur Api Key</th>
-	        <td><input type="text" name="imgur_api_key" value="<?php echo esc_attr( get_option('imgur_api_key') ); ?>" /></td>
+	        <td><input type="text" name="imgur_api_key" value="<?php echo esc_attr(get_option('imgur_api_key')); ?>" /></td>
 	        </tr>
 
 	        <tr valign="top">
 	        <th scope="row">Max file size</th>
-	        <td><input type="text" name="9theme_max_file_size" value="<?php echo esc_attr( get_option('9theme_max_file_size') ); ?>" /></td>
+	        <td><input type="text" name="9theme_max_file_size" value="<?php echo esc_attr(get_option('9theme_max_file_size')); ?>" /></td>
+	        </tr>
+
+			<tr valign="top">
+	        <th scope="row">Watermark Url.</th>
+	        <td><input type="text" name="9theme_watermark_url" value="<?php echo esc_attr(get_option('9theme_watermark_url')); ?>" /></td>
 	        </tr>
 
 	        <tr valign="top">
 	        <th scope="row">Hidden Categories.</th>
-	        <td><input type="text" name="9theme_hidden_category" value="<?php echo esc_attr( get_option('9theme_hidden_category') ); ?>" /></td>
+	        <td><input type="text" name="9theme_hidden_category" value="<?php echo esc_attr(get_option('9theme_hidden_category')); ?>" /></td>
 	        </tr>
 	    </table>
 

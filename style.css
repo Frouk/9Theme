@@ -1,18 +1,18 @@
 /*
 Theme Name: NeinTheme
 Theme URI: NeinTheme
-Author: Frouk
-Author URI: https://github.com/Frouk
+Author: Aristeidis Fkiaras
+Author URI: https://github.com/arisfkiaras
 Description: Nein
-Version: 1.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Version: 3.0
+License: GNU General Public License v3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Tags: Nein
 Text Domain: Nein
 */
 
-@import "styleNormal.css";
-@import "styleMobile.css";
+@import "styles/styleNormal.css";
+@import "styles/styleMobile.css";
 
 h1,li, ol, p, pre, td, th, ul {
     margin: 0;

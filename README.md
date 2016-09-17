@@ -7,13 +7,13 @@ Live Preview @ [9webm.com](http://9webm.com)
 
 * Mobile responsive
 * Front-end user registration, login and posting
-* Upload content from disk, direct image url, or Social media.
+* Upload content from disk, image url, or Social media
 * Automatically resize and watermark images
-* Automatically host images at imgur.com
+* Automatically upload images at imgur.com
 * Gif like html5 video player
-* Scrollable Album post type
+* Album post type
 * User Upvotes and Scoring system
-* Set up user only categories
+* Registered user only categories
 * Hide Wordpress Dashboard from unauthorized users.
 * Compatibility with most Wordpress Plugins
 

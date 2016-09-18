@@ -1,7 +1,7 @@
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
 
    // Show the login dialog box on click
-    jQuery('a#show_login').on('click', function(e){
+    $('a#show_login').on('click', function(e){
         $('div.login_overlay').remove();
         $('#popupregister').hide();
         $('body').prepend('<div class="login_overlay"></div>');
@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
         e.preventDefault();
    });
 
-    jQuery('a#show_register').on('click', function(e){
+    $('a#show_register').on('click', function(e){
         $('div.login_overlay').remove();
         $('#popuplogin').hide();
         $('body').prepend('<div class="login_overlay"></div>');
@@ -25,7 +25,7 @@ jQuery(document).ready(function($) {
         e.preventDefault();
     });
 
-    jQuery('a#show_upload').on('click', function(e){
+    $('a#show_upload').on('click', function(e){
         $('div.login_overlay').remove();
         $('#popupposturl').hide();
         $('body').prepend('<div class="login_overlay"></div>');
@@ -37,7 +37,7 @@ jQuery(document).ready(function($) {
         e.preventDefault();
     });
 
-    jQuery('a#show_upload_url').on('click', function(e){
+    $('a#show_upload_url').on('click', function(e){
         $('div.login_overlay').remove();
         $('#popuppost').hide();
         $('body').prepend('<div class="login_overlay"></div>');
@@ -49,14 +49,14 @@ jQuery(document).ready(function($) {
         e.preventDefault();
    });
 
-   jQuery('div#side-menu-link').on('click', function(e){
+   $('div#side-menu-link').on('click', function(e){
        $('#full-screen-menu').fadeIn(500);
        $('#sidebar').insertAfter('#bot_full_screen');
        $('#usercrap').insertAfter('#bot_full_screen');
        e.preventDefault();
    });
 
-   jQuery('div#top-right-button').on('click', function(e){
+   $('div#top-right-button').on('click', function(e){
         $('#sidebar').insertAfter('#sidebar-dummy');
         $('#usercrap').insertAfter('#menuz');
         $('#full-screen-menu').hide();
@@ -67,18 +67,15 @@ jQuery(document).ready(function($) {
 function videoFull(item) {
 	//⊞ ∷ ⧉ ⊠
 	var docelem = item.parentElement.childNodes[1];
-	 if (docelem.requestFullscreen) {
-		    docelem.requestFullscreen();
-		}
-		else if (docelem.mozRequestFullScreen) {
-		    docelem.mozRequestFullScreen();
-		}
-		else if (docelem.webkitRequestFullscreen) {
-		    docelem.webkitRequestFullscreen();
-		}
-		else if (docelem.msRequestFullscreen) {
-		    docelem.msRequestFullscreen();
-		}
+	if (docelem.requestFullscreen) {
+		docelem.requestFullscreen();
+	} else if (docelem.mozRequestFullScreen) {
+		docelem.mozRequestFullScreen();
+	} else if (docelem.webkitRequestFullscreen) {
+		docelem.webkitRequestFullscreen();
+	} else if (docelem.msRequestFullscreen) {
+		docelem.msRequestFullscreen();
+	}
 }
 
 function onVideoReady(mediaPlayer) {

@@ -143,12 +143,11 @@ function insertPost($title , $postContent, $myUserid) {
     kses_remove_filters();
 
     wp_insert_post( array(
-        'post_author'    => sanitize_text_field($myUserid),
+        'post_author'    => $myUserid,
         'post_title'     => sanitize_text_field($title),
         'post_type'      => 'post',
         'post_content'   => $postContent,
         'post_status'    => 'publish',
-        'filter' => true
     ));
 
     // Enable filters again

@@ -10,7 +10,7 @@ function manageuploadsplugin() {
             $result = tryUpload(false, -1);
         }
 
-        if ($result == "NotUploaded"){
+        if ($result == "NotUploaded") {
             return;
         } elseif ($result == "Success") {
             echo'
@@ -62,7 +62,6 @@ function tryUpload ($uploadFromDisk, $myUserid) {
     }
 
     $dimensions = getimagesize($imageFile);
-
     $imageWidth = get_option('9theme_image_width');
 
     switch ($dimensions['mime']) {
@@ -156,7 +155,7 @@ function insertPost($title , $postContent, $myUserid) {
     kses_init_filters();
 }
 
-function geturlsize($url){
+function geturlsize($url) {
    $ch = curl_init($url);
    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
    curl_setopt($ch, CURLOPT_HEADER, TRUE);
@@ -167,11 +166,11 @@ function geturlsize($url){
    return $size;
 }
 
-function watermarkgif($imagepath){
+function watermarkgif($imagepath) {
     // Coming soon...
 }
 
-function watermarkjpeg($imagepath){
+function watermarkjpeg($imagepath) {
     $im = imagecreatefromjpeg($imagepath);
     $stamp = imagecreatefrompng(get_option('9theme_watermark_url'));
     $marge_right = 1;
@@ -183,7 +182,7 @@ function watermarkjpeg($imagepath){
     imagedestroy($im);
 }
 
-function watermarkpng($imagepath){
+function watermarkpng($imagepath) {
     $im = imagecreatefrompng($imagepath);
     $stamp = imagecreatefrompng(get_option('9theme_watermark_url'));
     $marge_right = 1;
@@ -199,7 +198,7 @@ function postFromSource($url, $myUserid) {
     // Can test $myUserid here if don't want to
     // allow users post from source.
 
-    if (substr($url,-5) == '.gifv'){
+    if (substr($url,-5) == '.gifv') {
         postGifv($url, $myUserid);
         return "Success";
     } elseif (strpos($url, 'imgur.com/a/') > 0) {

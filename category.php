@@ -5,12 +5,12 @@
         <div id="posts">
             <div id="PageTitleBox"><div id="PageTitle"><?php single_cat_title(); ?></div></div>
             <div id="postslist">
-                <?php $yo=get_cat_ID(single_cat_title('', false)); ?>
+                <?php $yo = get_cat_ID(single_cat_title('', false)); ?>
                 <?php query_posts('cat='.$yo.'&paged=' . get_query_var('paged'));?>
            <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                 <div id="singlepost">
                     <div id="posttitle">
-                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        <a href="<?php the_permalink(); ?>"><?php esc_html(the_title()); ?></a>
                     </div>
                     <div id="postcontent">
                         <a href="<?php the_permalink(); ?>"><?php the_content(); ?></a>

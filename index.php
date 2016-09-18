@@ -10,7 +10,7 @@
 
                 <div id="singlepost">
                     <div id="posttitle">
-                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        <a href="<?php the_permalink(); ?>"><?php esc_html(the_title()); ?></a>
                     </div>
                     <div id="postcontent">
                         <a href="<?php the_permalink(); ?>"><?php the_content(); ?></a>

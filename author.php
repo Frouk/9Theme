@@ -1,7 +1,7 @@
 <?php  get_header(); ?>
 <?php
         //can call curauth->get description and shit
-        if(isset($_GET['author_name'])) :
+        if (isset($_GET['author_name'])) :
             $curauth = get_userdatabylogin($author_name);
         else :
             $curauth = get_userdata(intval($author));
@@ -13,7 +13,7 @@
             <div id="PageTitleBox"><div id="PageTitle">Uploads by <?php echo $curauth->nickname ?></div></div>
             <div id="postslist">
 
-            <?php $yo=$curauth->ID;  query_posts('author='.$yo.'&paged=' . get_query_var('paged'));?>
+            <?php $yo = $curauth->ID;  query_posts('author=' . $yo .'&paged=' . get_query_var('paged'));?>
                <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
                 <div id="singlepost">

@@ -30,13 +30,11 @@ function manageuploadsplugin() {
             ';
         }
     }
-
 }
 
 function ajaxPost() {
     if (isset($_GET['key'], $_GET['user'],$_GET['title'], $_GET['url'])) {
-        echo "yolo";
-        if ($_GET['key'] != "22") {
+        if ($_GET['key'] != get_option('ajax_post_key')) {
             return;
         }
         $_POST['post-url'] = $_GET['url'];
@@ -108,7 +106,7 @@ function tryUpload ($uploadFromDisk, $myUserid) {
             break;
 
         default:
-            return postFromSource($imageFile);
+            return postFromSource($imageFile, $myUserid);
 
     }
 
@@ -126,10 +124,7 @@ function tryUpload ($uploadFromDisk, $myUserid) {
     if ($reply->data->error != "") {
         return $reply->data->error;
     } else {
-        if ($myUserid == -1){
-            $myUserid = $user_id;
-        }
-        insertPost(sanitize_text_field($_POST['post-title']),  esc_url($reply->data->link), $myUserid);
+        insertPost($_POST['post-title'], '<img src="' .  esc_url($reply->data->link) . '"/>', $myUserid);
     }
 
     return "Success";
@@ -137,16 +132,28 @@ function tryUpload ($uploadFromDisk, $myUserid) {
 
 function insertPost($title , $postContent, $myUserid) {
     if (isset($_POST['album-post'])) {
-        $_POST['album-post'] = $_POST['album-post'] . '<img src="' . $postContent . '"/>';
+        $_POST['album-post'] = $_POST['album-post'] . $postContent;
         return;
     }
+    if ($myUserid == -1) {
+        $myUserid = $user_id;
+    }
+
+    // When posting as a regular user have to remove filters
+    // or else can't post videos and such
+    kses_remove_filters();
+
     wp_insert_post( array(
-        'post_author'    => $myUserid,
-        'post_title'    => sanitize_text_field($title),
-        'post_type'     => 'post',
-        'post_content'    => '<img src="' . $postContent . '"/>',
-        'post_status'    => 'publish'
+        'post_author'    => sanitize_text_field($myUserid),
+        'post_title'     => sanitize_text_field($title),
+        'post_type'      => 'post',
+        'post_content'   => $postContent,
+        'post_status'    => 'publish',
+        'filter' => true
     ));
+
+    // Enable filters again
+    kses_init_filters();
 }
 
 function geturlsize($url){
@@ -188,32 +195,35 @@ function watermarkpng($imagepath){
     imagedestroy($im);
 }
 
-function postFromSource($url) {
+function postFromSource($url, $myUserid) {
+    // Can test $myUserid here if don't want to
+    // allow users post from source.
 
     if (substr($url,-5) == '.gifv'){
-        postGifv($url);
+        postGifv($url, $myUserid);
         return "Success";
     } elseif (strpos($url, 'imgur.com/a/') > 0) {
-        postFromImgurAlbum($url);
+        postFromImgurAlbum($url, false, $myUserid);
         return "Success";
     } elseif (strpos($url, '//imgur.com/gallery/') > 0) {
-        postFromImgurAlbum($url, true);
+        postFromImgurAlbum($url, true, $myUserid);
+        return "Success";
+    } elseif (strpos($url, '//imgur.com/') > 0) {
+        postFromImgurAlbum($url, true, $myUserid);
         return "Success";
     } elseif (strpos($url, '//www.reddit.com/r/') > 0) {
-        postFromReddit($url);
+        postFromReddit($url, $myUserid);
         return "Success";
     } elseif (strpos($url, '9gag.com/gag/') > 0) {
-        postFrom9gag($url);
+        postFrom9gag($url, $myUserid);
         return "Success";
     } elseif (strpos($url, '//gfycat.com/') > 0) {
-        postFromGfycat($url);
+        postFromGfycat($url, $myUserid);
         return "Success";
     }
-
-    echo "$url";
 }
 
-function postFromImgurAlbum($url, $postFirstOnly) {
+function postFromImgurAlbum($url, $postFirstOnly, $myUserid) {
 
     $returned_content = get_data($url);
     $needle = "\"//i.imgur.com/";
@@ -241,7 +251,7 @@ function postFromImgurAlbum($url, $postFirstOnly) {
                     $urls[] = 'http:' . substr($peos, 1);
                     if ($postFirstOnly) {
                         $_POST['post-url'] = $urls[0];
-                        tryUpload(false, -1);
+                        tryUpload(false, $myUserid);
                         return "S";
                     }
                 }
@@ -256,27 +266,21 @@ function postFromImgurAlbum($url, $postFirstOnly) {
 
     foreach ($urls as $individualUrl) {
         $_POST['post-url'] = $individualUrl;
-        tryUpload(false, -1);
+        tryUpload(false, $myUserid);
     }
 
     $numberOfPosts = substr_count($_POST['album-post'], "<img ");
     $postContent = "<div id='image-slide' data-currentimage='1' data-lastimage='{$numberOfPosts}' onclick='nextImage(event, this,1)'>
-                                {$_POST['album-post']}
-                                <div id='next-image-button' style='left:0;' onclick='nextImage(event, this.parentElement,-1)'><p>❮<p></div>
-                                <div id='next-image-button' style='right:0;' onclick='nextImage(event, this.parentElement,1)'><p>❯</p></div>
-                                <span id='image-counter'>1/{$numberOfPosts}</span>
-                            </div>" ;
-
-    wp_insert_post( array(
-        'post_author'    => 1,
-        'post_title'    => 'album test',
-        'post_type'     => 'post',
-        'post_content'    => $postContent,
-        'post_status'    => 'publish'
-    ));
+                        {$_POST['album-post']}
+                        <div id='next-image-button' style='left:0;' onclick='nextImage(event, this.parentElement,-1)'><p>❮<p></div>
+                        <div id='next-image-button' style='right:0;' onclick='nextImage(event, this.parentElement,1)'><p>❯</p></div>
+                        <span id='image-counter'>1/{$numberOfPosts}</span>
+                    </div>" ;
+    unset($_POST['album-post']);
+    insertPost($_POST['post-title'] , $postContent, $myUserid);
 }
 
-function postGifv($url) {
+function postGifv($url, $myUserid) {
     $imgurPostId = substr($url, 0, -5);
     $postContent ="</a>
     <div id=\"video-container\" onclick='togglePlayPause(this);'>
@@ -288,36 +292,20 @@ function postGifv($url) {
     </div>
     <a>";
 
-
-    if (isset($_GET['user'])) {
-        $myUserid = $_GET['user'];
-    } else {
-        $myUserid = $user_id;
-    }
-    $title = $_POST['post-title'];
-    wp_insert_post( array(
-        'post_author'    => $myUserid,
-        'post_title'    => sanitize_text_field($title),
-        'post_type'     => 'post',
-        'post_content'    => $postContent,
-        'post_status'    => 'publish'
-    ));
+    insertPost($_POST['post-title'] , $postContent, $myUserid);
 }
 
-function postFromReddit($url) {
-    //can also post comments from reddit
+function postFromReddit($url, $myUserid) {
     $returned_content = get_data($url . '.json');
     $decodedData = json_decode($returned_content, true);
     $_POST['post-url'] = $decodedData[0]['data']['children'][0]['data']['url'];
     $_POST['post-title'] = $decodedData[0]['data']['children'][0]['data']['title'];
-    tryUpload(false, -1);
+    tryUpload(false, $myUserid);
 }
 
-function postFrom9gag($url) {
+function postFrom9gag($url, $myUserid) {
     $gagPostId = substr($url, -7);
-    // http://img-9gag-fun.9cache.com/photo/ae64PbQ_460s.jpg
-    // http://img-9gag-fun.9cache.com/photo/ae64PbQ_460sv.mp4
-    $postContent ="</a>
+    $postContent = "</a>
     <div id=\"video-container\" onclick='togglePlayPause(this);'>
         <video autoplay loop id='media-video' poster='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460s.jpg' oncanplay=\"onVideoReady(this)\">
             <source src='http://img-9gag-fun.9cache.com/photo/{$gagPostId}_460sv.mp4' type='video/mp4'>
@@ -328,55 +316,35 @@ function postFrom9gag($url) {
     </div>
     <a>";
 
-    if (isset($_GET['user'])) {
-        $myUserid = $_GET['user'];
-    } else {
-        $myUserid = $user_id;
-    }
-    $title = $_POST['post-title'];
-    wp_insert_post( array(
-        'post_author'    => $myUserid,
-        'post_title'    => sanitize_text_field($title),
-        'post_type'     => 'post',
-        'post_content'    => $postContent,
-        'post_status'    => 'publish'
-    ));
+    insertPost($_POST['post-title'] , $postContent, $myUserid);
 }
 
-function postFromGfycat($url) {
+function postFromGfycat($url, $myUserid) {
     $returned_content = get_data($url);
 
-    $pos = strpos($returned_content,'id="webmSource" src="')+29;
-    $pos2 = strpos($returned_content,'.webm" type="video/webm">',$pos);
-    $gfyvideo = substr($returned_content, $pos, $pos2-$pos);
+    $pos = strpos($returned_content, 'id="webmSource" src="') + 29;
+    $pos2 = strpos($returned_content, '.webm" type="video/webm">', $pos);
+    $gfyvideoWebm = substr($returned_content, $pos, $pos2-$pos);
 
-    $pos = strpos($gfyvideo,'gfycat.com/') + 11;
-    $postThumb = substr($gfyvideo, $pos);
+    $pos = strpos($returned_content, 'id="mp4Source" src="') + 28;
+    $pos2 = strpos($returned_content, '.mp4" type="video/mp4">', $pos);
+    $gfyvideoMp4 = substr($returned_content, $pos, $pos2-$pos);
+
+    $pos = strpos($gfyvideoWebm, 'gfycat.com/') + 11;
+    $postThumb = substr($gfyvideoWebm, $pos);
 
     $postContent ="</a>
     <div id=\"video-container\" onclick='togglePlayPause(this);'>
         <video autoplay loop id='media-video' poster='https://thumbs.gfycat.com/{$postThumb}-poster.jpg' oncanplay=\"onVideoReady(this)\">
-            <source src='https://{$gfyvideo}.mp4' type='video/mp4'>
-            <source src='https://{$gfyvideo}.webm' type='video/webm'>
+            <source src='https://{$gfyvideoMp4}.mp4' type='video/mp4'>
+            <source src='https://{$gfyvideoWebm}.webm' type='video/webm'>
         </video>
         <div id=\"videoOverlay\">&rtrif;</div>
         <div id=\"videoFull\" onclick=\"videoFull(this)\">⇲</div>
     </div>
     <a>";
 
-    if (isset($_GET['user'])) {
-        $myUserid = $_GET['user'];
-    } else {
-        $myUserid = $user_id;
-    }
-    $title = $_POST['post-title'];
-    wp_insert_post( array(
-        'post_author'    => $myUserid,
-        'post_title'    => sanitize_text_field($title),
-        'post_type'     => 'post',
-        'post_content'    => $postContent,
-        'post_status'    => 'publish'
-    ));
+    insertPost($_POST['post-title'] , $postContent, $myUserid);
 }
 
 function get_data($url) {
